@@ -38,6 +38,8 @@ class HomeVC: UIViewController, CLLocationManagerDelegate, UITableViewDelegate, 
         
         hideKeyboardWhenTappedAround()
         
+        self.navigationController?.navigationBarHidden = true
+        
         newPostTextView.delegate = self
         
         newPostTextView.inputAccessoryView = generateToolbar(self)
@@ -49,6 +51,8 @@ class HomeVC: UIViewController, CLLocationManagerDelegate, UITableViewDelegate, 
         self.tableView.scrollEnabled = true
         self.tableView.alwaysBounceVertical = true
         self.tableView.delaysContentTouches = false
+        tableView.allowsSelection = true
+        tableView.scrollsToTop = true
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -152,7 +156,8 @@ class HomeVC: UIViewController, CLLocationManagerDelegate, UITableViewDelegate, 
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
+        let thread = threads[indexPath.row]
+        performSegueWithIdentifier("threadVCFromHome", sender: thread)
     }
     
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -208,6 +213,14 @@ class HomeVC: UIViewController, CLLocationManagerDelegate, UITableViewDelegate, 
     
     func refreshView(sender: AnyObject){
         queryThreads()
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "threadVCFromHome" {
+            if let destinationVC = segue.destinationViewController as? ThreadVC {
+                destinationVC.thread = sender as? Thread
+            }
+        }
     }
 
 }

@@ -12,6 +12,7 @@ target 'eightam' do
   pod 'Firebase/Auth'
   pod 'Firebase/Database'
   pod 'GeoFire', :git => 'https://github.com/firebase/geofire-objc.git'
+  pod 'SloppySwiper'
 
   target 'eightamTests' do
     inherit! :search_paths
