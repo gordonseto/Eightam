@@ -11,6 +11,7 @@
 		8E8CC21F1D6CAB9C00F4675C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8CC21E1D6CAB9C00F4675C /* Constants.swift */; };
 		8E8CC2211D6CB42600F4675C /* Thread.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8CC2201D6CB42600F4675C /* Thread.swift */; };
 		8E8CC2231D6CB79F00F4675C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8CC2221D6CB79F00F4675C /* User.swift */; };
+		8E8CC2281D6CC9CE00F4675C /* General.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8CC2271D6CC9CE00F4675C /* General.swift */; };
 		8E9FE39D1D6C9F32004B1FD9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9FE39C1D6C9F32004B1FD9 /* AppDelegate.swift */; };
 		8E9FE39F1D6C9F32004B1FD9 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9FE39E1D6C9F32004B1FD9 /* HomeVC.swift */; };
 		8E9FE3A21D6C9F32004B1FD9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E9FE3A01D6C9F32004B1FD9 /* Main.storyboard */; };
@@ -18,6 +19,8 @@
 		8E9FE3A71D6C9F32004B1FD9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E9FE3A51D6C9F32004B1FD9 /* LaunchScreen.storyboard */; };
 		8E9FE3B21D6C9F32004B1FD9 /* eightamTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9FE3B11D6C9F32004B1FD9 /* eightamTests.swift */; };
 		8E9FE3BD1D6CA4B7004B1FD9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8E9FE3BC1D6CA4B7004B1FD9 /* GoogleService-Info.plist */; };
+		8EC806CB1D6CD0E300FC88DB /* ThreadCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC806CA1D6CD0E300FC88DB /* ThreadCell.swift */; };
+		8EC806CD1D6CE9B200FC88DB /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC806CC1D6CE9B200FC88DB /* CardView.swift */; };
 		D7467009A2F9BB393C089D46 /* Pods_eightamTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4100E067EFC8945D4131EBE7 /* Pods_eightamTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -39,6 +42,7 @@
 		8E8CC21E1D6CAB9C00F4675C /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		8E8CC2201D6CB42600F4675C /* Thread.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Thread.swift; sourceTree = "<group>"; };
 		8E8CC2221D6CB79F00F4675C /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		8E8CC2271D6CC9CE00F4675C /* General.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = General.swift; sourceTree = "<group>"; };
 		8E9FE3991D6C9F32004B1FD9 /* eightam.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = eightam.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E9FE39C1D6C9F32004B1FD9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8E9FE39E1D6C9F32004B1FD9 /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
@@ -50,6 +54,8 @@
 		8E9FE3B11D6C9F32004B1FD9 /* eightamTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = eightamTests.swift; sourceTree = "<group>"; };
 		8E9FE3B31D6C9F32004B1FD9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8E9FE3BC1D6CA4B7004B1FD9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../GoogleService-Info.plist"; sourceTree = "<group>"; };
+		8EC806CA1D6CD0E300FC88DB /* ThreadCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThreadCell.swift; sourceTree = "<group>"; };
+		8EC806CC1D6CE9B200FC88DB /* CardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		DD7F2940B6508B79D46835AB /* Pods-eightam.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-eightam.release.xcconfig"; path = "Pods/Target Support Files/Pods-eightam/Pods-eightam.release.xcconfig"; sourceTree = "<group>"; };
 		E1276DA5495A849F96148ECE /* Pods-eightamTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-eightamTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-eightamTests/Pods-eightamTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -94,6 +100,8 @@
 		8E8CC21B1D6CA89100F4675C /* View */ = {
 			isa = PBXGroup;
 			children = (
+				8EC806CA1D6CD0E300FC88DB /* ThreadCell.swift */,
+				8EC806CC1D6CE9B200FC88DB /* CardView.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -111,6 +119,7 @@
 			isa = PBXGroup;
 			children = (
 				8E8CC21E1D6CAB9C00F4675C /* Constants.swift */,
+				8E8CC2271D6CC9CE00F4675C /* General.swift */,
 			);
 			name = Util;
 			sourceTree = "<group>";
@@ -373,10 +382,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8E8CC2281D6CC9CE00F4675C /* General.swift in Sources */,
 				8E9FE39F1D6C9F32004B1FD9 /* HomeVC.swift in Sources */,
 				8E8CC21F1D6CAB9C00F4675C /* Constants.swift in Sources */,
 				8E9FE39D1D6C9F32004B1FD9 /* AppDelegate.swift in Sources */,
+				8EC806CB1D6CD0E300FC88DB /* ThreadCell.swift in Sources */,
 				8E8CC2231D6CB79F00F4675C /* User.swift in Sources */,
+				8EC806CD1D6CE9B200FC88DB /* CardView.swift in Sources */,
 				8E8CC2211D6CB42600F4675C /* Thread.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

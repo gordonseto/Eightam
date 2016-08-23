@@ -21,6 +21,7 @@ class Thread {
     private var _time: NSTimeInterval!
     private var _geolocation: CLLocation!
     private var _points: Int!
+    private var _numComments: Int!
     
     var key: String! {
         return _key
@@ -46,34 +47,33 @@ class Thread {
         return _points
     }
     
+    var numComments: Int! {
+        return _numComments
+    }
+    
     var firebase: FIRDatabaseReference!
     
     init(authorUid: String, text: String, geolocation: CLLocation!) {
         _opText = text
         _geolocation = geolocation
         _authorUid = authorUid
+        _time = NSDate().timeIntervalSince1970
+        _points = 0
+        _numComments = 0
     }
     
     init(key: String!){
         _key = key
     }
     
-    func newThread(){
-        _time = NSDate().timeIntervalSince1970
-        _points = 0
-    }
-    
-    func postThread() -> Task<Thread> {
+    func postThread(completion: (Thread)->()) {
         
-        let taskCompletionSource = TaskCompletionSource<Thread>()
-        
-        guard let authorUid = _authorUid else { return taskCompletionSource.task}
-        guard let opText = _opText else { return taskCompletionSource.task}
-        guard let time = _time else { return taskCompletionSource.task}
-        guard let geolocation = _geolocation else { return taskCompletionSource.task}
-        guard let points = _points else { return taskCompletionSource.task}
-        
-        let thread = ["authorUid": authorUid, "opText": opText, "time": time, "points": points]
+        guard let authorUid = _authorUid else { return }
+        guard let opText = _opText else { return }
+        guard let time = _time else { return }
+        guard let geolocation = _geolocation else { return }
+
+        let thread = ["authorUid": authorUid, "opText": opText, "time": time]
         
         firebase = FIRDatabase.database().reference()
         let geofire = GeoFire(firebaseRef: firebase.child("geolocations"))
@@ -84,13 +84,27 @@ class Thread {
         
         geofire.setLocation(geolocation, forKey: key, withCompletionBlock: { (error) in
             if error != nil {
-                taskCompletionSource.setError(error)
+                print(error)
+                return
             } else {
-                taskCompletionSource.setResult(self)
+                completion(self)
             }
         })
+    }
+    
+    func downloadThread(completion: (Thread) ->()) {
+        guard let key = _key else { return }
         
-        return taskCompletionSource.task
-        
+        firebase = FIRDatabase.database().reference()
+        firebase.child("threads").child(_key).observeSingleEventOfType(.Value, withBlock: {snapshot in
+            self._authorUid = snapshot.value!["authorUid"] as? String ?? ""
+            self._opText = snapshot.value!["opText"] as? String ?? ""
+            self._time = snapshot.value!["time"] as? NSTimeInterval ?? NSDate().timeIntervalSince1970
+            self._points = snapshot.value!["points"] as? Int ?? 0
+            self._numComments = snapshot.value!["numComments"] as? Int ?? 0
+            
+            print("downloaded \(self.opText)")
+            completion(self)
+        })
     }
 }
