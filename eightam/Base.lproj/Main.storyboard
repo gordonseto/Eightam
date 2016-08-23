@@ -1,13 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6211" systemVersion="14A298i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="KHv-6c-xGk">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6204"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="HelveticaNeue.ttc">
+            <string>HelveticaNeue</string>
+            <string>HelveticaNeue</string>
+        </mutableArray>
+    </customFonts>
     <scenes>
-        <!--View Controller-->
+        <!--Home-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="HomeVC" customModule="eightam" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -15,11 +21,86 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="s61-e9-6g5">
+                                <rect key="frame" x="0.0" y="105" width="600" height="140"/>
+                                <subviews>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="What's up?" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="xDa-nU-5vO">
+                                        <rect key="frame" x="8" y="8" width="584" height="108"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done"/>
+                                    </textView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="200" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uks-wC-0SV">
+                                        <rect key="frame" x="550" y="119" width="42" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="60" id="eb8-jk-GxL"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="140" id="2SV-tE-E5X"/>
+                                    <constraint firstAttribute="bottom" secondItem="uks-wC-0SV" secondAttribute="bottom" id="9Tr-Cg-fI2"/>
+                                    <constraint firstItem="uks-wC-0SV" firstAttribute="top" secondItem="xDa-nU-5vO" secondAttribute="bottom" constant="3" id="9na-fz-lY6"/>
+                                    <constraint firstAttribute="trailing" secondItem="xDa-nU-5vO" secondAttribute="trailing" constant="8" id="b2e-zo-QzE"/>
+                                    <constraint firstAttribute="trailing" secondItem="uks-wC-0SV" secondAttribute="trailing" constant="8" id="btQ-rP-LiJ"/>
+                                    <constraint firstItem="xDa-nU-5vO" firstAttribute="top" secondItem="s61-e9-6g5" secondAttribute="top" constant="8" id="ied-4A-CrK"/>
+                                    <constraint firstItem="xDa-nU-5vO" firstAttribute="leading" secondItem="s61-e9-6g5" secondAttribute="leading" constant="8" id="syz-bv-DpS"/>
+                                    <constraint firstAttribute="bottom" secondItem="xDa-nU-5vO" secondAttribute="bottom" constant="24" id="uwD-fm-srh"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aib-YN-VJo">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="77"/>
+                                <color key="backgroundColor" red="0.23529411764705882" green="0.69803921568627447" blue="0.88627450980392153" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="77" id="btp-kA-hSk"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="0.89710920022371354" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="s61-e9-6g5" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="7ec-z1-j5i"/>
+                            <constraint firstItem="aib-YN-VJo" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Gih-c5-ltp"/>
+                            <constraint firstItem="s61-e9-6g5" firstAttribute="top" secondItem="aib-YN-VJo" secondAttribute="bottom" constant="28" id="Lya-vp-BLq"/>
+                            <constraint firstAttribute="trailing" secondItem="s61-e9-6g5" secondAttribute="trailing" id="W4A-TO-Fbm"/>
+                            <constraint firstItem="aib-YN-VJo" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="rgb-HG-NL1"/>
+                            <constraint firstAttribute="trailing" secondItem="aib-YN-VJo" secondAttribute="trailing" id="v5B-e8-8pw"/>
+                        </constraints>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Home" image="location" id="zUo-DU-NKg"/>
+                    <connections>
+                        <outlet property="characterCountLabel" destination="uks-wC-0SV" id="Z5z-Vf-PtQ"/>
+                        <outlet property="newPostTextView" destination="xDa-nU-5vO" id="jyc-Nm-Mcq"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="340" y="349"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="w5q-ay-SG7">
+            <objects>
+                <tabBarController id="KHv-6c-xGk" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="LEx-Hi-1ua">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="nXx-LJ-OTo"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2jb-pe-7FA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-480" y="349"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="location" width="14" height="19"/>
+    </resources>
 </document>

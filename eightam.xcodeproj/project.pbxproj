@@ -7,12 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		26BDC5AC0ADD4024476FD705 /* Pods_eightam.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 405DA66257C281B40C9872DF /* Pods_eightam.framework */; };
+		8E8CC21F1D6CAB9C00F4675C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8CC21E1D6CAB9C00F4675C /* Constants.swift */; };
+		8E8CC2211D6CB42600F4675C /* Thread.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8CC2201D6CB42600F4675C /* Thread.swift */; };
+		8E8CC2231D6CB79F00F4675C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8CC2221D6CB79F00F4675C /* User.swift */; };
 		8E9FE39D1D6C9F32004B1FD9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9FE39C1D6C9F32004B1FD9 /* AppDelegate.swift */; };
-		8E9FE39F1D6C9F32004B1FD9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9FE39E1D6C9F32004B1FD9 /* ViewController.swift */; };
+		8E9FE39F1D6C9F32004B1FD9 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9FE39E1D6C9F32004B1FD9 /* HomeVC.swift */; };
 		8E9FE3A21D6C9F32004B1FD9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E9FE3A01D6C9F32004B1FD9 /* Main.storyboard */; };
 		8E9FE3A41D6C9F32004B1FD9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8E9FE3A31D6C9F32004B1FD9 /* Assets.xcassets */; };
 		8E9FE3A71D6C9F32004B1FD9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E9FE3A51D6C9F32004B1FD9 /* LaunchScreen.storyboard */; };
 		8E9FE3B21D6C9F32004B1FD9 /* eightamTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9FE3B11D6C9F32004B1FD9 /* eightamTests.swift */; };
+		8E9FE3BD1D6CA4B7004B1FD9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8E9FE3BC1D6CA4B7004B1FD9 /* GoogleService-Info.plist */; };
+		D7467009A2F9BB393C089D46 /* Pods_eightamTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4100E067EFC8945D4131EBE7 /* Pods_eightamTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -26,9 +32,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		405DA66257C281B40C9872DF /* Pods_eightam.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_eightam.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4100E067EFC8945D4131EBE7 /* Pods_eightamTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_eightamTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		59AC1C52FA006A67DDF88B1D /* Pods-eightam.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-eightam.debug.xcconfig"; path = "Pods/Target Support Files/Pods-eightam/Pods-eightam.debug.xcconfig"; sourceTree = "<group>"; };
+		6419EAECA72E5911AB346E03 /* Pods-eightamTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-eightamTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-eightamTests/Pods-eightamTests.debug.xcconfig"; sourceTree = "<group>"; };
+		8E8CC21E1D6CAB9C00F4675C /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		8E8CC2201D6CB42600F4675C /* Thread.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Thread.swift; sourceTree = "<group>"; };
+		8E8CC2221D6CB79F00F4675C /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		8E9FE3991D6C9F32004B1FD9 /* eightam.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = eightam.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E9FE39C1D6C9F32004B1FD9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		8E9FE39E1D6C9F32004B1FD9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		8E9FE39E1D6C9F32004B1FD9 /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
 		8E9FE3A11D6C9F32004B1FD9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8E9FE3A31D6C9F32004B1FD9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8E9FE3A61D6C9F32004B1FD9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -36,6 +49,9 @@
 		8E9FE3AD1D6C9F32004B1FD9 /* eightamTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = eightamTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E9FE3B11D6C9F32004B1FD9 /* eightamTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = eightamTests.swift; sourceTree = "<group>"; };
 		8E9FE3B31D6C9F32004B1FD9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8E9FE3BC1D6CA4B7004B1FD9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../GoogleService-Info.plist"; sourceTree = "<group>"; };
+		DD7F2940B6508B79D46835AB /* Pods-eightam.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-eightam.release.xcconfig"; path = "Pods/Target Support Files/Pods-eightam/Pods-eightam.release.xcconfig"; sourceTree = "<group>"; };
+		E1276DA5495A849F96148ECE /* Pods-eightamTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-eightamTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-eightamTests/Pods-eightamTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,6 +59,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				26BDC5AC0ADD4024476FD705 /* Pods_eightam.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -50,18 +67,62 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D7467009A2F9BB393C089D46 /* Pods_eightamTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1A567A68441AFFCFE0AFFFF3 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				405DA66257C281B40C9872DF /* Pods_eightam.framework */,
+				4100E067EFC8945D4131EBE7 /* Pods_eightamTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		8E8CC21A1D6CA88D00F4675C /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				8E9FE39E1D6C9F32004B1FD9 /* HomeVC.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		8E8CC21B1D6CA89100F4675C /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		8E8CC21C1D6CA89A00F4675C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				8E8CC2201D6CB42600F4675C /* Thread.swift */,
+				8E8CC2221D6CB79F00F4675C /* User.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		8E8CC21D1D6CAB8900F4675C /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				8E8CC21E1D6CAB9C00F4675C /* Constants.swift */,
+			);
+			name = Util;
+			sourceTree = "<group>";
+		};
 		8E9FE3901D6C9F32004B1FD9 = {
 			isa = PBXGroup;
 			children = (
 				8E9FE39B1D6C9F32004B1FD9 /* eightam */,
 				8E9FE3B01D6C9F32004B1FD9 /* eightamTests */,
 				8E9FE39A1D6C9F32004B1FD9 /* Products */,
+				F679FD2DD6E6AEB0C4E5AA75 /* Pods */,
+				1A567A68441AFFCFE0AFFFF3 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -77,12 +138,16 @@
 		8E9FE39B1D6C9F32004B1FD9 /* eightam */ = {
 			isa = PBXGroup;
 			children = (
+				8E8CC21D1D6CAB8900F4675C /* Util */,
+				8E8CC21C1D6CA89A00F4675C /* Model */,
+				8E8CC21B1D6CA89100F4675C /* View */,
+				8E8CC21A1D6CA88D00F4675C /* Controller */,
 				8E9FE39C1D6C9F32004B1FD9 /* AppDelegate.swift */,
-				8E9FE39E1D6C9F32004B1FD9 /* ViewController.swift */,
 				8E9FE3A01D6C9F32004B1FD9 /* Main.storyboard */,
 				8E9FE3A31D6C9F32004B1FD9 /* Assets.xcassets */,
 				8E9FE3A51D6C9F32004B1FD9 /* LaunchScreen.storyboard */,
 				8E9FE3A81D6C9F32004B1FD9 /* Info.plist */,
+				8E9FE3BC1D6CA4B7004B1FD9 /* GoogleService-Info.plist */,
 			);
 			path = eightam;
 			sourceTree = "<group>";
@@ -96,6 +161,17 @@
 			path = eightamTests;
 			sourceTree = "<group>";
 		};
+		F679FD2DD6E6AEB0C4E5AA75 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				59AC1C52FA006A67DDF88B1D /* Pods-eightam.debug.xcconfig */,
+				DD7F2940B6508B79D46835AB /* Pods-eightam.release.xcconfig */,
+				6419EAECA72E5911AB346E03 /* Pods-eightamTests.debug.xcconfig */,
+				E1276DA5495A849F96148ECE /* Pods-eightamTests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -103,9 +179,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8E9FE3B61D6C9F32004B1FD9 /* Build configuration list for PBXNativeTarget "eightam" */;
 			buildPhases = (
+				93E4AC43536B002575579C35 /* [CP] Check Pods Manifest.lock */,
 				8E9FE3951D6C9F32004B1FD9 /* Sources */,
 				8E9FE3961D6C9F32004B1FD9 /* Frameworks */,
 				8E9FE3971D6C9F32004B1FD9 /* Resources */,
+				55BDAAAAE625BCEB169869A2 /* [CP] Embed Pods Frameworks */,
+				D37581473345F1AFBF90C495 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -120,9 +199,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8E9FE3B91D6C9F32004B1FD9 /* Build configuration list for PBXNativeTarget "eightamTests" */;
 			buildPhases = (
+				0589CCF82CF28513F0C8A651 /* [CP] Check Pods Manifest.lock */,
 				8E9FE3A91D6C9F32004B1FD9 /* Sources */,
 				8E9FE3AA1D6C9F32004B1FD9 /* Frameworks */,
 				8E9FE3AB1D6C9F32004B1FD9 /* Resources */,
+				F1AE336088A423814E880FE5 /* [CP] Embed Pods Frameworks */,
+				962A0A5373128336DF9909E7 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -179,6 +261,7 @@
 			files = (
 				8E9FE3A71D6C9F32004B1FD9 /* LaunchScreen.storyboard in Resources */,
 				8E9FE3A41D6C9F32004B1FD9 /* Assets.xcassets in Resources */,
+				8E9FE3BD1D6CA4B7004B1FD9 /* GoogleService-Info.plist in Resources */,
 				8E9FE3A21D6C9F32004B1FD9 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -192,13 +275,109 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		0589CCF82CF28513F0C8A651 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		55BDAAAAE625BCEB169869A2 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-eightam/Pods-eightam-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		93E4AC43536B002575579C35 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		962A0A5373128336DF9909E7 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-eightamTests/Pods-eightamTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D37581473345F1AFBF90C495 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-eightam/Pods-eightam-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F1AE336088A423814E880FE5 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-eightamTests/Pods-eightamTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		8E9FE3951D6C9F32004B1FD9 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8E9FE39F1D6C9F32004B1FD9 /* ViewController.swift in Sources */,
+				8E9FE39F1D6C9F32004B1FD9 /* HomeVC.swift in Sources */,
+				8E8CC21F1D6CAB9C00F4675C /* Constants.swift in Sources */,
 				8E9FE39D1D6C9F32004B1FD9 /* AppDelegate.swift in Sources */,
+				8E8CC2231D6CB79F00F4675C /* User.swift in Sources */,
+				8E8CC2211D6CB42600F4675C /* Thread.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -325,9 +504,11 @@
 		};
 		8E9FE3B71D6C9F32004B1FD9 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 59AC1C52FA006A67DDF88B1D /* Pods-eightam.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = eightam/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.gordonseto.eightam;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -336,9 +517,11 @@
 		};
 		8E9FE3B81D6C9F32004B1FD9 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DD7F2940B6508B79D46835AB /* Pods-eightam.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = eightam/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.gordonseto.eightam;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -347,6 +530,7 @@
 		};
 		8E9FE3BA1D6C9F32004B1FD9 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6419EAECA72E5911AB346E03 /* Pods-eightamTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = eightamTests/Info.plist;
@@ -359,6 +543,7 @@
 		};
 		8E9FE3BB1D6C9F32004B1FD9 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E1276DA5495A849F96148ECE /* Pods-eightamTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = eightamTests/Info.plist;
@@ -388,6 +573,7 @@
 				8E9FE3B81D6C9F32004B1FD9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		8E9FE3B91D6C9F32004B1FD9 /* Build configuration list for PBXNativeTarget "eightamTests" */ = {
 			isa = XCConfigurationList;
@@ -396,6 +582,7 @@
 				8E9FE3BB1D6C9F32004B1FD9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
