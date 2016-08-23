@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import FirebaseDatabase
 
 func generateToolbar(viewController: UIViewController) -> UIToolbar {
     let numberToolbar = UIToolbar(frame: CGRectMake(0, 0, viewController.view.frame.size.width, 50))
@@ -33,4 +34,18 @@ func bounceView(view: UIView){
                 view.transform = CGAffineTransformMakeScale(1.0, 1.0)
                 }, completion: {completed in })
     })
+}
+
+func vote(uid: String, type: String, key: String, voteType: String){
+    let firebase = FIRDatabase.database().reference()
+    if voteType == "NoVote" {
+        firebase.child(type).child(key).child("upVotes").child(uid).setValue(nil)
+        firebase.child(type).child(key).child("downVotes").child(uid).setValue(nil)
+    } else if voteType == "UpVote" {
+        firebase.child(type).child(key).child("upVotes").child(uid).setValue(true)
+        firebase.child(type).child(key).child("downVotes").child(uid).setValue(nil)
+    } else {
+        firebase.child(type).child(key).child("upVotes").child(uid).setValue(nil)
+        firebase.child(type).child(key).child("downVotes").child(uid).setValue(true)
+    }
 }

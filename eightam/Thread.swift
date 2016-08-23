@@ -13,6 +13,10 @@ import FirebaseAuth
 import FirebaseDatabase
 import GeoFire
 
+enum VoteStatus {
+    case UpVote, DownVote, NoVote
+}
+
 class Thread {
     
     private var _key: String!
@@ -22,6 +26,8 @@ class Thread {
     private var _geolocation: CLLocation!
     private var _points: Int!
     private var _numComments: Int!
+    private var _upVotes: [String: Bool]!
+    private var _downVotes: [String: Bool]!
     
     var key: String! {
         return _key
@@ -44,11 +50,21 @@ class Thread {
     }
     
     var points: Int! {
-        return _points
+        return _upVotes.count - _downVotes.count
     }
     
     var numComments: Int! {
         return _numComments
+    }
+    
+    var upVotes: [String: Bool]! {
+        get {return _upVotes}
+        set { _upVotes = newValue}
+    }
+    
+    var downVotes: [String: Bool]! {
+        get {return _downVotes}
+        set {_downVotes = newValue}
     }
     
     var firebase: FIRDatabaseReference!
@@ -58,7 +74,8 @@ class Thread {
         _geolocation = geolocation
         _authorUid = authorUid
         _time = NSDate().timeIntervalSince1970
-        _points = 0
+        _upVotes = [:]
+        _downVotes = [:]
         _numComments = 0
     }
     
@@ -100,11 +117,26 @@ class Thread {
             self._authorUid = snapshot.value!["authorUid"] as? String ?? ""
             self._opText = snapshot.value!["opText"] as? String ?? ""
             self._time = snapshot.value!["time"] as? NSTimeInterval ?? NSDate().timeIntervalSince1970
-            self._points = snapshot.value!["points"] as? Int ?? 0
+            self._upVotes = snapshot.value!["upVotes"] as? [String: Bool] ?? [:]
+            self._downVotes = snapshot.value!["downVotes"] as? [String: Bool] ?? [:]
             self._numComments = snapshot.value!["numComments"] as? Int ?? 0
             
             print("downloaded \(self.opText)")
             completion(self)
         })
+    }
+    
+    func findUserVoteStatus(uid: String) -> VoteStatus {
+        guard let upVotes = _upVotes else { return VoteStatus.NoVote }
+        guard let downVotes = _downVotes else { return VoteStatus.NoVote }
+        
+        if upVotes[uid] != nil {
+            return VoteStatus.UpVote
+        } else if downVotes[uid] != nil {
+            return VoteStatus.DownVote
+        } else {
+            return VoteStatus.NoVote
+        }
+        
     }
 }
