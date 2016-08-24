@@ -14,7 +14,7 @@ class PostCell: UITableViewCell {
     
     @IBOutlet weak var textView: UITextView!
     @IBOutlet weak var timeLabel: UILabel!
-    @IBOutlet weak var numCommentsLabel: UILabel!
+    //@IBOutlet weak var numCommentsLabel: UILabel!
     @IBOutlet weak var pointsLabel: UILabel!
     @IBOutlet weak var upButton: UIButton!
     @IBOutlet weak var downButton: UIButton!
@@ -22,6 +22,7 @@ class PostCell: UITableViewCell {
     var voteStatus: VoteStatus!
     var uid: String!
     var post: Post!
+    var type: String = "replies"
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -40,11 +41,14 @@ class PostCell: UITableViewCell {
             voteStatus = post.findUserVoteStatus(uid)
         
             textView.text = opText
-            if type == "thread" {
-                if let thread = extra as? Thread {
-                    numCommentsLabel.text = "\(thread.numReplies) replies"
-                }
-            }
+            self.type = type
+//            if type == "threads" {
+//                if let thread = extra as? Thread {
+//                    numCommentsLabel.text = "\(thread.numReplies) replies"
+//                }
+//            } else {
+//                numCommentsLabel.text = ""
+//            }
             pointsLabel.text = "\(points)"
             
             timeLabel.text = "\(getPostTime(time).0)\(getPostTime(time).1)"
@@ -80,7 +84,7 @@ class PostCell: UITableViewCell {
     func downloadThreadAndConfigure(threadKey: String, completion: (Thread)->()) {
         let thread = Thread(key: threadKey)
         thread.downloadThread(){ thread in
-            self.configureCell(thread.originalPost, type: "thread", extra: thread)
+            self.configureCell(thread.originalPost, type: "threads", extra: thread)
             completion(thread)
         }
     }
@@ -88,7 +92,7 @@ class PostCell: UITableViewCell {
     func downloadPostAndConfigure(postKey: String, completion: (Post) ->()) {
         let post = Post(key: postKey)
         post.downloadPost(){ post in
-            self.configureCell(post, type: "post", extra: [])
+            self.configureCell(post, type: "replies", extra: [])
             completion(post)
         }
     }
@@ -99,12 +103,12 @@ class PostCell: UITableViewCell {
         if voteStatus == VoteStatus.UpVote {
             voteStatus = VoteStatus.NoVote
             displayNoVote()
-            vote(uid, type: "threads", key: post.key, voteType: "NoVote")
+            vote(uid, type: type, key: post.key, voteType: "NoVote")
             post.upVotes[uid] = nil
         } else {
             voteStatus = VoteStatus.UpVote
             displayUpVote()
-            vote(uid, type: "threads", key: post.key, voteType: "UpVote")
+            vote(uid, type: type, key: post.key, voteType: "UpVote")
             post.upVotes[uid] = true
             post.downVotes[uid] = nil
         }
@@ -117,12 +121,12 @@ class PostCell: UITableViewCell {
         if voteStatus == VoteStatus.DownVote {
             voteStatus = VoteStatus.NoVote
             displayNoVote()
-            vote(uid, type: "threads", key: post.key, voteType: "NoVote")
+            vote(uid, type: type, key: post.key, voteType: "NoVote")
             post.downVotes[uid] = nil
         } else {
             voteStatus = VoteStatus.DownVote
             displayDownVote()
-            vote(uid, type: "threads", key: post.key, voteType: "DownVote")
+            vote(uid, type: type, key: post.key, voteType: "DownVote")
             post.downVotes[uid] = true
             post.upVotes[uid] = nil
         }

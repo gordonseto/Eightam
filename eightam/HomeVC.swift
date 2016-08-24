@@ -138,7 +138,7 @@ class HomeVC: UIViewController, CLLocationManagerDelegate, UITableViewDelegate, 
         let cell = tableView.dequeueReusableCellWithIdentifier("ThreadCell", forIndexPath: indexPath) as! PostCell
         let key = threadKeys[indexPath.row]
         if let index = threads.indexOf({$0.key == key}) {
-            cell.configureCell(threads[index].originalPost, type: "thread", extra: threads[index])
+            cell.configureCell(threads[index].originalPost, type: "threads", extra: threads[index])
         } else {
             cell.downloadThreadAndConfigure(key) {thread in
                 self.threads.append(thread)

@@ -265,8 +265,7 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="downButton" destination="Fkg-LN-2ql" id="UPW-ZJ-eLi"/>
-                                            <outlet property="numCommentsLabel" destination="iRp-u3-owd" id="eVh-Xb-vZJ"/>
-                                            <outlet property="pointsLabel" destination="4Rg-ys-tRh" id="wtd-zX-6W3"/>
+                                            <outlet property="pointsLabel" destination="4Rg-ys-tRh" id="H7D-io-37T"/>
                                             <outlet property="textView" destination="FGe-0Z-NDv" id="wMq-VC-53L"/>
                                             <outlet property="timeLabel" destination="zkP-Pa-sQD" id="1p0-Kh-pi1"/>
                                             <outlet property="upButton" destination="ywm-Lv-aYR" id="b5b-no-4DI"/>
@@ -382,7 +381,7 @@
                                     </mask>
                                 </variation>
                             </view>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="120" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="e2h-n9-EzV">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="191" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="e2h-n9-EzV">
                                 <rect key="frame" x="0.0" y="64" width="600" height="475"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="YD8-5Z-K82" customClass="CardView" customModule="eightam" customModuleProvider="target">
@@ -473,21 +472,21 @@
                                     </variation>
                                 </view>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ReplyCell" rowHeight="120" id="Zbd-AM-Acs" customClass="PostCell" customModule="eightam" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="265" width="600" height="120"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ReplyCell" rowHeight="191" id="Zbd-AM-Acs" customClass="PostCell" customModule="eightam" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="265" width="600" height="191"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Zbd-AM-Acs" id="ZX0-4b-6tr">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="119"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="190"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="GyF-mm-wQw">
-                                                    <rect key="frame" x="8" y="8" width="516" height="84"/>
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" scrollEnabled="NO" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GyF-mm-wQw">
+                                                    <rect key="frame" x="8" y="8" width="520" height="114"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                 </textView>
                                                 <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DBH-bO-ot6">
-                                                    <rect key="frame" x="554" y="15" width="38" height="32"/>
+                                                    <rect key="frame" x="558" y="22" width="38" height="32"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="38" id="8bc-tJ-JUn"/>
                                                         <constraint firstAttribute="height" constant="32" id="Tgh-Ue-IPF"/>
@@ -498,7 +497,7 @@
                                                     </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="153" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HyK-oq-pwx">
-                                                    <rect key="frame" x="544" y="48" width="58" height="23"/>
+                                                    <rect key="frame" x="548" y="54" width="58" height="23"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="42" id="cZ2-br-UFs"/>
                                                         <constraint firstAttribute="width" constant="58" id="tZJ-FW-X9k"/>
@@ -513,7 +512,7 @@
                                                     </variation>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UbL-6T-7Wp">
-                                                    <rect key="frame" x="554" y="73" width="38" height="32"/>
+                                                    <rect key="frame" x="558" y="77" width="38" height="32"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="38" id="hFh-iL-tCz"/>
                                                         <constraint firstAttribute="height" constant="32" id="lmF-Nf-Lnv"/>
@@ -523,8 +522,8 @@
                                                         <action selector="onDownButtonTapped:" destination="Zbd-AM-Acs" eventType="touchUpInside" id="PBi-63-YnT"/>
                                                     </connections>
                                                 </button>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3d" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="54v-Ig-ilW">
-                                                    <rect key="frame" x="8" y="90" width="42" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="3d" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="54v-Ig-ilW">
+                                                    <rect key="frame" x="8" y="122" width="42" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="JQk-YW-O2R"/>
                                                         <constraint firstAttribute="width" constant="42" id="rQZ-U1-apa"/>
@@ -589,15 +588,11 @@
                         </variation>
                     </view>
                     <connections>
-                        <outlet property="downButton" destination="KFS-u8-aVI" id="pD2-OO-D1X"/>
-                        <outlet property="numCommentsLabel" destination="HBY-Ik-CHq" id="XrU-JL-RVr"/>
                         <outlet property="opTextView" destination="naP-iY-Hqe" id="adv-2m-QdL"/>
-                        <outlet property="pointsLabel" destination="n0x-f5-Wmg" id="062-kg-Lew"/>
                         <outlet property="replyInput" destination="18J-0l-ONV" id="frf-T1-A1n"/>
                         <outlet property="sendButton" destination="edZ-il-vl3" id="3AB-BI-PZs"/>
                         <outlet property="tableView" destination="e2h-n9-EzV" id="6DH-HZ-esL"/>
                         <outlet property="timeLabel" destination="2DN-X5-95B" id="7BT-us-kWE"/>
-                        <outlet property="upButton" destination="nTN-5V-gtK" id="ZTP-wp-REB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dzL-AW-RHm" userLabel="First Responder" sceneMemberID="firstResponder"/>

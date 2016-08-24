@@ -73,7 +73,7 @@ class ThreadVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UITab
         thread.downloadThread(){ thread in
             self.replies = []
             self.replyKeys = Array(thread.replyKeys.keys)
-            self.replyKeys = self.replyKeys.sort({$0 > $1})
+            self.replyKeys = self.replyKeys.sort({$0 < $1})
             print(self.replyKeys)
             self.refreshControl.endRefreshing()
             self.tableView.reloadData()
@@ -94,7 +94,7 @@ class ThreadVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UITab
         let cell = tableView.dequeueReusableCellWithIdentifier("ReplyCell", forIndexPath: indexPath) as! PostCell
         let key = replyKeys[indexPath.row]
         if let index = replies.indexOf({$0.key == key}) {
-            cell.configureCell(replies[index], type: "post", extra: [])
+            cell.configureCell(replies[index], type: "replies", extra: [])
         } else {
             cell.downloadPostAndConfigure(key) {post in
                 self.replies.append(post)
