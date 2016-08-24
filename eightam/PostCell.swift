@@ -45,7 +45,11 @@ class PostCell: UITableViewCell  {
             self.type = type
             if type == "threads" {
                 if let thread = extra as? Thread {
-                    numCommentsLabel.text = "\(thread.numReplies) replies"
+                    if thread.numReplies > 0 {
+                        numCommentsLabel.text = "\(thread.numReplies) replies"
+                    } else {
+                        numCommentsLabel.text = ""
+                    }
                 }
             }
             pointsLabel.text = "\(points)"

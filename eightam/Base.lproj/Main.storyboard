@@ -19,6 +19,7 @@
             <string>HelveticaNeue</string>
             <string>HelveticaNeue</string>
             <string>HelveticaNeue</string>
+            <string>HelveticaNeue</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -370,13 +371,6 @@
                                     <rect key="frame" x="0.0" y="64" width="600" height="194"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
-                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="naP-iY-Hqe">
-                                            <rect key="frame" x="8" y="14" width="524" height="110"/>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <color key="textColor" red="0.18517628210000001" green="0.18517628210000001" blue="0.18517628210000001" alpha="1" colorSpace="calibratedRGB"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                        </textView>
                                         <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nTN-5V-gtK">
                                             <rect key="frame" x="548" y="29" width="38" height="32"/>
                                             <constraints>
@@ -434,25 +428,32 @@
                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="eMJ-vX-gbG">
+                                            <rect key="frame" x="8" y="8" width="514" height="128"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="textColor" red="0.18517628210000001" green="0.18517628210000001" blue="0.18517628210000001" alpha="1" colorSpace="calibratedRGB"/>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
+                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                        </textView>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <constraints>
                                         <constraint firstItem="HBY-Ik-CHq" firstAttribute="centerY" secondItem="h2p-Vl-2SM" secondAttribute="centerY" id="2DN-X5-95B"/>
-                                        <constraint firstItem="n0x-f5-Wmg" firstAttribute="leading" secondItem="naP-iY-Hqe" secondAttribute="trailing" constant="6" id="3wh-dx-X1h"/>
                                         <constraint firstItem="HBY-Ik-CHq" firstAttribute="centerX" secondItem="YD8-5Z-K82" secondAttribute="centerX" id="6n0-6Q-Jjz"/>
+                                        <constraint firstItem="n0x-f5-Wmg" firstAttribute="leading" secondItem="eMJ-vX-gbG" secondAttribute="trailing" constant="20" id="8X5-ZY-QmL"/>
                                         <constraint firstItem="KFS-u8-aVI" firstAttribute="centerX" secondItem="n0x-f5-Wmg" secondAttribute="centerX" id="AZN-DH-CHh"/>
                                         <constraint firstAttribute="bottom" secondItem="h2p-Vl-2SM" secondAttribute="bottom" constant="8" id="EcW-HR-m1A"/>
                                         <constraint firstItem="n0x-f5-Wmg" firstAttribute="top" secondItem="nTN-5V-gtK" secondAttribute="bottom" constant="8" id="GDQ-en-kxJ"/>
+                                        <constraint firstItem="n0x-f5-Wmg" firstAttribute="centerY" secondItem="eMJ-vX-gbG" secondAttribute="centerY" id="Mhh-rE-cjA"/>
+                                        <constraint firstItem="HBY-Ik-CHq" firstAttribute="top" secondItem="eMJ-vX-gbG" secondAttribute="bottom" constant="6" id="PBi-AH-q8m"/>
                                         <constraint firstItem="n0x-f5-Wmg" firstAttribute="centerY" secondItem="YD8-5Z-K82" secondAttribute="centerY" id="T9T-If-Rmt"/>
                                         <constraint firstItem="h2p-Vl-2SM" firstAttribute="leading" secondItem="YD8-5Z-K82" secondAttribute="leading" constant="8" id="UWD-Gf-6qP"/>
-                                        <constraint firstItem="h2p-Vl-2SM" firstAttribute="top" secondItem="naP-iY-Hqe" secondAttribute="bottom" constant="20" id="Ue5-HA-J8G"/>
                                         <constraint firstAttribute="trailing" secondItem="nTN-5V-gtK" secondAttribute="trailing" constant="4" id="VNj-bp-wZT"/>
                                         <constraint firstItem="KFS-u8-aVI" firstAttribute="top" secondItem="n0x-f5-Wmg" secondAttribute="bottom" constant="8" id="WkE-oc-eXm"/>
-                                        <constraint firstItem="n0x-f5-Wmg" firstAttribute="centerY" secondItem="naP-iY-Hqe" secondAttribute="centerY" id="Wvk-4M-GIc"/>
+                                        <constraint firstItem="eMJ-vX-gbG" firstAttribute="leading" secondItem="YD8-5Z-K82" secondAttribute="leading" constant="8" id="Z9o-1g-ICI"/>
                                         <constraint firstAttribute="trailing" secondItem="n0x-f5-Wmg" secondAttribute="trailing" constant="4" id="eFX-an-pkw"/>
-                                        <constraint firstItem="naP-iY-Hqe" firstAttribute="top" secondItem="YD8-5Z-K82" secondAttribute="top" constant="14" id="i1K-hS-mSo"/>
                                         <constraint firstItem="nTN-5V-gtK" firstAttribute="centerX" secondItem="n0x-f5-Wmg" secondAttribute="centerX" id="oYQ-tB-klG"/>
-                                        <constraint firstItem="naP-iY-Hqe" firstAttribute="leading" secondItem="YD8-5Z-K82" secondAttribute="leading" constant="8" id="pEq-vv-Uo2"/>
+                                        <constraint firstItem="eMJ-vX-gbG" firstAttribute="top" secondItem="YD8-5Z-K82" secondAttribute="top" constant="14" id="oeP-c4-sui"/>
                                     </constraints>
                                     <variation key="default">
                                         <mask key="constraints">
@@ -586,12 +587,12 @@
                     <connections>
                         <outlet property="downButton" destination="KFS-u8-aVI" id="Epp-xQ-Z6i"/>
                         <outlet property="numCommentsLabel" destination="HBY-Ik-CHq" id="zIE-OS-3Jj"/>
-                        <outlet property="opTextView" destination="naP-iY-Hqe" id="adv-2m-QdL"/>
+                        <outlet property="opTextView" destination="eMJ-vX-gbG" id="CIJ-hx-ugc"/>
                         <outlet property="pointsLabel" destination="n0x-f5-Wmg" id="FEr-qG-tcM"/>
                         <outlet property="replyInput" destination="18J-0l-ONV" id="frf-T1-A1n"/>
                         <outlet property="sendButton" destination="edZ-il-vl3" id="3AB-BI-PZs"/>
                         <outlet property="tableView" destination="e2h-n9-EzV" id="6DH-HZ-esL"/>
-                        <outlet property="timeLabel" destination="2DN-X5-95B" id="7BT-us-kWE"/>
+                        <outlet property="timeLabel" destination="h2p-Vl-2SM" id="92A-LZ-eau"/>
                         <outlet property="upButton" destination="nTN-5V-gtK" id="wNi-lh-dCB"/>
                     </connections>
                 </viewController>

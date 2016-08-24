@@ -12,7 +12,7 @@ import FirebaseDatabase
 import GeoFire
 import BoltsSwift
 
-class HomeVC: UIViewController, CLLocationManagerDelegate, UITableViewDelegate, UITableViewDataSource, UITextViewDelegate {
+class HomeVC: UIViewController, CLLocationManagerDelegate, UITableViewDelegate, UITableViewDataSource, UITextViewDelegate, ThreadVCDelegate {
 
     @IBOutlet weak var newPostTextView: UITextView!
     @IBOutlet weak var characterCountLabel: UILabel!
@@ -64,6 +64,11 @@ class HomeVC: UIViewController, CLLocationManagerDelegate, UITableViewDelegate, 
             self.uid = uid
             beginHomeVC()
         }
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        self.tabBarController?.tabBar.hidden = false
     }
     
     func beginHomeVC() {
@@ -132,6 +137,14 @@ class HomeVC: UIViewController, CLLocationManagerDelegate, UITableViewDelegate, 
     func onKeyboardSendTapped(sender: AnyObject){
         newPostTextView.resignFirstResponder()
         postNewThread()
+    }
+    
+    func threadChanged(thread: Thread){
+        if let index = threads.indexOf({$0.key == thread.key}) {
+            thread.downloadThread(){thread in
+                self.tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: index, inSection: 0)], withRowAnimation: UITableViewRowAnimation.None)
+            }
+        }
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -218,6 +231,7 @@ class HomeVC: UIViewController, CLLocationManagerDelegate, UITableViewDelegate, 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "threadVCFromHome" {
             if let destinationVC = segue.destinationViewController as? ThreadVC {
+                destinationVC.delegate = self
                 destinationVC.thread = sender as? Thread
             }
         }

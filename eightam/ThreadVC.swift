@@ -13,6 +13,10 @@ import MBAutoGrowingTextView
 import FirebaseAuth
 import FirebaseDatabase
 
+protocol ThreadVCDelegate: class {
+    func threadChanged(thread: Thread)
+}
+
 class ThreadVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var opTextView: UITextView!
@@ -20,7 +24,7 @@ class ThreadVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UITab
     @IBOutlet weak var downButton: UIButton!
     @IBOutlet weak var pointsLabel: UILabel!
     @IBOutlet weak var numCommentsLabel: UILabel!
-    @IBOutlet weak var timeLabel: NSLayoutConstraint!
+    @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var sendButton: UIButton!
     @IBOutlet weak var replyInput: MBAutoGrowingTextView!
@@ -40,6 +44,8 @@ class ThreadVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UITab
     var voteStatus: VoteStatus!
     
     var type: String = "threads"
+    
+    weak var delegate: ThreadVCDelegate!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -82,6 +88,7 @@ class ThreadVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UITab
         self.opTextView.text = thread.originalPost.text
         self.pointsLabel.text = "\(thread.originalPost.points)"
         self.voteStatus = thread.originalPost.findUserVoteStatus(self.uid)
+        timeLabel.text = "\(getPostTime(thread.originalPost.time).0)\(getPostTime(thread.originalPost.time).1)"
         
         if thread.numReplies == 1 {
             self.numCommentsLabel.text = "\(thread.numReplies) reply"
@@ -96,6 +103,7 @@ class ThreadVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UITab
         } else {
             self.displayNoVote()
         }
+        
     }
     
     func getReplies(){
@@ -204,6 +212,7 @@ class ThreadVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UITab
                 } else {
                     self.numCommentsLabel.text = "\(self.replies.count) replies"
                 }
+                self.delegate?.threadChanged(self.thread)
             }
         }
     }
@@ -253,6 +262,7 @@ class ThreadVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UITab
             thread.originalPost.downVotes[uid] = nil
         }
         pointsLabel.text = "\(thread.originalPost.points)"
+        delegate?.threadChanged(self.thread)
     }
     
     @IBAction func onDownButtonTapped(sender: UIButton) {
@@ -272,5 +282,6 @@ class ThreadVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UITab
             thread.originalPost.upVotes[uid] = nil
         }
         pointsLabel.text = "\(thread.originalPost.points)"
+        delegate?.threadChanged(self.thread)
     }
 }
