@@ -21,13 +21,12 @@ class Thread {
     
     private var _key: String!
     private var _authorUid: String!
-    private var _opText: String!
     private var _time: NSTimeInterval!
     private var _geolocation: CLLocation!
-    private var _points: Int!
-    private var _numComments: Int!
-    private var _upVotes: [String: Bool]!
-    private var _downVotes: [String: Bool]!
+    private var _replyKeys: [String: Bool]!
+    var replies: [Post] = []
+    
+    var originalPost: Post!
     
     var key: String! {
         return _key
@@ -35,10 +34,6 @@ class Thread {
     
     var authorUid: String! {
         return _authorUid
-    }
-    
-    var opText: String! {
-        return _opText
     }
     
     var time: NSTimeInterval! {
@@ -49,34 +44,21 @@ class Thread {
         return _geolocation
     }
     
-    var points: Int! {
-        return _upVotes.count - _downVotes.count
+    var replyKeys: [String: Bool] {
+        return _replyKeys
     }
     
-    var numComments: Int! {
-        return _numComments
-    }
-    
-    var upVotes: [String: Bool]! {
-        get {return _upVotes}
-        set { _upVotes = newValue}
-    }
-    
-    var downVotes: [String: Bool]! {
-        get {return _downVotes}
-        set {_downVotes = newValue}
+    var numReplies: Int {
+        return replies.count
     }
     
     var firebase: FIRDatabaseReference!
     
     init(authorUid: String, text: String, geolocation: CLLocation!) {
-        _opText = text
         _geolocation = geolocation
         _authorUid = authorUid
         _time = NSDate().timeIntervalSince1970
-        _upVotes = [:]
-        _downVotes = [:]
-        _numComments = 0
+        originalPost = Post(uid: authorUid, text: text)
     }
     
     init(key: String!){
@@ -86,7 +68,7 @@ class Thread {
     func postThread(completion: (Thread)->()) {
         
         guard let authorUid = _authorUid else { return }
-        guard let opText = _opText else { return }
+        guard let opText = originalPost.text else { return }
         guard let time = _time else { return }
         guard let geolocation = _geolocation else { return }
 
@@ -115,28 +97,17 @@ class Thread {
         firebase = FIRDatabase.database().reference()
         firebase.child("threads").child(_key).observeSingleEventOfType(.Value, withBlock: {snapshot in
             self._authorUid = snapshot.value!["authorUid"] as? String ?? ""
-            self._opText = snapshot.value!["opText"] as? String ?? ""
+            let text = snapshot.value!["opText"] as? String ?? ""
             self._time = snapshot.value!["time"] as? NSTimeInterval ?? NSDate().timeIntervalSince1970
-            self._upVotes = snapshot.value!["upVotes"] as? [String: Bool] ?? [:]
-            self._downVotes = snapshot.value!["downVotes"] as? [String: Bool] ?? [:]
-            self._numComments = snapshot.value!["numComments"] as? Int ?? 0
+            let upVotes = snapshot.value!["upVotes"] as? [String: Bool] ?? [:]
+            let downVotes = snapshot.value!["downVotes"] as? [String: Bool] ?? [:]
+            self._replyKeys = snapshot.value!["replies"] as? [String: Bool] ?? [:]
             
-            print("downloaded \(self.opText)")
+            self.originalPost = Post(uid: self._authorUid, text: text, upVotes: upVotes, downVotes: downVotes)
+            
+            print("downloaded \(text)")
             completion(self)
         })
     }
-    
-    func findUserVoteStatus(uid: String) -> VoteStatus {
-        guard let upVotes = _upVotes else { return VoteStatus.NoVote }
-        guard let downVotes = _downVotes else { return VoteStatus.NoVote }
-        
-        if upVotes[uid] != nil {
-            return VoteStatus.UpVote
-        } else if downVotes[uid] != nil {
-            return VoteStatus.DownVote
-        } else {
-            return VoteStatus.NoVote
-        }
-        
-    }
+
 }

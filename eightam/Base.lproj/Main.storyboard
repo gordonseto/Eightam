@@ -308,7 +308,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="116" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="e2h-n9-EzV">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="120" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="e2h-n9-EzV">
                                 <rect key="frame" x="0.0" y="65" width="600" height="475"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="YD8-5Z-K82" customClass="CardView" customModule="eightam" customModuleProvider="target">
@@ -399,11 +399,11 @@
                                     </variation>
                                 </view>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="116" id="Zbd-AM-Acs">
-                                        <rect key="frame" x="0.0" y="265" width="600" height="116"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="120" id="Zbd-AM-Acs">
+                                        <rect key="frame" x="0.0" y="265" width="600" height="120"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Zbd-AM-Acs" id="ZX0-4b-6tr">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="115"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="119"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -431,19 +431,10 @@
                                     <constraint firstItem="hu5-5C-D3D" firstAttribute="leading" secondItem="tE2-dl-osN" secondAttribute="leading" constant="8" id="guj-P1-01h"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1NK-OK-Er8" customClass="CardView" customModule="eightam" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1NK-OK-Er8" customClass="ReplyView" customModule="eightam" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="540" width="600" height="60"/>
                                 <subviews>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Reply" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cuI-VY-wwz">
-                                        <rect key="frame" x="8" y="15" width="522" height="30"/>
-                                        <color key="backgroundColor" white="0.89710920019999996" alpha="1" colorSpace="calibratedWhite"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="30" id="5kq-eI-4In"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" keyboardType="twitter"/>
-                                    </textField>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="edZ-il-vl3">
+                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="edZ-il-vl3">
                                         <rect key="frame" x="538" y="15" width="46" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="46" id="R6H-Q6-Nzb"/>
@@ -457,20 +448,35 @@
                                             <action selector="onSendButtonPressed:" destination="jAP-x4-ZOV" eventType="touchUpInside" id="JNo-ky-gIR"/>
                                         </connections>
                                     </button>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" text="Reply..." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="18J-0l-ONV" customClass="MBAutoGrowingTextView">
+                                        <rect key="frame" x="8" y="15" width="520" height="30"/>
+                                        <color key="backgroundColor" white="0.89710920019999996" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" relation="lessThanOrEqual" constant="150" id="12k-xd-QDl"/>
+                                            <constraint firstAttribute="height" constant="30" id="wrM-Nj-6cv"/>
+                                        </constraints>
+                                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences" keyboardType="twitter"/>
+                                    </textView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="edZ-il-vl3" secondAttribute="trailing" constant="16" id="6hH-Dg-yTn"/>
-                                    <constraint firstItem="edZ-il-vl3" firstAttribute="centerY" secondItem="cuI-VY-wwz" secondAttribute="centerY" id="AyL-1e-ywq"/>
-                                    <constraint firstItem="edZ-il-vl3" firstAttribute="leading" secondItem="cuI-VY-wwz" secondAttribute="trailing" constant="8" id="Kz0-ag-DgY"/>
+                                    <constraint firstAttribute="bottom" secondItem="18J-0l-ONV" secondAttribute="bottom" constant="15" id="IXz-qb-aWI"/>
+                                    <constraint firstItem="18J-0l-ONV" firstAttribute="leading" secondItem="1NK-OK-Er8" secondAttribute="leading" constant="8" id="K8U-kX-bsw"/>
+                                    <constraint firstAttribute="trailing" secondItem="edZ-il-vl3" secondAttribute="trailing" constant="8" id="Mw1-6m-r3m"/>
                                     <constraint firstAttribute="height" constant="108" id="NLf-Kd-Fyo"/>
-                                    <constraint firstItem="cuI-VY-wwz" firstAttribute="leading" secondItem="1NK-OK-Er8" secondAttribute="leading" constant="8" id="VkG-gw-r3X"/>
+                                    <constraint firstItem="edZ-il-vl3" firstAttribute="leading" secondItem="18J-0l-ONV" secondAttribute="trailing" constant="8" id="aGu-pu-uvE"/>
                                     <constraint firstAttribute="height" constant="60" id="ch1-ns-dww"/>
-                                    <constraint firstItem="cuI-VY-wwz" firstAttribute="centerY" secondItem="1NK-OK-Er8" secondAttribute="centerY" id="o7v-lT-3Ji"/>
+                                    <constraint firstItem="18J-0l-ONV" firstAttribute="top" secondItem="1NK-OK-Er8" secondAttribute="top" constant="15" id="dCD-0o-TLc"/>
+                                    <constraint firstAttribute="bottom" secondItem="edZ-il-vl3" secondAttribute="bottom" constant="15" id="nXS-dy-zCF"/>
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
                                         <exclude reference="NLf-Kd-Fyo"/>
+                                        <exclude reference="ch1-ns-dww"/>
+                                        <exclude reference="6hH-Dg-yTn"/>
                                     </mask>
                                 </variation>
                             </view>
@@ -502,7 +508,7 @@
                         <outlet property="numCommentsLabel" destination="HBY-Ik-CHq" id="XrU-JL-RVr"/>
                         <outlet property="opTextView" destination="naP-iY-Hqe" id="adv-2m-QdL"/>
                         <outlet property="pointsLabel" destination="n0x-f5-Wmg" id="062-kg-Lew"/>
-                        <outlet property="replyInput" destination="cuI-VY-wwz" id="dQg-6b-IoL"/>
+                        <outlet property="replyInput" destination="18J-0l-ONV" id="frf-T1-A1n"/>
                         <outlet property="sendButton" destination="edZ-il-vl3" id="3AB-BI-PZs"/>
                         <outlet property="tableView" destination="e2h-n9-EzV" id="6DH-HZ-esL"/>
                         <outlet property="timeLabel" destination="2DN-X5-95B" id="7BT-us-kWE"/>

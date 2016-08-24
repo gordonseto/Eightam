@@ -9,8 +9,11 @@
 import UIKit
 import SloppySwiper
 import QuartzCore
+import MBAutoGrowingTextView
+import FirebaseAuth
+import FirebaseDatabase
 
-class ThreadVC: UIViewController {
+class ThreadVC: UIViewController, UITextViewDelegate {
 
     @IBOutlet weak var opTextView: UITextView!
     @IBOutlet weak var upButton: UIButton!
@@ -19,12 +22,17 @@ class ThreadVC: UIViewController {
     @IBOutlet weak var numCommentsLabel: UILabel!
     @IBOutlet weak var timeLabel: NSLayoutConstraint!
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var replyInput: UITextField!
     @IBOutlet weak var sendButton: UIButton!
+    @IBOutlet weak var replyInput: MBAutoGrowingTextView!
     
     var thread: Thread!
     
     var swiper: SloppySwiper!
+    
+    var uid: String!
+    
+    var replyKeys: [String] = []
+    var replies: [Post] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,11 +44,25 @@ class ThreadVC: UIViewController {
             navigationcontroller.delegate = swiper
         }
         
-        replyInput.layer.sublayerTransform = CATransform3DMakeTranslation(5, 0, 0)
+        replyInput.delegate = self
+        replyInput.layer.cornerRadius = 4.0
         
-        opTextView.text = thread.opText
+        opTextView.text = thread.originalPost.text
+        
+        if let uid = FIRAuth.auth()?.currentUser?.uid {
+            self.uid = uid
+            getReplies()
+        }
     }
-
+    
+    func getReplies(){
+        thread.downloadThread(){ thread in
+            self.replyKeys = Array(thread.replyKeys.keys)
+            self.replyKeys = self.replyKeys.sort({$0 > $1})
+            print(self.replyKeys)
+        }
+    }
+    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -50,8 +72,43 @@ class ThreadVC: UIViewController {
     override func viewDidDisappear(animated: Bool) {
         self.tabBarController?.tabBar.hidden = false
     }
+    
+    func textViewDidBeginEditing(textView: UITextView) {
+        textView.textColor = UIColor.blackColor()
+        if textView.text == "Reply..." {
+            textView.text = ""
+        }
+    }
+    
+    func textViewDidEndEditing(textView: UITextView) {
+        if textView.text == "" {
+            textView.textColor = UIColor.lightGrayColor()
+            textView.text = "Reply..."
+        } else {
+            textView.textColor = UIColor.blackColor()
+        }
+    }
+    
+    func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
+        let maxtext: Int = MAX_TEXT
+        //If the text is larger than the maxtext, the return is false
+        if text == "\n" {
+            textView.resignFirstResponder()
+            return false
+        }
+        return textView.text.characters.count + (text.characters.count - range.length) <= maxtext
+    }
 
     @IBAction func onSendButtonPressed(sender: AnyObject) {
+        if let uid = uid {
+            sendButton.userInteractionEnabled = false
+            let post = Post(uid: uid, text: replyInput.text)
+            post.post(thread.key){ post in
+                self.replyInput.textColor = UIColor.lightGrayColor()
+                self.replyInput.text = "Reply..."
+                self.sendButton.userInteractionEnabled = true
+            }
+        }
     }
 
     @IBAction func onBackButtonPressed(sender: AnyObject) {

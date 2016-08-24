@@ -32,13 +32,13 @@ class ThreadCell: UITableViewCell {
         self.thread = thread
         if let uid = FIRAuth.auth()?.currentUser?.uid {
             self.uid = uid
-            print(thread.opText)
-            guard let opText = thread.opText else { return }
+            print(thread.originalPost.text)
+            guard let opText = thread.originalPost.text else { return }
             guard let time = thread.time else { return }
             guard let numComments = thread.numComments else { return }
-            guard let points = thread.points else { return }
+            guard let points = thread.originalPost.points else { return }
         
-            voteStatus = thread.findUserVoteStatus(uid)
+            voteStatus = thread.originalPost.findUserVoteStatus(uid)
         
             opTextView.text = opText
             numCommentsLabel.text = "\(numComments) replies"
@@ -89,15 +89,15 @@ class ThreadCell: UITableViewCell {
             voteStatus = VoteStatus.NoVote
             displayNoVote()
             vote(uid, type: "threads", key: thread.key, voteType: "NoVote")
-            thread.upVotes[uid] = nil
+            thread.originalPost.upVotes[uid] = nil
         } else {
             voteStatus = VoteStatus.UpVote
             displayUpVote()
             vote(uid, type: "threads", key: thread.key, voteType: "UpVote")
-            thread.upVotes[uid] = true
-            thread.downVotes[uid] = nil
+            thread.originalPost.upVotes[uid] = true
+            thread.originalPost.downVotes[uid] = nil
         }
-        pointsLabel.text = "\(thread.points)"
+        pointsLabel.text = "\(thread.originalPost.points)"
     }
     
     @IBAction func onDownButtonTapped(sender: UIButton) {
@@ -107,15 +107,15 @@ class ThreadCell: UITableViewCell {
             voteStatus = VoteStatus.NoVote
             displayNoVote()
             vote(uid, type: "threads", key: thread.key, voteType: "NoVote")
-            thread.downVotes[uid] = nil
+            thread.originalPost.downVotes[uid] = nil
         } else {
             voteStatus = VoteStatus.DownVote
             displayDownVote()
             vote(uid, type: "threads", key: thread.key, voteType: "DownVote")
-            thread.downVotes[uid] = true
-            thread.upVotes[uid] = nil
+            thread.originalPost.downVotes[uid] = true
+            thread.originalPost.upVotes[uid] = nil
         }
-        pointsLabel.text = "\(thread.points)"
+        pointsLabel.text = "\(thread.originalPost.points)"
     }
 
 }
