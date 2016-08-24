@@ -9,12 +9,12 @@
 import UIKit
 import FirebaseAuth
 
-class PostCell: UITableViewCell {
+class PostCell: UITableViewCell  {
 
     
-    @IBOutlet weak var textView: UITextView!
+    @IBOutlet weak var postTextLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
-    //@IBOutlet weak var numCommentsLabel: UILabel!
+    @IBOutlet weak var numCommentsLabel: UILabel!
     @IBOutlet weak var pointsLabel: UILabel!
     @IBOutlet weak var upButton: UIButton!
     @IBOutlet weak var downButton: UIButton!
@@ -40,15 +40,14 @@ class PostCell: UITableViewCell {
         
             voteStatus = post.findUserVoteStatus(uid)
         
-            textView.text = opText
+            postTextLabel.text = opText
+
             self.type = type
-//            if type == "threads" {
-//                if let thread = extra as? Thread {
-//                    numCommentsLabel.text = "\(thread.numReplies) replies"
-//                }
-//            } else {
-//                numCommentsLabel.text = ""
-//            }
+            if type == "threads" {
+                if let thread = extra as? Thread {
+                    numCommentsLabel.text = "\(thread.numReplies) replies"
+                }
+            }
             pointsLabel.text = "\(points)"
             
             timeLabel.text = "\(getPostTime(time).0)\(getPostTime(time).1)"
@@ -100,6 +99,7 @@ class PostCell: UITableViewCell {
     @IBAction func onUpButtonTapped(sender: UIButton) {
         bounceView(sender, amount: 1.5)
         guard let _ = voteStatus else { return }
+        guard let _ = post.key else { return }
         if voteStatus == VoteStatus.UpVote {
             voteStatus = VoteStatus.NoVote
             displayNoVote()
@@ -118,6 +118,7 @@ class PostCell: UITableViewCell {
     @IBAction func onDownButtonTapped(sender: UIButton) {
         bounceView(sender, amount: 1.5)
         guard let _ = voteStatus else { return }
+        guard let _ = post.key else { return }
         if voteStatus == VoteStatus.DownVote {
             voteStatus = VoteStatus.NoVote
             displayNoVote()

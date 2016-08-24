@@ -80,3 +80,18 @@ func getPostTime(time: NSTimeInterval) -> (value: String, unit: String) {
     }
 }
 
+func displayBackgroundMessage(message: String, label: UILabel, viewToAdd: UIView, height: CGFloat, textSize: CGFloat) {
+    label.center = CGPointMake(UIScreen.mainScreen().bounds.size.width/2, UIScreen.mainScreen().bounds.size.height/2 - height)
+    label.text = message
+    label.textAlignment = .Center
+    label.font = UIFont(name: "HelveticaNeue-Bold", size: textSize)
+    label.textColor = UIColor.lightGrayColor()
+    viewToAdd.addSubview(label)
+}
+
+func removeBackgroundMessage(label: UILabel!){
+    if let label = label {
+        label.removeFromSuperview()
+    }
+}
+

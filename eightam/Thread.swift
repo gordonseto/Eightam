@@ -49,7 +49,7 @@ class Thread {
     }
     
     var numReplies: Int {
-        return replies.count
+        return replyKeys.count
     }
     
     var firebase: FIRDatabaseReference!

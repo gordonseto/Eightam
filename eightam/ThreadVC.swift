@@ -26,6 +26,7 @@ class ThreadVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UITab
     @IBOutlet weak var replyInput: MBAutoGrowingTextView!
     
     var refreshControl: UIRefreshControl!
+    var noRepliesLabel: UILabel!
     
     var thread: Thread!
     
@@ -35,6 +36,10 @@ class ThreadVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UITab
     
     var replyKeys: [String] = []
     var replies: [Post] = []
+    
+    var voteStatus: VoteStatus!
+    
+    var type: String = "threads"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,6 +54,9 @@ class ThreadVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UITab
         tableView.delegate = self
         tableView.dataSource = self
         
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 140
+        
         refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: Selector("refreshView:"), forControlEvents: UIControlEvents.ValueChanged)
         refreshControl.tintColor = UIColor.lightGrayColor()
@@ -56,12 +64,13 @@ class ThreadVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UITab
         self.tableView.scrollEnabled = true
         self.tableView.alwaysBounceVertical = true
         self.tableView.delaysContentTouches = false
+        self.tableView.tableFooterView = UIView(frame: CGRectMake(0, 0, self.tableView.frame.size.width, 1))
         tableView.allowsSelection = true
+        
+        noRepliesLabel = UILabel(frame: CGRectMake(0, 0, 220, 120))
         
         replyInput.delegate = self
         replyInput.layer.cornerRadius = 4.0
-        
-        opTextView.text = thread.originalPost.text
         
         if let uid = FIRAuth.auth()?.currentUser?.uid {
             self.uid = uid
@@ -69,14 +78,61 @@ class ThreadVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UITab
         }
     }
     
+    func initializeOPView(){
+        self.opTextView.text = thread.originalPost.text
+        self.pointsLabel.text = "\(thread.originalPost.points)"
+        self.voteStatus = thread.originalPost.findUserVoteStatus(self.uid)
+        
+        if thread.numReplies == 1 {
+            self.numCommentsLabel.text = "\(thread.numReplies) reply"
+        } else {
+            self.numCommentsLabel.text = "\(thread.numReplies) replies"
+        }
+        
+        if self.voteStatus == VoteStatus.UpVote {
+            self.displayUpVote()
+        } else if self.voteStatus == VoteStatus.DownVote {
+            self.displayDownVote()
+        } else {
+            self.displayNoVote()
+        }
+    }
+    
     func getReplies(){
         thread.downloadThread(){ thread in
+            
+            self.initializeOPView()
+            
             self.replies = []
             self.replyKeys = Array(thread.replyKeys.keys)
             self.replyKeys = self.replyKeys.sort({$0 < $1})
-            print(self.replyKeys)
-            self.refreshControl.endRefreshing()
-            self.tableView.reloadData()
+
+            var downloadedPosts = 0
+            for key in self.replyKeys {
+                let post = Post(key: key)
+                post.downloadPost(){post in
+                    downloadedPosts++
+                    self.replies.append(post)
+                    if downloadedPosts == self.replyKeys.count {
+                        self.doneGettingPosts()
+                    }
+                }
+            }
+            if self.replyKeys.count == 0 {
+                self.doneGettingPosts()
+            }
+            
+        }
+    }
+    
+    func doneGettingPosts(){
+        replies = replies.sort({$0.key < $1.key})
+        self.refreshControl.endRefreshing()
+        self.tableView.reloadData()
+        if self.replies.count == 0 {
+            displayBackgroundMessage("No Replies", label: noRepliesLabel, viewToAdd: tableView, height: 40, textSize: 17)
+        } else {
+            removeBackgroundMessage(noRepliesLabel)
         }
     }
     
@@ -92,19 +148,13 @@ class ThreadVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UITab
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("ReplyCell", forIndexPath: indexPath) as! PostCell
-        let key = replyKeys[indexPath.row]
-        if let index = replies.indexOf({$0.key == key}) {
-            cell.configureCell(replies[index], type: "replies", extra: [])
-        } else {
-            cell.downloadPostAndConfigure(key) {post in
-                self.replies.append(post)
-            }
-        }
+        let reply = replies[indexPath.row]
+        cell.configureCell(reply, type: "replies", extra: [])
         return cell
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return replyKeys.count
+        return replies.count
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -145,7 +195,15 @@ class ThreadVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UITab
                 self.replyInput.textColor = UIColor.lightGrayColor()
                 self.replyInput.text = "Reply..."
                 self.sendButton.userInteractionEnabled = true
-                self.getReplies()
+                self.replies.append(post)
+                self.tableView.reloadData()
+                self.tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: self.replies.count - 1, inSection: 0), atScrollPosition: UITableViewScrollPosition.Bottom, animated: true)
+                removeBackgroundMessage(self.noRepliesLabel)
+                if self.replies.count == 1 {
+                    self.numCommentsLabel.text = "\(self.replies.count) reply"
+                } else {
+                    self.numCommentsLabel.text = "\(self.replies.count) replies"
+                }
             }
         }
     }
@@ -158,5 +216,61 @@ class ThreadVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UITab
     
     func refreshView(sender: AnyObject){
         getReplies()
+    }
+    
+    func displayUpVote(){
+        pointsLabel.textColor = UIColor(red: 60.0/255.0, green: 178.0/255.0, blue: 226.0/255.0, alpha: 1.0)
+        upButton.setImage(UIImage(named:"up_colored"), forState: .Normal)
+        downButton.setImage(UIImage(named:"down"), forState: .Normal)
+    }
+    
+    func displayDownVote(){
+        pointsLabel.textColor = UIColor(red: 60.0/255.0, green: 178.0/255.0, blue: 226.0/255.0, alpha: 1.0)
+        upButton.setImage(UIImage(named:"up"), forState: .Normal)
+        downButton.setImage(UIImage(named:"down_colored"), forState: .Normal)
+    }
+    
+    func displayNoVote(){
+        pointsLabel.textColor = UIColor.lightGrayColor()
+        upButton.setImage(UIImage(named:"up"), forState: .Normal)
+        downButton.setImage(UIImage(named:"down"), forState: .Normal)
+    }
+    
+    @IBAction func onUpButtonTapped(sender: UIButton) {
+        bounceView(sender, amount: 1.5)
+        guard let _ = voteStatus else { return }
+        guard let _ = thread.originalPost.key else { return }
+        if voteStatus == VoteStatus.UpVote {
+            voteStatus = VoteStatus.NoVote
+            displayNoVote()
+            vote(uid, type: type, key: thread.originalPost.key, voteType: "NoVote")
+            thread.originalPost.upVotes[uid] = nil
+        } else {
+            voteStatus = VoteStatus.UpVote
+            displayUpVote()
+            vote(uid, type: type, key: thread.originalPost.key, voteType: "UpVote")
+            thread.originalPost.upVotes[uid] = true
+            thread.originalPost.downVotes[uid] = nil
+        }
+        pointsLabel.text = "\(thread.originalPost.points)"
+    }
+    
+    @IBAction func onDownButtonTapped(sender: UIButton) {
+        bounceView(sender, amount: 1.5)
+        guard let _ = voteStatus else { return }
+        guard let _ = thread.originalPost.key else { return }
+        if voteStatus == VoteStatus.DownVote {
+            voteStatus = VoteStatus.NoVote
+            displayNoVote()
+            vote(uid, type: type, key: thread.originalPost.key, voteType: "NoVote")
+            thread.originalPost.downVotes[uid] = nil
+        } else {
+            voteStatus = VoteStatus.DownVote
+            displayDownVote()
+            vote(uid, type: type, key: thread.originalPost.key, voteType: "DownVote")
+            thread.originalPost.downVotes[uid] = true
+            thread.originalPost.upVotes[uid] = nil
+        }
+        pointsLabel.text = "\(thread.originalPost.points)"
     }
 }

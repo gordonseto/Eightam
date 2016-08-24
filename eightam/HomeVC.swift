@@ -181,7 +181,7 @@ class HomeVC: UIViewController, CLLocationManagerDelegate, UITableViewDelegate, 
     }
     
     func textViewDidBeginEditing(textView: UITextView) {
-        textView.textColor = UIColor.blackColor()
+        textView.textColor = UIColor(red: 47.0/255.0, green: 47.0/255.0, blue: 47.0/255.0, alpha: 1.0)
         if textView.text == "What's up?" {
             textView.text = ""
         }
@@ -192,7 +192,7 @@ class HomeVC: UIViewController, CLLocationManagerDelegate, UITableViewDelegate, 
             textView.textColor = UIColor.lightGrayColor()
             textView.text = "What's up?"
         } else {
-            textView.textColor = UIColor.blackColor()
+            textView.textColor = UIColor(red: 47.0/255.0, green: 47.0/255.0, blue: 47.0/255.0, alpha: 1.0)
         }
     }
     
