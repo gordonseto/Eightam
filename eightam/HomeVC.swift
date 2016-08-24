@@ -44,6 +44,9 @@ class HomeVC: UIViewController, CLLocationManagerDelegate, UITableViewDelegate, 
         
         newPostTextView.inputAccessoryView = generateToolbar(self)
         
+        tableView.delegate = self
+        tableView.dataSource = self
+        
         refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: Selector("refreshView:"), forControlEvents: UIControlEvents.ValueChanged)
         refreshControl.tintColor = UIColor.whiteColor()
@@ -52,10 +55,6 @@ class HomeVC: UIViewController, CLLocationManagerDelegate, UITableViewDelegate, 
         self.tableView.alwaysBounceVertical = true
         self.tableView.delaysContentTouches = false
         tableView.allowsSelection = true
-        tableView.scrollsToTop = true
-        
-        tableView.delegate = self
-        tableView.dataSource = self
         
         locationManager.delegate = self
         

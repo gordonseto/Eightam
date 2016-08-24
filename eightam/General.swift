@@ -49,3 +49,33 @@ func vote(uid: String, type: String, key: String, voteType: String){
         firebase.child(type).child(key).child("downVotes").child(uid).setValue(true)
     }
 }
+
+func getPostTime(time: NSTimeInterval) -> (value: String, unit: String) {
+    let currentTime = NSDate().timeIntervalSince1970
+    var timeDifference = currentTime - time
+    if timeDifference < 60 { // seconds
+        return ("\(Int(timeDifference))", "s")
+    } else {
+        timeDifference /= 60.0
+        if timeDifference < 60 { //minutes
+            return ("\(Int(timeDifference))", "m")
+        } else {
+            timeDifference /= 60.0
+            if timeDifference < 24 { //hours
+                return ("\(Int(timeDifference))", "h")
+            } else {
+                timeDifference /= 24.0
+                if timeDifference < 7 { //days
+                    return ("\(Int(timeDifference))", "d")
+                } else {
+                    timeDifference /= 7.0
+                    if timeDifference < 52.0 { //weeks
+                        return ("\(Int(timeDifference))", "w")
+                    } else {
+                        return ("\(Int(timeDifference))", "y") //years
+                    }
+                }
+            }
+        }
+    }
+}

@@ -44,6 +44,8 @@ class ThreadCell: UITableViewCell {
             numCommentsLabel.text = "\(numComments) replies"
             pointsLabel.text = "\(points)"
             
+            timeLabel.text = "\(getPostTime(time).0)\(getPostTime(time).1)"
+            
             if voteStatus == VoteStatus.UpVote {
                 displayUpVote()
             } else if voteStatus == VoteStatus.DownVote {
