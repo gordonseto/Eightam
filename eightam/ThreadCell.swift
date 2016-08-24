@@ -83,7 +83,7 @@ class ThreadCell: UITableViewCell {
     }
     
     @IBAction func onUpButtonTapped(sender: UIButton) {
-        bounceView(sender)
+        bounceView(sender, amount: 1.5)
         guard let _ = voteStatus else { return }
         if voteStatus == VoteStatus.UpVote {
             voteStatus = VoteStatus.NoVote
@@ -101,7 +101,7 @@ class ThreadCell: UITableViewCell {
     }
     
     @IBAction func onDownButtonTapped(sender: UIButton) {
-        bounceView(sender)
+        bounceView(sender, amount: 1.5)
         guard let _ = voteStatus else { return }
         if voteStatus == VoteStatus.DownVote {
             voteStatus = VoteStatus.NoVote

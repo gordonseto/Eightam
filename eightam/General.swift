@@ -26,9 +26,9 @@ func generateToolbar(viewController: UIViewController) -> UIToolbar {
     return numberToolbar
 }
 
-func bounceView(view: UIView){
+func bounceView(view: UIView, amount: CGFloat){
     UIView.animateWithDuration(0.1, delay: 0.0, options: [], animations: {
-        view.transform = CGAffineTransformMakeScale(1.1, 1.1)
+        view.transform = CGAffineTransformMakeScale(amount, amount)
         }, completion: {completed in
             UIView.animateWithDuration(0.1, delay: 0.0, options: [], animations: {
                 view.transform = CGAffineTransformMakeScale(1.0, 1.0)
@@ -79,3 +79,4 @@ func getPostTime(time: NSTimeInterval) -> (value: String, unit: String) {
         }
     }
 }
+

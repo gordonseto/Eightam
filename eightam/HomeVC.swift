@@ -197,7 +197,7 @@ class HomeVC: UIViewController, CLLocationManagerDelegate, UITableViewDelegate, 
     
     func textViewDidChange(textView: UITextView) {
         characterCountLabel.text = "\(MAX_TEXT - textView.text.characters.count)"
-        bounceView(characterCountLabel)
+        bounceView(characterCountLabel, amount: 1.1)
     }
     
     func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {

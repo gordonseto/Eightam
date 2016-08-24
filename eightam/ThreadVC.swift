@@ -8,6 +8,7 @@
 
 import UIKit
 import SloppySwiper
+import QuartzCore
 
 class ThreadVC: UIViewController {
 
@@ -18,6 +19,8 @@ class ThreadVC: UIViewController {
     @IBOutlet weak var numCommentsLabel: UILabel!
     @IBOutlet weak var timeLabel: NSLayoutConstraint!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var replyInput: UITextField!
+    @IBOutlet weak var sendButton: UIButton!
     
     var thread: Thread!
     
@@ -26,14 +29,30 @@ class ThreadVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        hideKeyboardWhenTappedAround()
+        
         if let navigationcontroller = self.navigationController {
             swiper = SloppySwiper(navigationController: navigationcontroller)
             navigationcontroller.delegate = swiper
         }
         
+        replyInput.layer.sublayerTransform = CATransform3DMakeTranslation(5, 0, 0)
+        
         opTextView.text = thread.opText
     }
 
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.tabBarController?.tabBar.hidden = true
+    }
+    
+    override func viewDidDisappear(animated: Bool) {
+        self.tabBarController?.tabBar.hidden = false
+    }
+
+    @IBAction func onSendButtonPressed(sender: AnyObject) {
+    }
 
     @IBAction func onBackButtonPressed(sender: AnyObject) {
         if let navController = self.navigationController {
