@@ -75,6 +75,7 @@ class HomeVC: UIViewController, CLLocationManagerDelegate, UITableViewDelegate, 
             if threads.count == 0 {
                 
             }
+            firebase.removeAllObservers()
             hasLoadedThreads = true
             
             let geofireRef = firebase.child("geolocations")
@@ -134,10 +135,10 @@ class HomeVC: UIViewController, CLLocationManagerDelegate, UITableViewDelegate, 
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("ThreadCell", forIndexPath: indexPath) as! ThreadCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("ThreadCell", forIndexPath: indexPath) as! PostCell
         let key = threadKeys[indexPath.row]
         if let index = threads.indexOf({$0.key == key}) {
-            cell.configureCell(threads[index])
+            cell.configureCell(threads[index].originalPost, type: "thread", extra: threads[index])
         } else {
             cell.downloadThreadAndConfigure(key) {thread in
                 self.threads.append(thread)

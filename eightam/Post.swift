@@ -62,11 +62,13 @@ class Post {
         downVotes = [:]
     }
     
-    init(uid: String, text: String, upVotes: [String:Bool], downVotes: [String:Bool]){
+    init(key: String, uid: String, text: String, upVotes: [String:Bool], downVotes: [String:Bool], time: NSTimeInterval){
+        _key = key
         _authorUid = uid
         _text = text
         _upVotes = upVotes
         _downVotes = downVotes
+        _time = time
     }
     
     func findUserVoteStatus(uid: String) -> VoteStatus {
@@ -115,4 +117,5 @@ class Post {
             completion(self)
         })
     }
+
 }

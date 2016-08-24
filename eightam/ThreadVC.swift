@@ -13,7 +13,7 @@ import MBAutoGrowingTextView
 import FirebaseAuth
 import FirebaseDatabase
 
-class ThreadVC: UIViewController, UITextViewDelegate {
+class ThreadVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var opTextView: UITextView!
     @IBOutlet weak var upButton: UIButton!
@@ -24,6 +24,8 @@ class ThreadVC: UIViewController, UITextViewDelegate {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var sendButton: UIButton!
     @IBOutlet weak var replyInput: MBAutoGrowingTextView!
+    
+    var refreshControl: UIRefreshControl!
     
     var thread: Thread!
     
@@ -44,6 +46,18 @@ class ThreadVC: UIViewController, UITextViewDelegate {
             navigationcontroller.delegate = swiper
         }
         
+        tableView.delegate = self
+        tableView.dataSource = self
+        
+        refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: Selector("refreshView:"), forControlEvents: UIControlEvents.ValueChanged)
+        refreshControl.tintColor = UIColor.lightGrayColor()
+        self.tableView.addSubview(refreshControl)
+        self.tableView.scrollEnabled = true
+        self.tableView.alwaysBounceVertical = true
+        self.tableView.delaysContentTouches = false
+        tableView.allowsSelection = true
+        
         replyInput.delegate = self
         replyInput.layer.cornerRadius = 4.0
         
@@ -57,9 +71,12 @@ class ThreadVC: UIViewController, UITextViewDelegate {
     
     func getReplies(){
         thread.downloadThread(){ thread in
+            self.replies = []
             self.replyKeys = Array(thread.replyKeys.keys)
             self.replyKeys = self.replyKeys.sort({$0 > $1})
             print(self.replyKeys)
+            self.refreshControl.endRefreshing()
+            self.tableView.reloadData()
         }
     }
     
@@ -71,6 +88,27 @@ class ThreadVC: UIViewController, UITextViewDelegate {
     
     override func viewDidDisappear(animated: Bool) {
         self.tabBarController?.tabBar.hidden = false
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("ReplyCell", forIndexPath: indexPath) as! PostCell
+        let key = replyKeys[indexPath.row]
+        if let index = replies.indexOf({$0.key == key}) {
+            cell.configureCell(replies[index], type: "post", extra: [])
+        } else {
+            cell.downloadPostAndConfigure(key) {post in
+                self.replies.append(post)
+            }
+        }
+        return cell
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return replyKeys.count
+    }
+    
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 1
     }
     
     func textViewDidBeginEditing(textView: UITextView) {
@@ -107,6 +145,7 @@ class ThreadVC: UIViewController, UITextViewDelegate {
                 self.replyInput.textColor = UIColor.lightGrayColor()
                 self.replyInput.text = "Reply..."
                 self.sendButton.userInteractionEnabled = true
+                self.getReplies()
             }
         }
     }
@@ -115,5 +154,9 @@ class ThreadVC: UIViewController, UITextViewDelegate {
         if let navController = self.navigationController {
             navController.popViewControllerAnimated(true)
         }
+    }
+    
+    func refreshView(sender: AnyObject){
+        getReplies()
     }
 }

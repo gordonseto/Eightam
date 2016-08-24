@@ -103,7 +103,7 @@ class Thread {
             let downVotes = snapshot.value!["downVotes"] as? [String: Bool] ?? [:]
             self._replyKeys = snapshot.value!["replies"] as? [String: Bool] ?? [:]
             
-            self.originalPost = Post(uid: self._authorUid, text: text, upVotes: upVotes, downVotes: downVotes)
+            self.originalPost = Post(key: key, uid: self._authorUid, text: text, upVotes: upVotes, downVotes: downVotes, time: self._time)
             
             print("downloaded \(text)")
             completion(self)

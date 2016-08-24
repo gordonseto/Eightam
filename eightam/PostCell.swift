@@ -9,10 +9,10 @@
 import UIKit
 import FirebaseAuth
 
-class ThreadCell: UITableViewCell {
+class PostCell: UITableViewCell {
 
     
-    @IBOutlet weak var opTextView: UITextView!
+    @IBOutlet weak var textView: UITextView!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var numCommentsLabel: UILabel!
     @IBOutlet weak var pointsLabel: UILabel!
@@ -21,27 +21,30 @@ class ThreadCell: UITableViewCell {
     
     var voteStatus: VoteStatus!
     var uid: String!
-    var thread: Thread!
+    var post: Post!
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
     }
     
-    func configureCell(thread: Thread){
-        self.thread = thread
+    func configureCell(post: Post, type: String, extra: AnyObject){
+        self.post = post
         if let uid = FIRAuth.auth()?.currentUser?.uid {
             self.uid = uid
-            print(thread.originalPost.text)
-            guard let opText = thread.originalPost.text else { return }
-            guard let time = thread.time else { return }
-            guard let numComments = thread.numComments else { return }
-            guard let points = thread.originalPost.points else { return }
+            print(post.text)
+            guard let opText = post.text else { return }
+            guard let time = post.time else { return }
+            guard let points = post.points else { return }
         
-            voteStatus = thread.originalPost.findUserVoteStatus(uid)
+            voteStatus = post.findUserVoteStatus(uid)
         
-            opTextView.text = opText
-            numCommentsLabel.text = "\(numComments) replies"
+            textView.text = opText
+            if type == "thread" {
+                if let thread = extra as? Thread {
+                    numCommentsLabel.text = "\(thread.numReplies) replies"
+                }
+            }
             pointsLabel.text = "\(points)"
             
             timeLabel.text = "\(getPostTime(time).0)\(getPostTime(time).1)"
@@ -77,8 +80,16 @@ class ThreadCell: UITableViewCell {
     func downloadThreadAndConfigure(threadKey: String, completion: (Thread)->()) {
         let thread = Thread(key: threadKey)
         thread.downloadThread(){ thread in
-            self.configureCell(thread)
+            self.configureCell(thread.originalPost, type: "thread", extra: thread)
             completion(thread)
+        }
+    }
+    
+    func downloadPostAndConfigure(postKey: String, completion: (Post) ->()) {
+        let post = Post(key: postKey)
+        post.downloadPost(){ post in
+            self.configureCell(post, type: "post", extra: [])
+            completion(post)
         }
     }
     
@@ -88,16 +99,16 @@ class ThreadCell: UITableViewCell {
         if voteStatus == VoteStatus.UpVote {
             voteStatus = VoteStatus.NoVote
             displayNoVote()
-            vote(uid, type: "threads", key: thread.key, voteType: "NoVote")
-            thread.originalPost.upVotes[uid] = nil
+            vote(uid, type: "threads", key: post.key, voteType: "NoVote")
+            post.upVotes[uid] = nil
         } else {
             voteStatus = VoteStatus.UpVote
             displayUpVote()
-            vote(uid, type: "threads", key: thread.key, voteType: "UpVote")
-            thread.originalPost.upVotes[uid] = true
-            thread.originalPost.downVotes[uid] = nil
+            vote(uid, type: "threads", key: post.key, voteType: "UpVote")
+            post.upVotes[uid] = true
+            post.downVotes[uid] = nil
         }
-        pointsLabel.text = "\(thread.originalPost.points)"
+        pointsLabel.text = "\(post.points)"
     }
     
     @IBAction func onDownButtonTapped(sender: UIButton) {
@@ -106,16 +117,16 @@ class ThreadCell: UITableViewCell {
         if voteStatus == VoteStatus.DownVote {
             voteStatus = VoteStatus.NoVote
             displayNoVote()
-            vote(uid, type: "threads", key: thread.key, voteType: "NoVote")
-            thread.originalPost.downVotes[uid] = nil
+            vote(uid, type: "threads", key: post.key, voteType: "NoVote")
+            post.downVotes[uid] = nil
         } else {
             voteStatus = VoteStatus.DownVote
             displayDownVote()
-            vote(uid, type: "threads", key: thread.key, voteType: "DownVote")
-            thread.originalPost.downVotes[uid] = true
-            thread.originalPost.upVotes[uid] = nil
+            vote(uid, type: "threads", key: post.key, voteType: "DownVote")
+            post.downVotes[uid] = true
+            post.upVotes[uid] = nil
         }
-        pointsLabel.text = "\(thread.originalPost.points)"
+        pointsLabel.text = "\(post.points)"
     }
 
 }
