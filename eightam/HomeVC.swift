@@ -11,13 +11,14 @@ import FirebaseAuth
 import FirebaseDatabase
 import GeoFire
 import BoltsSwift
+import SloppySwiper
 
 class HomeVC: UIViewController, CLLocationManagerDelegate, UITableViewDelegate, UITableViewDataSource, UITextViewDelegate, ThreadVCDelegate {
 
     @IBOutlet weak var newPostTextView: UITextView!
     @IBOutlet weak var characterCountLabel: UILabel!
-    @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var backButton: UIButton!
     
     var refreshControl: UIRefreshControl!
     
@@ -33,6 +34,10 @@ class HomeVC: UIViewController, CLLocationManagerDelegate, UITableViewDelegate, 
     
     var uid: String!
     
+    var isPeekLocation: Bool = false
+    
+    var swiper: SloppySwiper!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -42,6 +47,11 @@ class HomeVC: UIViewController, CLLocationManagerDelegate, UITableViewDelegate, 
         hideKeyboardWhenTappedAround()
         
         self.navigationController?.navigationBarHidden = true
+        
+        if let navigationcontroller = self.navigationController {
+            swiper = SloppySwiper(navigationController: navigationcontroller)
+            navigationcontroller.delegate = swiper
+        }
         
         newPostTextView.delegate = self
         
@@ -75,7 +85,15 @@ class HomeVC: UIViewController, CLLocationManagerDelegate, UITableViewDelegate, 
     }
     
     func beginHomeVC() {
-        locationAuthStatus()
+        if !isPeekLocation {
+            backButton.hidden = true
+            locationAuthStatus()
+        } else {
+            if let location = currentLocation {
+                backButton.hidden = false
+                queryThreads()
+            }
+        }
     }
     
     func queryThreads(){
@@ -225,6 +243,12 @@ class HomeVC: UIViewController, CLLocationManagerDelegate, UITableViewDelegate, 
     
     func refreshView(sender: AnyObject){
         queryThreads()
+    }
+    
+    @IBAction func onBackButtonPressed(sender: AnyObject) {
+        if let navController = self.navigationController {
+            navController.popViewControllerAnimated(true)
+        }
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

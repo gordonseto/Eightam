@@ -13,6 +13,8 @@ import GoogleMaps
 class MapVC: UIViewController, MKMapViewDelegate, UIGestureRecognizerDelegate {
 
     @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var locationLabel: UILabel!
+    @IBOutlet weak var binocularsButton: UIButton!
     
     var location: CLLocationCoordinate2D!
     var pin: MKPointAnnotation!
@@ -20,8 +22,12 @@ class MapVC: UIViewController, MKMapViewDelegate, UIGestureRecognizerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        showGoogleAutoComplete()
+        mapView.hidden = true
         
+        binocularsButton.imageView?.contentMode = UIViewContentMode.ScaleAspectFit
+        
+        showGoogleAutoComplete()
+
         mapView.delegate = self
         
         let panRec = UIPanGestureRecognizer(target: self, action: "onMapDragged:")
@@ -32,10 +38,13 @@ class MapVC: UIViewController, MKMapViewDelegate, UIGestureRecognizerDelegate {
     func showGoogleAutoComplete(){
         let autocompleteController = GMSAutocompleteViewController()
         autocompleteController.delegate = self
-        self.presentViewController(autocompleteController, animated: true, completion: nil)
+        self.presentViewController(autocompleteController, animated: true){
+            self.mapView.hidden = false
+        }
     }
     
     func centerMapOnLocation(place: GMSPlace){
+        locationLabel.text = place.name
         location = place.coordinate
         
         let coordinateRegion = MKCoordinateRegionMakeWithDistance(location, SEARCH_RADIUS * 1000, SEARCH_RADIUS * 1000)
@@ -45,7 +54,6 @@ class MapVC: UIViewController, MKMapViewDelegate, UIGestureRecognizerDelegate {
     }
     
     func setMapPin(location: CLLocationCoordinate2D){
-        print("pin called")
         if let pin = pin {
             mapView.removeAnnotation(pin)
         }
@@ -61,9 +69,12 @@ class MapVC: UIViewController, MKMapViewDelegate, UIGestureRecognizerDelegate {
     }
     
     func onMapDragged(gestureRecognizer: UIGestureRecognizer) {
-        print("wat")
         let location = mapView.centerCoordinate
         setMapPin(location)
+    }
+    
+    @IBAction func onBinocularsPressed(sender: AnyObject) {
+        performSegueWithIdentifier("homeVCFromMap", sender: nil)
     }
     
     @IBAction func onBackButtonPressed(sender: AnyObject) {
@@ -75,13 +86,21 @@ class MapVC: UIViewController, MKMapViewDelegate, UIGestureRecognizerDelegate {
     func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWithGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         return true
     }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "homeVCFromMap" {
+            if let destinationVC = segue.destinationViewController as? HomeVC {
+                destinationVC.isPeekLocation = true
+                destinationVC.currentLocation = CLLocation(latitude: location.latitude, longitude: location.longitude)
+            }
+        }
+    }
 }
 
 extension MapVC: GMSAutocompleteViewControllerDelegate {
     func viewController(viewController: GMSAutocompleteViewController, didAutocompleteWithPlace place: GMSPlace) {
         centerMapOnLocation(place)
         self.dismissViewControllerAnimated(true, completion: nil)
-        
     }
     
     func viewController(viewController: GMSAutocompleteViewController, didFailAutocompleteWithError error: NSError) {
@@ -90,5 +109,8 @@ extension MapVC: GMSAutocompleteViewControllerDelegate {
     
     func wasCancelled(viewController: GMSAutocompleteViewController) {
         self.dismissViewControllerAnimated(true, completion: nil)
+        if let navController = self.navigationController {
+            navController.popViewControllerAnimated(true)
+        }
     }
 }

@@ -154,7 +154,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="ZPt-a5-sKp"/>
                     <connections>
-                        <segue destination="U4n-c5-FsI" kind="show" identifier="mapVCFromBasecamp" id="UnX-GD-29E"/>
+                        <segue destination="U4n-c5-FsI" kind="show" identifier="mapVCFromBasecamp" id="wPj-dz-81a"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pFv-n9-YdS" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -178,13 +178,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="kmJ-ZL-5qj">
-                                <rect key="frame" x="0.0" y="66" width="600" height="534"/>
-                            </mapView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4eR-vU-6CF">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="65"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hib-aZ-62p">
+                                    <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hib-aZ-62p">
                                         <rect key="frame" x="8" y="22" width="35" height="35"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="35" id="2he-RX-IHH"/>
@@ -196,17 +193,59 @@
                                             <action selector="onBackButtonPressed:" destination="U4n-c5-FsI" eventType="touchUpInside" id="rfM-yC-GVT"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yKa-2f-6yb">
+                                        <rect key="frame" x="557" y="36" width="35" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="25" id="L3t-Vp-BBY"/>
+                                            <constraint firstAttribute="height" constant="21" id="Ze0-4v-DKa"/>
+                                            <constraint firstAttribute="height" constant="21" id="j3x-Fr-TIe"/>
+                                            <constraint firstAttribute="width" constant="35" id="x37-Zu-aBw"/>
+                                        </constraints>
+                                        <state key="normal" image="binoculars"/>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="Ze0-4v-DKa"/>
+                                                <exclude reference="j3x-Fr-TIe"/>
+                                                <exclude reference="x37-Zu-aBw"/>
+                                            </mask>
+                                        </variation>
+                                        <connections>
+                                            <action selector="onBinocularsPressed:" destination="U4n-c5-FsI" eventType="touchUpInside" id="8Qr-EL-GKx"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LC2-Od-HDV">
+                                        <rect key="frame" x="51" y="29" width="498" height="21"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" red="0.23529411759999999" green="0.69803921570000005" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
+                                    <constraint firstItem="LC2-Od-HDV" firstAttribute="centerY" secondItem="Hib-aZ-62p" secondAttribute="centerY" id="BDg-5o-Vso"/>
+                                    <constraint firstItem="yKa-2f-6yb" firstAttribute="centerY" secondItem="Hib-aZ-62p" secondAttribute="centerY" constant="4" id="Bw5-af-V0x"/>
                                     <constraint firstItem="Hib-aZ-62p" firstAttribute="leading" secondItem="4eR-vU-6CF" secondAttribute="leading" constant="8" id="bLN-US-luH"/>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="65" id="dX7-Hi-cuj"/>
+                                    <constraint firstItem="yKa-2f-6yb" firstAttribute="leading" secondItem="LC2-Od-HDV" secondAttribute="trailing" constant="16" id="fqY-NJ-tgW"/>
+                                    <constraint firstAttribute="bottom" secondItem="LC2-Od-HDV" secondAttribute="bottom" constant="8" id="gMN-6G-nc8"/>
+                                    <constraint firstAttribute="bottom" secondItem="yKa-2f-6yb" secondAttribute="bottom" constant="8" id="gev-yF-3ra"/>
+                                    <constraint firstAttribute="trailing" secondItem="yKa-2f-6yb" secondAttribute="trailing" constant="8" id="mP4-ee-s3A"/>
                                     <constraint firstAttribute="bottom" secondItem="Hib-aZ-62p" secondAttribute="bottom" constant="8" id="qfE-xb-ERA"/>
                                     <constraint firstAttribute="height" constant="65" id="rUn-dE-OFw"/>
+                                    <constraint firstItem="LC2-Od-HDV" firstAttribute="leading" secondItem="Hib-aZ-62p" secondAttribute="trailing" constant="16" id="xmd-K7-JvO"/>
                                 </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="gMN-6G-nc8"/>
+                                        <exclude reference="gev-yF-3ra"/>
+                                    </mask>
+                                </variation>
                             </view>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="kmJ-ZL-5qj">
+                                <rect key="frame" x="0.0" y="66" width="600" height="534"/>
+                            </mapView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.89710920019999996" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="4eR-vU-6CF" secondAttribute="trailing" id="0Id-JM-eqC"/>
                             <constraint firstItem="kmJ-ZL-5qj" firstAttribute="top" secondItem="4eR-vU-6CF" secondAttribute="bottom" id="Bgy-7b-tUT"/>
@@ -218,7 +257,10 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="binocularsButton" destination="yKa-2f-6yb" id="DKD-mF-bwP"/>
+                        <outlet property="locationLabel" destination="LC2-Od-HDV" id="3K8-Mn-hMu"/>
                         <outlet property="mapView" destination="kmJ-ZL-5qj" id="PAc-lu-egQ"/>
+                        <segue destination="BYZ-38-t0r" kind="show" identifier="homeVCFromMap" id="ndP-zA-4Ax"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zdc-zZ-B70" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -252,11 +294,28 @@
                                         </segments>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </segmentedControl>
+                                    <button hidden="YES" opaque="NO" tag="1" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XzA-ln-uuu">
+                                        <rect key="frame" x="8" y="15" width="35" height="35"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="35" id="FvB-zm-33u"/>
+                                            <constraint firstAttribute="height" constant="35" id="USm-Bd-AWo"/>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="35" id="axE-mi-NTr"/>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="35" id="iqZ-ru-PTu"/>
+                                        </constraints>
+                                        <state key="normal" image="backbuttonwhite"/>
+                                        <connections>
+                                            <action selector="onBackButtonPressed:" destination="U4n-c5-FsI" eventType="touchUpInside" id="5Gs-cK-1VB"/>
+                                            <action selector="onBackButtonPressed:" destination="jAP-x4-ZOV" eventType="touchUpInside" id="L9o-0g-s4W"/>
+                                            <action selector="onBackButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="bl5-Zs-LBc"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.23529411764705882" green="0.69803921568627447" blue="0.88627450980392153" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="5Sl-cY-XHO" secondAttribute="bottom" constant="8" id="KYf-7Y-9Os"/>
+                                    <constraint firstAttribute="bottom" secondItem="XzA-ln-uuu" secondAttribute="bottom" constant="8" id="ToY-Dq-AmJ"/>
                                     <constraint firstAttribute="height" constant="65" id="btp-kA-hSk"/>
+                                    <constraint firstItem="XzA-ln-uuu" firstAttribute="leading" secondItem="aib-YN-VJo" secondAttribute="leading" constant="8" id="qu1-Kf-838"/>
                                     <constraint firstItem="5Sl-cY-XHO" firstAttribute="centerX" secondItem="aib-YN-VJo" secondAttribute="centerX" id="rOL-pC-9dV"/>
                                 </constraints>
                             </view>
@@ -456,6 +515,7 @@
                     <tabBarItem key="tabBarItem" title="Home" id="zUo-DU-NKg"/>
                     <navigationItem key="navigationItem" id="hfL-99-KrR"/>
                     <connections>
+                        <outlet property="backButton" destination="XzA-ln-uuu" id="p4L-po-waM"/>
                         <outlet property="characterCountLabel" destination="uks-wC-0SV" id="Z5z-Vf-PtQ"/>
                         <outlet property="newPostTextView" destination="xDa-nU-5vO" id="jyc-Nm-Mcq"/>
                         <outlet property="tableView" destination="Rrj-J5-tpQ" id="Glp-fM-8sV"/>
@@ -806,7 +866,11 @@
     </scenes>
     <resources>
         <image name="backbuttonwhite" width="128" height="128"/>
+        <image name="binoculars" width="70" height="41"/>
         <image name="down" width="18" height="10"/>
         <image name="up" width="18" height="10"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="TLu-ZG-i8t"/>
+    </inferredMetricsTieBreakers>
 </document>
