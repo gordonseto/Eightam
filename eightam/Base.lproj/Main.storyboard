@@ -91,7 +91,7 @@
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GwI-s4-gTs">
                                                     <rect key="frame" x="24" y="8" width="568" height="112"/>
-                                                    <string key="text">Tap here to set your basecamp. Your basecamp can only be set once and allows you to post and vote there even when you are away from it.</string>
+                                                    <string key="text">Tap here to set your basecamp. Your basecamp can only be set once and allows you to post and vote even when you are away from it.</string>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>

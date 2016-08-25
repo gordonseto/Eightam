@@ -14,7 +14,7 @@ target 'eightam' do
   pod 'GeoFire', :git => 'https://github.com/firebase/geofire-objc.git'
   pod 'SloppySwiper'
   pod 'MBAutoGrowingTextView', '~> 0.1.0'
-  pod 'GooglePlaces'
+  pod 'GoogleMaps'
 
   target 'eightamTests' do
     inherit! :search_paths
