@@ -29,7 +29,7 @@ class PostCell: UITableViewCell  {
         
     }
     
-    func configureCell(post: Post, type: String, extra: AnyObject){
+    func configureCell(post: Post, type: String, extra: AnyObject, isPeekLocation: Bool){
         self.post = post
         if let uid = FIRAuth.auth()?.currentUser?.uid {
             self.uid = uid
@@ -56,12 +56,22 @@ class PostCell: UITableViewCell  {
             
             timeLabel.text = "\(getPostTime(time).0)\(getPostTime(time).1)"
             
-            if voteStatus == VoteStatus.UpVote {
-                displayUpVote()
-            } else if voteStatus == VoteStatus.DownVote {
-                displayDownVote()
+            if !isPeekLocation {
+                upButton.userInteractionEnabled = true
+                downButton.userInteractionEnabled = true
+                if voteStatus == VoteStatus.UpVote {
+                    displayUpVote()
+                } else if voteStatus == VoteStatus.DownVote {
+                    displayDownVote()
+                } else {
+                    displayNoVote()
+                }
             } else {
-                displayNoVote()
+                upButton.userInteractionEnabled = false
+                downButton.userInteractionEnabled = false
+                upButton.setImage(UIImage(named:"updisabled"), forState: .Normal)
+                downButton.setImage(UIImage(named: "downdisabled"), forState: .Normal)
+                pointsLabel.textColor = UIColor.lightGrayColor()
             }
         }
     }
@@ -84,18 +94,18 @@ class PostCell: UITableViewCell  {
         downButton.setImage(UIImage(named:"down"), forState: .Normal)
     }
     
-    func downloadThreadAndConfigure(threadKey: String, completion: (Thread)->()) {
+    func downloadThreadAndConfigure(threadKey: String, isPeekLocation: Bool, completion: (Thread)->()) {
         let thread = Thread(key: threadKey)
         thread.downloadThread(){ thread in
-            self.configureCell(thread.originalPost, type: "threads", extra: thread)
+            self.configureCell(thread.originalPost, type: "threads", extra: thread, isPeekLocation: isPeekLocation)
             completion(thread)
         }
     }
     
-    func downloadPostAndConfigure(postKey: String, completion: (Post) ->()) {
+    func downloadPostAndConfigure(postKey: String, isPeekLocation: Bool, completion: (Post) ->()) {
         let post = Post(key: postKey)
         post.downloadPost(){ post in
-            self.configureCell(post, type: "replies", extra: [])
+            self.configureCell(post, type: "replies", extra: [], isPeekLocation: isPeekLocation)
             completion(post)
         }
     }

@@ -518,6 +518,7 @@
                         <outlet property="backButton" destination="XzA-ln-uuu" id="p4L-po-waM"/>
                         <outlet property="characterCountLabel" destination="uks-wC-0SV" id="Z5z-Vf-PtQ"/>
                         <outlet property="newPostTextView" destination="xDa-nU-5vO" id="jyc-Nm-Mcq"/>
+                        <outlet property="newPostView" destination="dFF-QT-2Cv" id="TZr-mA-ekG"/>
                         <outlet property="tableView" destination="Rrj-J5-tpQ" id="Glp-fM-8sV"/>
                         <segue destination="jAP-x4-ZOV" kind="show" identifier="threadVCFromHome" id="6EW-ph-mZJ"/>
                     </connections>
@@ -835,8 +836,10 @@
                         <outlet property="opTextView" destination="eMJ-vX-gbG" id="CIJ-hx-ugc"/>
                         <outlet property="pointsLabel" destination="n0x-f5-Wmg" id="FEr-qG-tcM"/>
                         <outlet property="replyInput" destination="18J-0l-ONV" id="frf-T1-A1n"/>
+                        <outlet property="replyView" destination="1NK-OK-Er8" id="yTy-IF-slS"/>
                         <outlet property="sendButton" destination="edZ-il-vl3" id="3AB-BI-PZs"/>
                         <outlet property="tableView" destination="e2h-n9-EzV" id="6DH-HZ-esL"/>
+                        <outlet property="tableViewBottomConstraint" destination="uzC-fx-hKA" id="bGn-TM-PDC"/>
                         <outlet property="timeLabel" destination="h2p-Vl-2SM" id="92A-LZ-eau"/>
                         <outlet property="upButton" destination="nTN-5V-gtK" id="wNi-lh-dCB"/>
                     </connections>

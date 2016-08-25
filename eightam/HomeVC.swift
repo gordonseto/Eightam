@@ -19,6 +19,7 @@ class HomeVC: UIViewController, CLLocationManagerDelegate, UITableViewDelegate, 
     @IBOutlet weak var characterCountLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var backButton: UIButton!
+    @IBOutlet weak var newPostView: UIView!
     
     var refreshControl: UIRefreshControl!
     
@@ -86,10 +87,13 @@ class HomeVC: UIViewController, CLLocationManagerDelegate, UITableViewDelegate, 
     
     func beginHomeVC() {
         if !isPeekLocation {
+            newPostView.hidden = false
             backButton.hidden = true
             locationAuthStatus()
         } else {
             if let location = currentLocation {
+                newPostView.hidden = true
+                newPostView.bounds = CGRectMake(newPostView.bounds.minX, self.view.bounds.height, newPostView.bounds.width, 0)
                 backButton.hidden = false
                 queryThreads()
             }
@@ -166,9 +170,9 @@ class HomeVC: UIViewController, CLLocationManagerDelegate, UITableViewDelegate, 
         let cell = tableView.dequeueReusableCellWithIdentifier("ThreadCell", forIndexPath: indexPath) as! PostCell
         let key = threadKeys[indexPath.row]
         if let index = threads.indexOf({$0.key == key}) {
-            cell.configureCell(threads[index].originalPost, type: "threads", extra: threads[index])
+            cell.configureCell(threads[index].originalPost, type: "threads", extra: threads[index], isPeekLocation: isPeekLocation)
         } else {
-            cell.downloadThreadAndConfigure(key) {thread in
+            cell.downloadThreadAndConfigure(key, isPeekLocation: isPeekLocation) {thread in
                 self.threads.append(thread)
             }
         }
@@ -256,6 +260,7 @@ class HomeVC: UIViewController, CLLocationManagerDelegate, UITableViewDelegate, 
             if let destinationVC = segue.destinationViewController as? ThreadVC {
                 destinationVC.delegate = self
                 destinationVC.thread = sender as? Thread
+                destinationVC.isPeekLocation = isPeekLocation
             }
         }
     }

@@ -28,6 +28,8 @@ class ThreadVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UITab
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var sendButton: UIButton!
     @IBOutlet weak var replyInput: MBAutoGrowingTextView!
+    @IBOutlet weak var replyView: ReplyView!
+    @IBOutlet weak var tableViewBottomConstraint: NSLayoutConstraint!
     
     var refreshControl: UIRefreshControl!
     var noRepliesLabel: UILabel!
@@ -46,6 +48,8 @@ class ThreadVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UITab
     var type: String = "threads"
     
     weak var delegate: ThreadVCDelegate!
+    
+    var isPeekLocation: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -96,12 +100,25 @@ class ThreadVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UITab
             self.numCommentsLabel.text = "\(thread.numReplies) replies"
         }
         
-        if self.voteStatus == VoteStatus.UpVote {
-            self.displayUpVote()
-        } else if self.voteStatus == VoteStatus.DownVote {
-            self.displayDownVote()
+        if !isPeekLocation {
+            upButton.userInteractionEnabled = true
+            downButton.userInteractionEnabled = true
+            replyView.hidden = false
+            if self.voteStatus == VoteStatus.UpVote {
+                self.displayUpVote()
+            } else if self.voteStatus == VoteStatus.DownVote {
+                self.displayDownVote()
+            } else {
+                self.displayNoVote()
+            }
         } else {
-            self.displayNoVote()
+            upButton.userInteractionEnabled = false
+            downButton.userInteractionEnabled = false
+            replyView.hidden = true
+            tableViewBottomConstraint.constant = -60
+            upButton.setImage(UIImage(named:"updisabled"), forState: .Normal)
+            downButton.setImage(UIImage(named: "downdisabled"), forState: .Normal)
+            pointsLabel.textColor = UIColor.lightGrayColor()
         }
         
     }
@@ -157,7 +174,7 @@ class ThreadVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UITab
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("ReplyCell", forIndexPath: indexPath) as! PostCell
         let reply = replies[indexPath.row]
-        cell.configureCell(reply, type: "replies", extra: [])
+        cell.configureCell(reply, type: "replies", extra: [], isPeekLocation: isPeekLocation)
         return cell
     }
     
