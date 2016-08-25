@@ -72,11 +72,49 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="lli-at-Ppn">
                                 <rect key="frame" x="0.0" y="66" width="600" height="485"/>
                                 <color key="backgroundColor" white="0.89710920019999996" alpha="1" colorSpace="calibratedWhite"/>
-                                <view key="tableFooterView" contentMode="scaleToFill" id="bKh-gp-97b" customClass="CardView" customModule="eightam" customModuleProvider="target">
+                                <view key="tableFooterView" contentMode="scaleToFill" id="bKh-gp-97b">
                                     <rect key="frame" x="0.0" y="64" width="600" height="204"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My Basecamp" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4zn-vt-bIl">
+                                        <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cuy-4L-yZe" customClass="CardView" customModule="eightam" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="68" width="600" height="128"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GwI-s4-gTs">
+                                                    <rect key="frame" x="24" y="8" width="568" height="112"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="112" id="WOP-na-Yrz"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
+                                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                    <variation key="default">
+                                                        <mask key="constraints">
+                                                            <exclude reference="WOP-na-Yrz"/>
+                                                        </mask>
+                                                    </variation>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <gestureRecognizers/>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="GwI-s4-gTs" secondAttribute="bottom" constant="16" id="3V1-kK-plQ"/>
+                                                <constraint firstItem="GwI-s4-gTs" firstAttribute="leading" secondItem="cuy-4L-yZe" secondAttribute="leading" constant="8" id="OWM-tN-cHi"/>
+                                                <constraint firstAttribute="height" constant="77" id="YRA-Pr-vxK"/>
+                                                <constraint firstItem="GwI-s4-gTs" firstAttribute="top" secondItem="cuy-4L-yZe" secondAttribute="top" constant="16" id="ZVJ-7D-6Cr"/>
+                                                <constraint firstAttribute="trailing" secondItem="GwI-s4-gTs" secondAttribute="trailing" constant="8" id="hBd-l2-Rz6"/>
+                                                <constraint firstAttribute="height" constant="128" id="hn8-SG-8T8"/>
+                                            </constraints>
+                                            <variation key="default">
+                                                <mask key="constraints">
+                                                    <exclude reference="YRA-Pr-vxK"/>
+                                                    <exclude reference="hn8-SG-8T8"/>
+                                                </mask>
+                                            </variation>
+                                            <connections>
+                                                <outletCollection property="gestureRecognizers" destination="2oB-cc-RjY" appends="YES" id="4yH-Ha-MMP"/>
+                                            </connections>
+                                        </view>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="My Basecamp" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4zn-vt-bIl">
                                             <rect key="frame" x="8" y="33" width="270" height="21"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="270" id="Yxl-xa-cRa"/>
@@ -86,36 +124,6 @@
                                             <color key="textColor" red="0.57632211538461542" green="0.57632211538461542" blue="0.57632211538461542" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cuy-4L-yZe" customClass="CardView" customModule="eightam" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="68" width="600" height="128"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GwI-s4-gTs">
-                                                    <rect key="frame" x="24" y="8" width="568" height="112"/>
-                                                    <string key="text">Tap here to set your basecamp. Your basecamp can only be set once and allows you to post and vote even when you are away from it.</string>
-                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
-                                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <gestureRecognizers/>
-                                            <constraints>
-                                                <constraint firstAttribute="bottom" secondItem="GwI-s4-gTs" secondAttribute="bottom" constant="8" id="3V1-kK-plQ"/>
-                                                <constraint firstItem="GwI-s4-gTs" firstAttribute="leading" secondItem="cuy-4L-yZe" secondAttribute="leading" constant="24" id="OWM-tN-cHi"/>
-                                                <constraint firstAttribute="height" constant="77" id="YRA-Pr-vxK"/>
-                                                <constraint firstItem="GwI-s4-gTs" firstAttribute="top" secondItem="cuy-4L-yZe" secondAttribute="top" constant="8" id="ZVJ-7D-6Cr"/>
-                                                <constraint firstAttribute="trailing" secondItem="GwI-s4-gTs" secondAttribute="trailing" constant="8" id="hBd-l2-Rz6"/>
-                                                <constraint firstAttribute="height" constant="128" id="hn8-SG-8T8"/>
-                                            </constraints>
-                                            <variation key="default">
-                                                <mask key="constraints">
-                                                    <exclude reference="YRA-Pr-vxK"/>
-                                                </mask>
-                                            </variation>
-                                            <connections>
-                                                <outletCollection property="gestureRecognizers" destination="2oB-cc-RjY" appends="YES" id="4yH-Ha-MMP"/>
-                                            </connections>
-                                        </view>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <constraints>
@@ -124,7 +132,13 @@
                                         <constraint firstItem="cuy-4L-yZe" firstAttribute="top" secondItem="4zn-vt-bIl" secondAttribute="bottom" constant="14" id="SVB-yC-vYj"/>
                                         <constraint firstItem="4zn-vt-bIl" firstAttribute="top" secondItem="bKh-gp-97b" secondAttribute="top" constant="33" id="hFe-hk-jI2"/>
                                         <constraint firstItem="4zn-vt-bIl" firstAttribute="leading" secondItem="bKh-gp-97b" secondAttribute="leading" constant="8" id="ojI-oL-eUP"/>
+                                        <constraint firstItem="4zn-vt-bIl" firstAttribute="top" secondItem="bKh-gp-97b" secondAttribute="top" constant="23" id="xuB-Rs-Eu0"/>
                                     </constraints>
+                                    <variation key="default">
+                                        <mask key="constraints">
+                                            <exclude reference="hFe-hk-jI2"/>
+                                        </mask>
+                                    </variation>
                                 </view>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f9k-c4-16S" customClass="NavigationView" customModule="eightam" customModuleProvider="target">
@@ -154,6 +168,9 @@
                     </view>
                     <navigationItem key="navigationItem" id="ZPt-a5-sKp"/>
                     <connections>
+                        <outlet property="basecampLabel" destination="GwI-s4-gTs" id="5js-VI-hqZ"/>
+                        <outlet property="basecampView" destination="cuy-4L-yZe" id="F0x-gC-Sre"/>
+                        <outlet property="tableView" destination="lli-at-Ppn" id="KuW-8u-Ya8"/>
                         <segue destination="U4n-c5-FsI" kind="show" identifier="mapVCFromBasecamp" id="wPj-dz-81a"/>
                     </connections>
                 </viewController>
@@ -283,7 +300,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="65"/>
                                 <subviews>
                                     <segmentedControl opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="5Sl-cY-XHO">
-                                        <rect key="frame" x="249" y="29" width="103" height="29"/>
+                                        <rect key="frame" x="249" y="29" width="103" height="26"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="25" id="Ae3-fa-czz"/>
                                             <constraint firstAttribute="width" constant="103" id="Hns-JV-6P1"/>
@@ -320,7 +337,7 @@
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" delaysContentTouches="NO" canCancelContentTouches="NO" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelectionDuringEditing="YES" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="170" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Rrj-J5-tpQ">
-                                <rect key="frame" x="0.0" y="79" width="600" height="472"/>
+                                <rect key="frame" x="0.0" y="140" width="600" height="411"/>
                                 <color key="backgroundColor" white="0.89710920019999996" alpha="1" colorSpace="calibratedWhite"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="dFF-QT-2Cv">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="168"/>
@@ -500,6 +517,20 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <button opaque="NO" alpha="0.80000000000000004" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MUp-UZ-xxH">
+                                <rect key="frame" x="0.0" y="64" width="600" height="60"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="te0-XJ-bBP"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
+                                <state key="normal" title="Set As Basecamp">
+                                    <color key="titleColor" red="0.23078926282051282" green="0.23078926282051282" blue="0.23078926282051282" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="onBannerButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="fPh-8q-Vsg"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="0.89710920022371354" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -507,15 +538,25 @@
                             <constraint firstItem="Rrj-J5-tpQ" firstAttribute="top" secondItem="aib-YN-VJo" secondAttribute="bottom" id="83Z-Fw-gw7"/>
                             <constraint firstItem="Rrj-J5-tpQ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="9QT-7P-6et"/>
                             <constraint firstItem="aib-YN-VJo" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Gih-c5-ltp"/>
+                            <constraint firstItem="MUp-UZ-xxH" firstAttribute="top" secondItem="aib-YN-VJo" secondAttribute="bottom" id="P2m-S4-IUe"/>
+                            <constraint firstItem="MUp-UZ-xxH" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="RaM-wD-hpd"/>
+                            <constraint firstItem="MUp-UZ-xxH" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="TWS-7p-nKr"/>
+                            <constraint firstAttribute="trailing" secondItem="MUp-UZ-xxH" secondAttribute="trailing" id="ccE-3m-jNZ"/>
                             <constraint firstItem="aib-YN-VJo" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="rgb-HG-NL1"/>
                             <constraint firstAttribute="trailing" secondItem="aib-YN-VJo" secondAttribute="trailing" id="v5B-e8-8pw"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Rrj-J5-tpQ" secondAttribute="bottom" id="zZr-Ot-3vx"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="TWS-7p-nKr"/>
+                            </mask>
+                        </variation>
                     </view>
                     <tabBarItem key="tabBarItem" title="Home" id="zUo-DU-NKg"/>
                     <navigationItem key="navigationItem" id="hfL-99-KrR"/>
                     <connections>
                         <outlet property="backButton" destination="XzA-ln-uuu" id="p4L-po-waM"/>
+                        <outlet property="bannerButton" destination="MUp-UZ-xxH" id="fRn-jg-oml"/>
                         <outlet property="characterCountLabel" destination="uks-wC-0SV" id="Z5z-Vf-PtQ"/>
                         <outlet property="newPostTextView" destination="xDa-nU-5vO" id="jyc-Nm-Mcq"/>
                         <outlet property="newPostView" destination="dFF-QT-2Cv" id="TZr-mA-ekG"/>

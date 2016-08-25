@@ -20,6 +20,7 @@ class HomeVC: UIViewController, CLLocationManagerDelegate, UITableViewDelegate, 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var newPostView: UIView!
+    @IBOutlet weak var bannerButton: UIButton!
     
     var refreshControl: UIRefreshControl!
     
@@ -36,6 +37,8 @@ class HomeVC: UIViewController, CLLocationManagerDelegate, UITableViewDelegate, 
     var uid: String!
     
     var isPeekLocation: Bool = false
+    var isBasecampOption: Bool = false
+    var peekLocationName: String!
     
     var swiper: SloppySwiper!
     
@@ -87,11 +90,17 @@ class HomeVC: UIViewController, CLLocationManagerDelegate, UITableViewDelegate, 
     
     func beginHomeVC() {
         if !isPeekLocation {
+            bannerButton.hidden = true
             newPostView.hidden = false
             backButton.hidden = true
             locationAuthStatus()
         } else {
             if let location = currentLocation {
+                bannerButton.hidden = false
+                bannerButton.layer.shadowColor = DISABLED_GREY_COLOR.CGColor
+                bannerButton.layer.shadowOffset = CGSizeMake(0, 1.0);
+                bannerButton.layer.shadowOpacity = 1.0;
+                bannerButton.layer.shadowRadius = 0.0;
                 newPostView.hidden = true
                 newPostView.bounds = CGRectMake(newPostView.bounds.minX, self.view.bounds.height, newPostView.bounds.width, 0)
                 backButton.hidden = false
@@ -247,6 +256,35 @@ class HomeVC: UIViewController, CLLocationManagerDelegate, UITableViewDelegate, 
     
     func refreshView(sender: AnyObject){
         queryThreads()
+    }
+    
+    func saveAsBasecamp(){
+        guard let currentLocation = currentLocation else { return }
+        guard let basecampName = peekLocationName else { return }
+        firebase = FIRDatabase.database().reference()
+        firebase.child("basecamps").child(uid).child("name").setValue(basecampName)
+        firebase.child("basecamps").child(uid).child("latitude").setValue(currentLocation.coordinate.latitude)
+        firebase.child("basecamps").child(uid).child("longitude").setValue(currentLocation.coordinate.longitude)
+        if let navController = self.navigationController {
+            if let exploreVC = navController.viewControllers[0] as? ExploreVC {
+                navController.popToRootViewControllerAnimated(true)
+                exploreVC.setBasecamp(currentLocation.coordinate.latitude, longitude: currentLocation.coordinate.longitude, name: basecampName)
+            }
+        }
+    }
+    
+    func savePeekLocation(){
+        if let navController = self.navigationController {
+            navController.popToRootViewControllerAnimated(true)
+        }
+    }
+    
+    @IBAction func onBannerButtonPressed(sender: AnyObject) {
+        if isBasecampOption {
+            saveAsBasecamp()
+        } else {
+            savePeekLocation()
+        }
     }
     
     @IBAction func onBackButtonPressed(sender: AnyObject) {

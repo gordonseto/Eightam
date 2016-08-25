@@ -19,6 +19,8 @@ class MapVC: UIViewController, MKMapViewDelegate, UIGestureRecognizerDelegate {
     var location: CLLocationCoordinate2D!
     var pin: MKPointAnnotation!
     
+    var place: GMSPlace!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -44,6 +46,7 @@ class MapVC: UIViewController, MKMapViewDelegate, UIGestureRecognizerDelegate {
     }
     
     func centerMapOnLocation(place: GMSPlace){
+        self.place = place
         locationLabel.text = place.name
         location = place.coordinate
         
@@ -74,6 +77,8 @@ class MapVC: UIViewController, MKMapViewDelegate, UIGestureRecognizerDelegate {
     }
     
     @IBAction func onBinocularsPressed(sender: AnyObject) {
+        guard let _ = place else { return }
+        guard let _ = location else { return }
         performSegueWithIdentifier("homeVCFromMap", sender: nil)
     }
     
@@ -91,7 +96,9 @@ class MapVC: UIViewController, MKMapViewDelegate, UIGestureRecognizerDelegate {
         if segue.identifier == "homeVCFromMap" {
             if let destinationVC = segue.destinationViewController as? HomeVC {
                 destinationVC.isPeekLocation = true
+                destinationVC.isBasecampOption = true
                 destinationVC.currentLocation = CLLocation(latitude: location.latitude, longitude: location.longitude)
+                destinationVC.peekLocationName = place.name
             }
         }
     }

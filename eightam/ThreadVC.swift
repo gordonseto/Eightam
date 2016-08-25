@@ -115,7 +115,7 @@ class ThreadVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UITab
             upButton.userInteractionEnabled = false
             downButton.userInteractionEnabled = false
             replyView.hidden = true
-            tableViewBottomConstraint.constant = -60
+            tableViewBottomConstraint.constant = -replyView.bounds.height
             upButton.setImage(UIImage(named:"updisabled"), forState: .Normal)
             downButton.setImage(UIImage(named: "downdisabled"), forState: .Normal)
             pointsLabel.textColor = UIColor.lightGrayColor()
