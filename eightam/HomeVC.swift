@@ -36,6 +36,9 @@ class HomeVC: UIViewController, CLLocationManagerDelegate, UITableViewDelegate, 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let tbc = self.tabBarController
+        tbc?.tabBar.selectedImageTintColor = BLUE_COLOR
+        
         hideKeyboardWhenTappedAround()
         
         self.navigationController?.navigationBarHidden = true
@@ -86,13 +89,7 @@ class HomeVC: UIViewController, CLLocationManagerDelegate, UITableViewDelegate, 
             let geofireRef = firebase.child("geolocations")
             let geofire = GeoFire(firebaseRef: geofireRef)
             
-            var radius: Double
-            if let rad = NSUserDefaults.standardUserDefaults().objectForKey("SEARCH_RADIUS") as? Double {
-                radius = rad
-            } else {
-                radius = 30 //km
-                NSUserDefaults.standardUserDefaults().setObject(radius, forKey: "SEARCH_RADIUS")
-            }
+            let radius: Double = SEARCH_RADIUS //km
             
             threads = []
             threadKeys = []
@@ -177,6 +174,8 @@ class HomeVC: UIViewController, CLLocationManagerDelegate, UITableViewDelegate, 
         
         if let location = locations.first {
             //print(location)
+            NSUserDefaults.standardUserDefaults().setObject(location.coordinate.latitude, forKey: "LAST_LATITUDE")
+            NSUserDefaults.standardUserDefaults().setObject(location.coordinate.longitude, forKey: "LAST_LONGITUDE")
             self.currentLocation = location
             if !hasLoadedThreads {
                 queryThreads()

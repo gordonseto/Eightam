@@ -67,13 +67,13 @@ class PostCell: UITableViewCell  {
     }
     
     func displayUpVote(){
-        pointsLabel.textColor = UIColor(red: 60.0/255.0, green: 178.0/255.0, blue: 226.0/255.0, alpha: 1.0)
+        pointsLabel.textColor = BLUE_COLOR
         upButton.setImage(UIImage(named:"up_colored"), forState: .Normal)
         downButton.setImage(UIImage(named:"down"), forState: .Normal)
     }
     
     func displayDownVote(){
-        pointsLabel.textColor = UIColor(red: 60.0/255.0, green: 178.0/255.0, blue: 226.0/255.0, alpha: 1.0)
+        pointsLabel.textColor = BLUE_COLOR
         upButton.setImage(UIImage(named:"up"), forState: .Normal)
         downButton.setImage(UIImage(named:"down_colored"), forState: .Normal)
     }

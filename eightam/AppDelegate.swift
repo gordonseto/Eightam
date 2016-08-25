@@ -10,6 +10,7 @@ import UIKit
 import IQKeyboardManagerSwift
 import Firebase
 import FirebaseAuth
+import GooglePlaces
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -27,6 +28,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         IQKeyboardManager.sharedManager().enable = true
         IQKeyboardManager.sharedManager().enableAutoToolbar = false
+        
+        GMSPlaces
     
         return true
     }

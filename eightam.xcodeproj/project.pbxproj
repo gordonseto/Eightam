@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		26BDC5AC0ADD4024476FD705 /* Pods_eightam.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 405DA66257C281B40C9872DF /* Pods_eightam.framework */; };
+		8E7762051D6F54E3004DA65D /* ExploreVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7762041D6F54E3004DA65D /* ExploreVC.swift */; };
+		8E7762071D6F5644004DA65D /* NavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7762061D6F5644004DA65D /* NavigationView.swift */; };
+		8E7762091D6F59F4004DA65D /* MapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7762081D6F59F4004DA65D /* MapVC.swift */; };
 		8E8CC21F1D6CAB9C00F4675C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8CC21E1D6CAB9C00F4675C /* Constants.swift */; };
 		8E8CC2211D6CB42600F4675C /* Thread.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8CC2201D6CB42600F4675C /* Thread.swift */; };
 		8E8CC2231D6CB79F00F4675C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8CC2221D6CB79F00F4675C /* User.swift */; };
@@ -42,6 +45,9 @@
 		4100E067EFC8945D4131EBE7 /* Pods_eightamTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_eightamTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		59AC1C52FA006A67DDF88B1D /* Pods-eightam.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-eightam.debug.xcconfig"; path = "Pods/Target Support Files/Pods-eightam/Pods-eightam.debug.xcconfig"; sourceTree = "<group>"; };
 		6419EAECA72E5911AB346E03 /* Pods-eightamTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-eightamTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-eightamTests/Pods-eightamTests.debug.xcconfig"; sourceTree = "<group>"; };
+		8E7762041D6F54E3004DA65D /* ExploreVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExploreVC.swift; sourceTree = "<group>"; };
+		8E7762061D6F5644004DA65D /* NavigationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationView.swift; sourceTree = "<group>"; };
+		8E7762081D6F59F4004DA65D /* MapVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapVC.swift; sourceTree = "<group>"; };
 		8E8CC21E1D6CAB9C00F4675C /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		8E8CC2201D6CB42600F4675C /* Thread.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Thread.swift; sourceTree = "<group>"; };
 		8E8CC2221D6CB79F00F4675C /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -100,6 +106,8 @@
 			children = (
 				8E9FE39E1D6C9F32004B1FD9 /* HomeVC.swift */,
 				8EC806CE1D6D0C7100FC88DB /* ThreadVC.swift */,
+				8E7762041D6F54E3004DA65D /* ExploreVC.swift */,
+				8E7762081D6F59F4004DA65D /* MapVC.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -110,6 +118,7 @@
 				8EC806CA1D6CD0E300FC88DB /* PostCell.swift */,
 				8EC806CC1D6CE9B200FC88DB /* CardView.swift */,
 				8EC806D31D6E091C00FC88DB /* ReplyView.swift */,
+				8E7762061D6F5644004DA65D /* NavigationView.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -397,9 +406,12 @@
 				8E9FE39F1D6C9F32004B1FD9 /* HomeVC.swift in Sources */,
 				8E8CC21F1D6CAB9C00F4675C /* Constants.swift in Sources */,
 				8E9FE39D1D6C9F32004B1FD9 /* AppDelegate.swift in Sources */,
+				8E7762051D6F54E3004DA65D /* ExploreVC.swift in Sources */,
 				8EC806CB1D6CD0E300FC88DB /* PostCell.swift in Sources */,
 				8E8CC2231D6CB79F00F4675C /* User.swift in Sources */,
+				8E7762071D6F5644004DA65D /* NavigationView.swift in Sources */,
 				8EC806CD1D6CE9B200FC88DB /* CardView.swift in Sources */,
+				8E7762091D6F59F4004DA65D /* MapVC.swift in Sources */,
 				8E8CC2211D6CB42600F4675C /* Thread.swift in Sources */,
 				8EC806D41D6E091C00FC88DB /* ReplyView.swift in Sources */,
 			);
