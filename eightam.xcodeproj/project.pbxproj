@@ -11,6 +11,9 @@
 		8E7762051D6F54E3004DA65D /* ExploreVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7762041D6F54E3004DA65D /* ExploreVC.swift */; };
 		8E7762071D6F5644004DA65D /* NavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7762061D6F5644004DA65D /* NavigationView.swift */; };
 		8E7762091D6F59F4004DA65D /* MapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7762081D6F59F4004DA65D /* MapVC.swift */; };
+		8E77620E1D6FCABD004DA65D /* BatchClientPush.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E77620D1D6FCABD004DA65D /* BatchClientPush.swift */; };
+		8E7762101D6FCB42004DA65D /* NotificationsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E77620F1D6FCB42004DA65D /* NotificationsManager.swift */; };
+		8E7762121D6FD5CC004DA65D /* Hamptons.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 8E7762111D6FD5CC004DA65D /* Hamptons.gpx */; };
 		8E8CC21F1D6CAB9C00F4675C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8CC21E1D6CAB9C00F4675C /* Constants.swift */; };
 		8E8CC2211D6CB42600F4675C /* Thread.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8CC2201D6CB42600F4675C /* Thread.swift */; };
 		8E8CC2231D6CB79F00F4675C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8CC2221D6CB79F00F4675C /* User.swift */; };
@@ -48,6 +51,9 @@
 		8E7762041D6F54E3004DA65D /* ExploreVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExploreVC.swift; sourceTree = "<group>"; };
 		8E7762061D6F5644004DA65D /* NavigationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationView.swift; sourceTree = "<group>"; };
 		8E7762081D6F59F4004DA65D /* MapVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapVC.swift; sourceTree = "<group>"; };
+		8E77620D1D6FCABD004DA65D /* BatchClientPush.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BatchClientPush.swift; sourceTree = "<group>"; };
+		8E77620F1D6FCB42004DA65D /* NotificationsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsManager.swift; sourceTree = "<group>"; };
+		8E7762111D6FD5CC004DA65D /* Hamptons.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Hamptons.gpx; sourceTree = "<group>"; };
 		8E8CC21E1D6CAB9C00F4675C /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		8E8CC2201D6CB42600F4675C /* Thread.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Thread.swift; sourceTree = "<group>"; };
 		8E8CC2221D6CB79F00F4675C /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -138,6 +144,8 @@
 			children = (
 				8E8CC21E1D6CAB9C00F4675C /* Constants.swift */,
 				8E8CC2271D6CC9CE00F4675C /* General.swift */,
+				8E77620D1D6FCABD004DA65D /* BatchClientPush.swift */,
+				8E77620F1D6FCB42004DA65D /* NotificationsManager.swift */,
 			);
 			name = Util;
 			sourceTree = "<group>";
@@ -145,6 +153,7 @@
 		8E9FE3901D6C9F32004B1FD9 = {
 			isa = PBXGroup;
 			children = (
+				8E7762111D6FD5CC004DA65D /* Hamptons.gpx */,
 				8E9FE39B1D6C9F32004B1FD9 /* eightam */,
 				8E9FE3B01D6C9F32004B1FD9 /* eightamTests */,
 				8E9FE39A1D6C9F32004B1FD9 /* Products */,
@@ -288,6 +297,7 @@
 			files = (
 				8E9FE3A71D6C9F32004B1FD9 /* LaunchScreen.storyboard in Resources */,
 				8E9FE3A41D6C9F32004B1FD9 /* Assets.xcassets in Resources */,
+				8E7762121D6FD5CC004DA65D /* Hamptons.gpx in Resources */,
 				8E9FE3BD1D6CA4B7004B1FD9 /* GoogleService-Info.plist in Resources */,
 				8E9FE3A21D6C9F32004B1FD9 /* Main.storyboard in Resources */,
 			);
@@ -407,8 +417,10 @@
 				8E8CC21F1D6CAB9C00F4675C /* Constants.swift in Sources */,
 				8E9FE39D1D6C9F32004B1FD9 /* AppDelegate.swift in Sources */,
 				8E7762051D6F54E3004DA65D /* ExploreVC.swift in Sources */,
+				8E77620E1D6FCABD004DA65D /* BatchClientPush.swift in Sources */,
 				8EC806CB1D6CD0E300FC88DB /* PostCell.swift in Sources */,
 				8E8CC2231D6CB79F00F4675C /* User.swift in Sources */,
+				8E7762101D6FCB42004DA65D /* NotificationsManager.swift in Sources */,
 				8E7762071D6F5644004DA65D /* NavigationView.swift in Sources */,
 				8EC806CD1D6CE9B200FC88DB /* CardView.swift in Sources */,
 				8E7762091D6F59F4004DA65D /* MapVC.swift in Sources */,

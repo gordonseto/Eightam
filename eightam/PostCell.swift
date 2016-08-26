@@ -117,14 +117,14 @@ class PostCell: UITableViewCell  {
         if voteStatus == VoteStatus.UpVote {
             voteStatus = VoteStatus.NoVote
             displayNoVote()
-            vote(uid, type: type, key: post.key, voteType: "NoVote")
             post.upVotes[uid] = nil
+            vote(uid, type: type, post: post, voteType: "NoVote")
         } else {
             voteStatus = VoteStatus.UpVote
             displayUpVote()
-            vote(uid, type: type, key: post.key, voteType: "UpVote")
             post.upVotes[uid] = true
             post.downVotes[uid] = nil
+            vote(uid, type: type, post: post, voteType: "UpVote")
         }
         pointsLabel.text = "\(post.points)"
     }
@@ -136,14 +136,14 @@ class PostCell: UITableViewCell  {
         if voteStatus == VoteStatus.DownVote {
             voteStatus = VoteStatus.NoVote
             displayNoVote()
-            vote(uid, type: type, key: post.key, voteType: "NoVote")
             post.downVotes[uid] = nil
+            vote(uid, type: type, post: post, voteType: "NoVote")
         } else {
             voteStatus = VoteStatus.DownVote
             displayDownVote()
-            vote(uid, type: type, key: post.key, voteType: "DownVote")
             post.downVotes[uid] = true
             post.upVotes[uid] = nil
+            vote(uid, type: type, post: post, voteType: "DownVote")
         }
         pointsLabel.text = "\(post.points)"
     }

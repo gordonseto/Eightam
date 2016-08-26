@@ -269,14 +269,14 @@ class ThreadVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UITab
         if voteStatus == VoteStatus.UpVote {
             voteStatus = VoteStatus.NoVote
             displayNoVote()
-            vote(uid, type: type, key: thread.originalPost.key, voteType: "NoVote")
             thread.originalPost.upVotes[uid] = nil
+            vote(uid, type: type, post: thread.originalPost, voteType: "NoVote")
         } else {
             voteStatus = VoteStatus.UpVote
             displayUpVote()
-            vote(uid, type: type, key: thread.originalPost.key, voteType: "UpVote")
             thread.originalPost.upVotes[uid] = true
             thread.originalPost.downVotes[uid] = nil
+            vote(uid, type: type, post: thread.originalPost, voteType: "UpVote")
         }
         pointsLabel.text = "\(thread.originalPost.points)"
         delegate?.threadChanged(self.thread)
@@ -289,14 +289,14 @@ class ThreadVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UITab
         if voteStatus == VoteStatus.DownVote {
             voteStatus = VoteStatus.NoVote
             displayNoVote()
-            vote(uid, type: type, key: thread.originalPost.key, voteType: "NoVote")
             thread.originalPost.downVotes[uid] = nil
+            vote(uid, type: type, post: thread.originalPost, voteType: "NoVote")
         } else {
             voteStatus = VoteStatus.DownVote
             displayDownVote()
-            vote(uid, type: type, key: thread.originalPost.key, voteType: "DownVote")
             thread.originalPost.downVotes[uid] = true
             thread.originalPost.upVotes[uid] = nil
+            vote(uid, type: type, post: thread.originalPost, voteType: "DownVote")
         }
         pointsLabel.text = "\(thread.originalPost.points)"
         delegate?.threadChanged(self.thread)

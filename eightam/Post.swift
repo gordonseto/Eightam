@@ -48,6 +48,12 @@ class Post {
         set {_downVotes = newValue}
     }
     
+    var numVoters: Int! {
+        return _upVotes.count + _downVotes.count
+    }
+    
+    var notificationMilestone: Int = 0
+    
     var firebase: FIRDatabaseReference!
     
     init(key: String) {

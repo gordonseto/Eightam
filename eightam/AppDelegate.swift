@@ -25,13 +25,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FIRApp.configure()
         FIRAuth.auth()?.signInAnonymouslyWithCompletion(){ (user, error) in
             print(user?.uid)
+            
+            Batch.startWithAPIKey(BATCH_API_KEY)
+            BatchPush.registerForRemoteNotifications()
+            
+            let editor = BatchUser.editor()
+            editor.setIdentifier(user?.uid)
+            editor.save() // Do not forget to save the changes!
         }
         
         IQKeyboardManager.sharedManager().enable = true
         IQKeyboardManager.sharedManager().enableAutoToolbar = false
-        
-        Batch.startWithAPIKey(BATCH_API_KEY)
-        BatchPush.registerForRemoteNotifications()
         
         GMSServices.provideAPIKey(GOOGLE_API_KEY)
     

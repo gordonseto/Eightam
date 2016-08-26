@@ -36,17 +36,32 @@ func bounceView(view: UIView, amount: CGFloat){
     })
 }
 
-func vote(uid: String, type: String, key: String, voteType: String){
+func vote(uid: String, type: String, post: Post, voteType: String){
     let firebase = FIRDatabase.database().reference()
+
+    if post.numVoters % 5 == 0 && voteType != "NoVote" && post.numVoters > post.notificationMilestone {
+        post.notificationMilestone = post.numVoters
+        var message: String = ""
+        var deeplink: String = ""
+        print(post.authorUid)
+        if type == "threads" {
+            message = "\(post.numVoters) people have voted on your post \"\(post.text)\""
+            deeplink = "eightam://threads/\(post.key)"
+        } else {
+            message = "\(post.numVoters) people have voted on your reply \"\(post.text)\""
+            deeplink = "eightam://replies/\(post.key)"
+        }
+        NotificationsManager.sharedInstance.sendNotification(post.authorUid, hasSound: false, groupId: type, message: message, deeplink: deeplink)
+    }
     if voteType == "NoVote" {
-        firebase.child(type).child(key).child("upVotes").child(uid).setValue(nil)
-        firebase.child(type).child(key).child("downVotes").child(uid).setValue(nil)
+        firebase.child(type).child(post.key).child("upVotes").child(uid).setValue(nil)
+        firebase.child(type).child(post.key).child("downVotes").child(uid).setValue(nil)
     } else if voteType == "UpVote" {
-        firebase.child(type).child(key).child("upVotes").child(uid).setValue(true)
-        firebase.child(type).child(key).child("downVotes").child(uid).setValue(nil)
+        firebase.child(type).child(post.key).child("upVotes").child(uid).setValue(true)
+        firebase.child(type).child(post.key).child("downVotes").child(uid).setValue(nil)
     } else {
-        firebase.child(type).child(key).child("upVotes").child(uid).setValue(nil)
-        firebase.child(type).child(key).child("downVotes").child(uid).setValue(true)
+        firebase.child(type).child(post.key).child("upVotes").child(uid).setValue(nil)
+        firebase.child(type).child(post.key).child("downVotes").child(uid).setValue(true)
     }
 }
 
