@@ -66,22 +66,40 @@ class ExploreVC: UIViewController {
     func setBasecamp(latitude: CLLocationDegrees, longitude: CLLocationDegrees, name: String) {
         basecamp = CLLocation(latitude: latitude, longitude: longitude)
         basecampLabel.font = UIFont(name: "Helvetica-Neue", size: 15.0)
+        basecampLabel.textColor = DARK_GREY_TEXT_COLOR
         basecampLabel.text = name
     }
 
     @IBAction func onBasecampTapped(sender: AnyObject) {
         if let _ = uid {
             if let _ = basecamp {
-                
+                performSegueWithIdentifier("homeVCFromBasecamp", sender: nil)
             } else {
                 performSegueWithIdentifier("mapVCFromBasecamp", sender: nil)
             }
         }
     }
     
+    @IBAction func onPeekButtonTapped(sender: AnyObject) {
+        performSegueWithIdentifier("mapVCFromPeekButton", sender: nil)
+    }
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "mapVCFromBasecamp" {
-            
+            if let destinationVC = segue.destinationViewController as? MapVC {
+                destinationVC.isPeekLocation = true
+                destinationVC.isBasecampOption = true
+            }
+        } else if segue.identifier == "homeVCFromBasecamp" {
+            if let destinationVC = segue.destinationViewController as? HomeVC {
+                destinationVC.isBasecamp = true
+                destinationVC.currentLocation = basecamp
+            }
+        } else if segue.identifier == "mapVCFromPeekButton" {
+            if let destinationVC = segue.destinationViewController as? MapVC {
+                destinationVC.isBasecampOption = false
+                destinationVC.isPeekLocation = true
+            }
         }
     }
     

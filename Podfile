@@ -15,6 +15,7 @@ target 'eightam' do
   pod 'SloppySwiper'
   pod 'MBAutoGrowingTextView', '~> 0.1.0'
   pod 'GoogleMaps'
+  pod 'Batch'
 
   target 'eightamTests' do
     inherit! :search_paths

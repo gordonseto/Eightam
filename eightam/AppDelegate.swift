@@ -11,6 +11,7 @@ import IQKeyboardManagerSwift
 import Firebase
 import FirebaseAuth
 import GoogleMaps
+import Batch
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -28,6 +29,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         IQKeyboardManager.sharedManager().enable = true
         IQKeyboardManager.sharedManager().enableAutoToolbar = false
+        
+        Batch.startWithAPIKey(BATCH_API_KEY)
+        BatchPush.registerForRemoteNotifications()
         
         GMSServices.provideAPIKey(GOOGLE_API_KEY)
     

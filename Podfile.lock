@@ -1,4 +1,5 @@
 PODS:
+  - Batch (1.5.4)
   - Bolts-Swift (1.1.0)
   - Firebase (3.2.1):
     - Firebase/Core (= 3.2.1)
@@ -39,6 +40,7 @@ PODS:
   - SloppySwiper (0.5)
 
 DEPENDENCIES:
+  - Batch
   - Bolts-Swift
   - Firebase
   - Firebase/Auth
@@ -59,6 +61,7 @@ CHECKOUT OPTIONS:
     :git: https://github.com/firebase/geofire-objc.git
 
 SPEC CHECKSUMS:
+  Batch: 13083f81837fe1da9ea84b0533a2965c73ff74c6
   Bolts-Swift: 63ef77f967f795415531da45eef419eab79ec730
   Firebase: 6c80ac28d59d06bfd9152a7b6ea17625ca93183d
   FirebaseAnalytics: 6f75b04e6bfb8e0b6e9ef298e04c24eea3b13863
@@ -75,6 +78,6 @@ SPEC CHECKSUMS:
   MBAutoGrowingTextView: 3955d4513be3d184fe2cb7739999c1f994dcd4d5
   SloppySwiper: 7fdffc91062af8fb80574dee80082cb9e0cee507
 
-PODFILE CHECKSUM: 6935a87a7314cb44def8844b9270805f1ac9b2af
+PODFILE CHECKSUM: 2a78f8e143d40dab80c84c0b29d9dc2dc2765c1a
 
 COCOAPODS: 1.0.1

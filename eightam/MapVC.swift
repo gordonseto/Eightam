@@ -21,6 +21,9 @@ class MapVC: UIViewController, MKMapViewDelegate, UIGestureRecognizerDelegate {
     
     var place: GMSPlace!
     
+    var isPeekLocation: Bool = true
+    var isBasecampOption: Bool = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -95,8 +98,8 @@ class MapVC: UIViewController, MKMapViewDelegate, UIGestureRecognizerDelegate {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "homeVCFromMap" {
             if let destinationVC = segue.destinationViewController as? HomeVC {
-                destinationVC.isPeekLocation = true
-                destinationVC.isBasecampOption = true
+                destinationVC.isPeekLocation = isPeekLocation
+                destinationVC.isBasecampOption = isBasecampOption
                 destinationVC.currentLocation = CLLocation(latitude: location.latitude, longitude: location.longitude)
                 destinationVC.peekLocationName = place.name
             }

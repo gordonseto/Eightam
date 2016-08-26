@@ -38,6 +38,7 @@ class HomeVC: UIViewController, CLLocationManagerDelegate, UITableViewDelegate, 
     
     var isPeekLocation: Bool = false
     var isBasecampOption: Bool = false
+    var isBasecamp: Bool = false
     var peekLocationName: String!
     
     var swiper: SloppySwiper!
@@ -93,9 +94,21 @@ class HomeVC: UIViewController, CLLocationManagerDelegate, UITableViewDelegate, 
             bannerButton.hidden = true
             newPostView.hidden = false
             backButton.hidden = true
-            locationAuthStatus()
+            if isBasecamp {
+                backButton.hidden = false
+                queryThreads()
+            } else {
+                locationAuthStatus()
+            }
         } else {
-            if let location = currentLocation {
+            if let _ = currentLocation {
+                if isBasecampOption {
+                    bannerButton.setTitle("Set As Basecamp", forState: .Normal)
+                } else {
+                    if let peekLocationName = peekLocationName {
+                        bannerButton.setTitle("\(peekLocationName)", forState: .Normal)
+                    }
+                }
                 bannerButton.hidden = false
                 bannerButton.layer.shadowColor = DISABLED_GREY_COLOR.CGColor
                 bannerButton.layer.shadowOffset = CGSizeMake(0, 1.0);
@@ -224,7 +237,7 @@ class HomeVC: UIViewController, CLLocationManagerDelegate, UITableViewDelegate, 
     }
     
     func textViewDidBeginEditing(textView: UITextView) {
-        textView.textColor = UIColor(red: 47.0/255.0, green: 47.0/255.0, blue: 47.0/255.0, alpha: 1.0)
+        textView.textColor = DARK_GREY_TEXT_COLOR
         if textView.text == "What's up?" {
             textView.text = ""
         }
@@ -235,7 +248,7 @@ class HomeVC: UIViewController, CLLocationManagerDelegate, UITableViewDelegate, 
             textView.textColor = UIColor.lightGrayColor()
             textView.text = "What's up?"
         } else {
-            textView.textColor = UIColor(red: 47.0/255.0, green: 47.0/255.0, blue: 47.0/255.0, alpha: 1.0)
+            textView.textColor = DARK_GREY_TEXT_COLOR
         }
     }
     
@@ -274,14 +287,23 @@ class HomeVC: UIViewController, CLLocationManagerDelegate, UITableViewDelegate, 
     }
     
     func savePeekLocation(){
-        if let navController = self.navigationController {
-            navController.popToRootViewControllerAnimated(true)
-        }
+        
     }
     
     @IBAction func onBannerButtonPressed(sender: AnyObject) {
         if isBasecampOption {
-            saveAsBasecamp()
+            let alert = UIAlertController(title: "Save As Basecamp", message: "Are you sure you want to save this location as your basecamp? This can only be done once.", preferredStyle: .Alert)
+            
+            let cancel = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default) { action -> Void in
+            }
+            alert.addAction(cancel)
+            
+            let add = UIAlertAction(title: "Yes", style: UIAlertActionStyle.Default) { action -> Void in
+                self.saveAsBasecamp()
+            }
+            alert.addAction(add)
+            
+            self.presentViewController(alert, animated: true, completion: nil)
         } else {
             savePeekLocation()
         }
