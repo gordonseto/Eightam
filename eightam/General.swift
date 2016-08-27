@@ -41,17 +41,7 @@ func vote(uid: String, type: String, post: Post, voteType: String){
 
     if post.numVoters % 5 == 0 && voteType != "NoVote" && post.numVoters > post.notificationMilestone {
         post.notificationMilestone = post.numVoters
-        var message: String = ""
-        var deeplink: String = ""
-        print(post.authorUid)
-        if type == "threads" {
-            message = "\(post.numVoters) people have voted on your post \"\(post.text)\""
-            deeplink = "eightam://threads/\(post.key)"
-        } else {
-            message = "\(post.numVoters) people have voted on your reply \"\(post.text)\""
-            deeplink = "eightam://replies/\(post.key)"
-        }
-        NotificationsManager.sharedInstance.sendNotification(post.authorUid, hasSound: false, groupId: type, message: message, deeplink: deeplink)
+        NotificationsManager.sharedInstance.createVoteNotification(post, type: type)
     }
     if voteType == "NoVote" {
         firebase.child(type).child(post.key).child("upVotes").child(uid).setValue(nil)

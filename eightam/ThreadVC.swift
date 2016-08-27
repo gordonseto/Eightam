@@ -215,8 +215,9 @@ class ThreadVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UITab
     @IBAction func onSendButtonPressed(sender: AnyObject) {
         if let uid = uid {
             sendButton.userInteractionEnabled = false
-            let post = Post(uid: uid, text: replyInput.text)
+            let post = Post(uid: uid, threadKey: thread.key, text: replyInput.text)
             post.post(thread.key){ post in
+                NotificationsManager.sharedInstance.createReplyNotification(self.uid, thread: self.thread, threadReplies: self.replies)
                 self.replyInput.textColor = UIColor.lightGrayColor()
                 self.replyInput.text = "Reply..."
                 self.sendButton.userInteractionEnabled = true

@@ -12,6 +12,7 @@ import FirebaseDatabase
 class Post {
     private var _key: String!
     private var _authorUid: String!
+    private var _threadKey: String!
     private var _text: String!
     private var _time: NSTimeInterval!
     private var _points: Int!
@@ -24,6 +25,10 @@ class Post {
     
     var authorUid: String! {
         return _authorUid
+    }
+    
+    var threadKey: String! {
+        return _threadKey
     }
     
     var text: String! {
@@ -60,21 +65,24 @@ class Post {
         _key = key
     }
     
-    init(uid: String, text: String){
+    init(uid: String, threadKey: String, text: String){
         _authorUid = uid
+        _threadKey = threadKey
         _text = text
         _time = NSDate().timeIntervalSince1970
         upVotes = [:]
         downVotes = [:]
     }
     
-    init(key: String, uid: String, text: String, upVotes: [String:Bool], downVotes: [String:Bool], time: NSTimeInterval){
+    init(key: String, uid: String, threadKey: String, text: String, upVotes: [String:Bool], downVotes: [String:Bool], time: NSTimeInterval){
         _key = key
         _authorUid = uid
+        _threadKey = threadKey
         _text = text
         _upVotes = upVotes
         _downVotes = downVotes
         _time = time
+        notificationMilestone = numVoters
     }
     
     func findUserVoteStatus(uid: String) -> VoteStatus {
@@ -93,10 +101,11 @@ class Post {
     
     func post(threadId: String, completion: (Post) -> ()) {
         guard let authorUid = _authorUid else { return }
+        guard let threadKey = _threadKey else { return }
         guard let text = text else { return }
         guard let time = _time else { return }
         
-        let post = ["authorUid": authorUid, "text": text, "time": time]
+        let post = ["authorUid": authorUid, "threadKey": threadKey, "text": text, "time": time]
         
         firebase = FIRDatabase.database().reference()
         
@@ -114,6 +123,7 @@ class Post {
         firebase = FIRDatabase.database().reference()
         firebase.child("replies").child(_key).observeSingleEventOfType(.Value, withBlock: {snapshot in
             self._authorUid = snapshot.value!["authorUid"] as? String ?? ""
+            self._threadKey = snapshot.value!["threadKey"] as? String ?? ""
             self._text = snapshot.value!["text"] as? String ?? ""
             self._time = snapshot.value!["time"] as? NSTimeInterval ?? NSDate().timeIntervalSince1970
             self._upVotes = snapshot.value!["upVotes"] as? [String: Bool] ?? [:]
