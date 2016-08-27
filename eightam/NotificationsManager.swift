@@ -51,7 +51,7 @@ class NotificationsManager {
             message = "\(post.numVoters) people have voted on your reply \"\(post.text)\""
             deeplink = "eightam://votes/replies/\(post.threadKey)"
         }
-        let notification = Notification(uid: post.authorUid, threadKey: post.threadKey, message: message)
+        let notification = Notification(uid: post.authorUid, threadKey: post.threadKey, message: message, seen: false)
         notification.saveNotification()
         sendNotification([post.authorUid], hasSound: false, groupId: "votes", message: message, deeplink: deeplink)
     }
@@ -64,7 +64,7 @@ class NotificationsManager {
         print(uids)
         let message = "Someone has replied to \"\(thread.originalPost.text)\""
         for uid in uids {
-            let notification = Notification(uid: uid, threadKey: thread.key, message: message)
+            let notification = Notification(uid: uid, threadKey: thread.key, message: message, seen: false)
             notification.saveNotification()
         }
         sendNotification(uids, hasSound: false, groupId: "replies", message: message, deeplink: "eightam://replies/\(thread.key)")
