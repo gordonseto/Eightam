@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		26BDC5AC0ADD4024476FD705 /* Pods_eightam.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 405DA66257C281B40C9872DF /* Pods_eightam.framework */; };
+		8E064AAD1D720306000FB47E /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E064AAC1D720306000FB47E /* Notification.swift */; };
+		8E064AAF1D720779000FB47E /* NotificationsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E064AAE1D720779000FB47E /* NotificationsVC.swift */; };
 		8E7762051D6F54E3004DA65D /* ExploreVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7762041D6F54E3004DA65D /* ExploreVC.swift */; };
 		8E7762071D6F5644004DA65D /* NavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7762061D6F5644004DA65D /* NavigationView.swift */; };
 		8E7762091D6F59F4004DA65D /* MapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7762081D6F59F4004DA65D /* MapVC.swift */; };
@@ -48,6 +50,8 @@
 		4100E067EFC8945D4131EBE7 /* Pods_eightamTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_eightamTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		59AC1C52FA006A67DDF88B1D /* Pods-eightam.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-eightam.debug.xcconfig"; path = "Pods/Target Support Files/Pods-eightam/Pods-eightam.debug.xcconfig"; sourceTree = "<group>"; };
 		6419EAECA72E5911AB346E03 /* Pods-eightamTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-eightamTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-eightamTests/Pods-eightamTests.debug.xcconfig"; sourceTree = "<group>"; };
+		8E064AAC1D720306000FB47E /* Notification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
+		8E064AAE1D720779000FB47E /* NotificationsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsVC.swift; sourceTree = "<group>"; };
 		8E7762041D6F54E3004DA65D /* ExploreVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExploreVC.swift; sourceTree = "<group>"; };
 		8E7762061D6F5644004DA65D /* NavigationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationView.swift; sourceTree = "<group>"; };
 		8E7762081D6F59F4004DA65D /* MapVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapVC.swift; sourceTree = "<group>"; };
@@ -114,6 +118,7 @@
 				8EC806CE1D6D0C7100FC88DB /* ThreadVC.swift */,
 				8E7762041D6F54E3004DA65D /* ExploreVC.swift */,
 				8E7762081D6F59F4004DA65D /* MapVC.swift */,
+				8E064AAE1D720779000FB47E /* NotificationsVC.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -135,6 +140,7 @@
 				8E8CC2201D6CB42600F4675C /* Thread.swift */,
 				8E8CC2221D6CB79F00F4675C /* User.swift */,
 				8EC806D51D6E0B4200FC88DB /* Post.swift */,
+				8E064AAC1D720306000FB47E /* Notification.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -264,6 +270,11 @@
 				TargetAttributes = {
 					8E9FE3981D6C9F32004B1FD9 = {
 						CreatedOnToolsVersion = 7.3.1;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 					8E9FE3AC1D6C9F32004B1FD9 = {
 						CreatedOnToolsVersion = 7.3.1;
@@ -411,6 +422,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8EC806CF1D6D0C7100FC88DB /* ThreadVC.swift in Sources */,
+				8E064AAF1D720779000FB47E /* NotificationsVC.swift in Sources */,
 				8EC806D61D6E0B4200FC88DB /* Post.swift in Sources */,
 				8E8CC2281D6CC9CE00F4675C /* General.swift in Sources */,
 				8E9FE39F1D6C9F32004B1FD9 /* HomeVC.swift in Sources */,
@@ -426,6 +438,7 @@
 				8E7762091D6F59F4004DA65D /* MapVC.swift in Sources */,
 				8E8CC2211D6CB42600F4675C /* Thread.swift in Sources */,
 				8EC806D41D6E091C00FC88DB /* ReplyView.swift in Sources */,
+				8E064AAD1D720306000FB47E /* Notification.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

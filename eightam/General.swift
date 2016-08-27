@@ -39,7 +39,7 @@ func bounceView(view: UIView, amount: CGFloat){
 func vote(uid: String, type: String, post: Post, voteType: String){
     let firebase = FIRDatabase.database().reference()
 
-    if post.numVoters % 5 == 0 && voteType != "NoVote" && post.numVoters > post.notificationMilestone {
+    if post.numVoters % 5 == 0 && voteType != "NoVote" && post.numVoters > post.notificationMilestone && uid != post.authorUid {
         post.notificationMilestone = post.numVoters
         NotificationsManager.sharedInstance.createVoteNotification(post, type: type)
     }

@@ -46,11 +46,13 @@ class NotificationsManager {
         print(post.authorUid)
         if type == "threads" {
             message = "\(post.numVoters) people have voted on your post \"\(post.text)\""
-            deeplink = "eightam://votes/threads/\(post.key)"
+            deeplink = "eightam://votes/threads/\(post.threadKey)"
         } else {
             message = "\(post.numVoters) people have voted on your reply \"\(post.text)\""
-            deeplink = "eightam://votes/replies/\(post.key)"
+            deeplink = "eightam://votes/replies/\(post.threadKey)"
         }
+        let notification = Notification(uid: post.authorUid, threadKey: post.threadKey, message: message)
+        notification.saveNotification()
         sendNotification([post.authorUid], hasSound: false, groupId: "votes", message: message, deeplink: deeplink)
     }
     
@@ -60,6 +62,11 @@ class NotificationsManager {
         uids = Array(Set(uids))   //filter to only unique uids
         uids = uids.filter({$0 != uid})       //filter out replier
         print(uids)
-        sendNotification(uids, hasSound: false, groupId: "replies", message: "Someone has replied to \"\(thread.originalPost.text)\"", deeplink: "eightam://replies/\(thread.key)")
+        let message = "Someone has replied to \"\(thread.originalPost.text)\""
+        for uid in uids {
+            let notification = Notification(uid: uid, threadKey: thread.key, message: message)
+            notification.saveNotification()
+        }
+        sendNotification(uids, hasSound: false, groupId: "replies", message: message, deeplink: "eightam://replies/\(thread.key)")
     }
 }
