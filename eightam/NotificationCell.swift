@@ -11,6 +11,8 @@ import UIKit
 class NotificationCell: UITableViewCell {
 
     @IBOutlet weak var messageLabel: UILabel!
+    @IBOutlet weak var timeLabel: UILabel!
+    @IBOutlet weak var notificationCellView: UIView!
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -18,6 +20,22 @@ class NotificationCell: UITableViewCell {
     }
     
     func configureCell(notification: Notification) {
-        messageLabel.text = notification.message
+        messageLabel.textColor = DARK_GREY_TEXT_COLOR
+        timeLabel.textColor = DARK_GREY_TEXT_COLOR
+        if let message = notification.message {
+            messageLabel.text = message
+        }
+        if let time = notification.time {
+            timeLabel.text = "\(getPostTime(time).0)\(getPostTime(time).1)"
+        }
+        if let seen = notification.seen {
+            if seen {
+                messageLabel.font = UIFont(name: "HelveticaNeue", size: 15)
+                timeLabel.font = UIFont(name: "HelveticaNeue", size: 13)
+            } else {
+                messageLabel.font = UIFont(name: "HelveticaNeue-Bold", size: 15)
+                timeLabel.font = UIFont(name: "HelveticaNeue-Bold", size: 13)
+            }
+        }
     }
 }

@@ -16,6 +16,7 @@ class Notification {
     private var _uid: String!
     private var _seen: Bool!
     private var _time: NSTimeInterval!
+    private var _key: String!
     
     var uid: String! {
         return _uid
@@ -42,6 +43,10 @@ class Notification {
         return _time
     }
     
+    var key: String! {
+        return _key
+    }
+    
     var firebase: FIRDatabaseReference!
     
     init(uid: String, threadKey: String, message: String){
@@ -52,7 +57,8 @@ class Notification {
         _time = NSDate().timeIntervalSince1970
     }
     
-    init(uid: String, threadKey: String, message: String, seen: Bool, time: NSTimeInterval) {
+    init(key: String, uid: String, threadKey: String, message: String, seen: Bool, time: NSTimeInterval) {
+        _key = key
         _uid = uid
         _threadKey = threadKey
         _message = message
@@ -69,6 +75,16 @@ class Notification {
         let notification = ["threadKey": threadKey, "message": message, "time": time]
         
         firebase = FIRDatabase.database().reference()
-        firebase.child("notifications").child(uid).childByAutoId().setValue(notification)
+        _key = firebase.child("notifications").child(uid).childByAutoId().key
+        firebase.child("notifications").child(uid).child(_key).setValue(notification)
+    }
+    
+    func setAsSeen(){
+        guard let key = _key else { return }
+        guard let uid = _uid else { return }
+        
+        _seen = true
+        firebase = FIRDatabase.database().reference()
+        firebase.child("notifications").child(uid).child(key).child("seen").setValue(true)
     }
 }
