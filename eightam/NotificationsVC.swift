@@ -62,7 +62,7 @@ class NotificationsVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     
     func getNotifications(){
         firebase =  FIRDatabase.database().reference()
-        firebase.child("notifications").child(uid).queryOrderedByKey().queryLimitedToLast(20).observeSingleEventOfType(.Value, withBlock: {snapshot in
+        firebase.child("notifications").child(uid).queryOrderedByKey().queryLimitedToLast(10).observeSingleEventOfType(.Value, withBlock: {snapshot in
             print(snapshot)
             self.notifications = []
             for child in snapshot.children {
@@ -88,6 +88,9 @@ class NotificationsVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         } else {
             removeBackgroundMessage(noNotificationsLabel)
         }
+        if let tbc = self.tabBarController {
+            NotificationsManager.sharedInstance.clearTabBarBadgeAtIndex(NOTIFICATIONS_INDEX, tabBarController: tbc)
+        }
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -100,9 +103,18 @@ class NotificationsVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let notification = notifications[indexPath.row]
         let thread = Thread(key: notification.threadKey)
+        threadSelected(thread)
+    }
+    
+    func threadSelected(thread: Thread){
         performSegueWithIdentifier("threadVCFromNotifications", sender: thread)
-        notification.setAsSeen()
-        tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.None)
+        let sameThreadNotifications = notifications.filter({$0.threadKey == thread.key})
+        for notif in sameThreadNotifications {  //get all notifications of same thread and mark as seen
+            notif.setAsSeen()
+        }
+        if let tableView = tableView {
+            tableView.reloadData()
+        }
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

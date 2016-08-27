@@ -7,6 +7,9 @@
 //
 
 import Foundation
+import FirebaseDatabase
+import FirebaseAuth
+import UIKit
 
 class NotificationsManager {
     static let sharedInstance = NotificationsManager()
@@ -53,6 +56,7 @@ class NotificationsManager {
         }
         let notification = Notification(uid: post.authorUid, threadKey: post.threadKey, message: message)
         notification.saveNotification()
+        addValueToNotificationBadge(post.authorUid)
         sendNotification([post.authorUid], hasSound: false, groupId: "votes", message: message, deeplink: deeplink)
     }
     
@@ -66,7 +70,80 @@ class NotificationsManager {
         for uid in uids {
             let notification = Notification(uid: uid, threadKey: thread.key, message: message)
             notification.saveNotification()
+            addValueToNotificationBadge(uid)
         }
         sendNotification(uids, hasSound: false, groupId: "replies", message: message, deeplink: "eightam://replies/\(thread.key)")
+    }
+    
+    func addValueToNotificationBadge(uid: String){
+        let firebase = FIRDatabase.database().reference()
+        firebase.child("users").child(uid).runTransactionBlock({ (currentData: FIRMutableData) -> FIRTransactionResult in
+            if var user = currentData.value as? [String: AnyObject] {
+                var notificationBadgeValue = user["notifications"] as? Int ?? 0
+                notificationBadgeValue++
+                user["notifications"] = notificationBadgeValue
+                currentData.value = user
+                return FIRTransactionResult.successWithValue(currentData)
+            }
+            return FIRTransactionResult.successWithValue(currentData)
+            }, andCompletionBlock: { (error, committed, snapshot) in
+                if error != nil {
+                    print("error in transaction")
+                }
+        })
+    }
+    
+    func getNumberOfUsersNotifications(uid: String, completion: (Int!)->()){
+        let firebase = FIRDatabase.database().reference()
+        firebase.child("users").child(uid).child("notifications").observeSingleEventOfType(.Value, withBlock: {snapshot in
+            print(snapshot)
+            let badgeValue = snapshot.value as? Int ?? nil
+            completion(badgeValue)
+        })
+    }
+    
+    func updateTabBar(tabBarController: UITabBarController){
+        print("update tab bar")
+        if let uid = FIRAuth.auth()?.currentUser?.uid {
+            getNumberOfUsersNotifications(uid){ badgeValue in
+                if badgeValue == nil {
+                    tabBarController.tabBar.items?[NOTIFICATIONS_INDEX].badgeValue = nil
+                } else {
+                    tabBarController.tabBar.items?[NOTIFICATIONS_INDEX].badgeValue = "\(badgeValue)"
+                }
+            }
+        }
+    }
+    
+    func clearTabBarBadgeAtIndex(index: Int, tabBarController: UITabBarController){
+        print("clear tab bar")
+        if tabBarController.tabBar.items?[index].badgeValue != nil {
+            print("tab bar is not nil")
+            tabBarController.tabBar.items?[index].badgeValue = nil
+            if let uid = FIRAuth.auth()?.currentUser?.uid {
+                let firebase = FIRDatabase.database().reference()
+                firebase.child("users").child(uid).child("notifications").setValue(nil)
+            }
+        }
+    }
+    
+    func goToCertainView(deepLink: String, tabBarController: UITabBarController){
+        print("go to certain view")
+        let queryArray = deepLink.componentsSeparatedByString("/")
+        let queryType = queryArray[2]
+        var threadKey = ""
+        if queryType == "replies" {
+            threadKey = queryArray[3]
+        } else {
+            threadKey = queryArray[4]
+        }
+        tabBarController.selectedIndex = NOTIFICATIONS_INDEX
+        if let notificationsNVC = tabBarController.viewControllers![NOTIFICATIONS_INDEX] as? UINavigationController {
+            if let notificationsVC = notificationsNVC.viewControllers[0] as? NotificationsVC {
+                let thread = Thread(key: threadKey)
+                notificationsVC.threadSelected(thread)
+                clearTabBarBadgeAtIndex(NOTIFICATIONS_INDEX, tabBarController: tabBarController)
+            }
+        }
     }
 }

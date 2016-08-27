@@ -41,10 +41,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         GMSServices.provideAPIKey(GOOGLE_API_KEY)
         
-        if let notification = launchOptions?[UIApplicationLaunchOptionsRemoteNotificationKey] as? [String: AnyObject] {
-            print("didfinishlaunching with options launch options")
-        } else {
-            print("didfinishlaunching with options no launch options")
+        if let tabBarController: UITabBarController = self.window?.rootViewController as? UITabBarController {
+            if let notification = launchOptions?[UIApplicationLaunchOptionsRemoteNotificationKey] as? [String: AnyObject] {
+                if let deepLink = notification["com.batch"]?["l"] as? String {
+                    NotificationsManager.sharedInstance.goToCertainView(deepLink, tabBarController: tabBarController)
+                }
+            } else {
+                NotificationsManager.sharedInstance.updateTabBar(tabBarController)
+            }
         }
     
         return true
@@ -62,12 +66,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillEnterForeground(application: UIApplication) {
         // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
-        print("will enter foreground")
     }
 
     func applicationDidBecomeActive(application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-        print("did become active")
     }
 
     func applicationWillTerminate(application: UIApplication) {
@@ -75,14 +77,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
-        print("hi")
+        
+        if let tabBarController: UITabBarController = self.window?.rootViewController as? UITabBarController {
+            if application.applicationState == UIApplicationState.Active {
+                //print("application state active")
+                NotificationsManager.sharedInstance.updateTabBar(tabBarController)
+            } else if application.applicationState == UIApplicationState.Background {
+                //print("application state background")
+                NotificationsManager.sharedInstance.updateTabBar(tabBarController)
+            } else if application.applicationState == UIApplicationState.Inactive {
+                //print("application state inactive")
+                print(userInfo)
+                if let deepLink = userInfo["com.batch"]?["l"] as? String {
+                    NotificationsManager.sharedInstance.goToCertainView(deepLink, tabBarController: tabBarController)
+                }
+            }
+        }
         completionHandler(.NewData)
     }
-    
-    func application(app: UIApplication, openURL url: NSURL, options: [String : AnyObject]) -> Bool {
-        print("openURL")
-        return true
-    }
-
 }
 
