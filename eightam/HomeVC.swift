@@ -23,6 +23,9 @@ class HomeVC: UIViewController, CLLocationManagerDelegate, UITableViewDelegate, 
     @IBOutlet weak var bannerButton: UIButton!
     
     var refreshControl: UIRefreshControl!
+    var activityIndicator: UIActivityIndicatorView!
+    var loadingLabel: UILabel!
+    var noThreadsLabel: UILabel!
     
     let locationManager = CLLocationManager()
     var currentLocation: CLLocation!
@@ -57,6 +60,10 @@ class HomeVC: UIViewController, CLLocationManagerDelegate, UITableViewDelegate, 
             swiper = SloppySwiper(navigationController: navigationcontroller)
             navigationcontroller.delegate = swiper
         }
+        activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
+        loadingLabel = UILabel(frame: CGRectMake(0, 0, 100, 30))
+        noThreadsLabel = UILabel(frame: CGRectMake(0, 0, 220, 120))
+        noThreadsLabel.numberOfLines = 2
         
         newPostTextView.delegate = self
         
@@ -125,7 +132,9 @@ class HomeVC: UIViewController, CLLocationManagerDelegate, UITableViewDelegate, 
     func queryThreads(){
         if let currentloc = currentLocation {
             if threads.count == 0 {
-                
+                //display loading message
+                startLoadingAnimation(activityIndicator, loadingLabel: loadingLabel, viewToAdd: tableView)
+                removeBackgroundMessage(noThreadsLabel)
             }
             firebase.removeAllObservers()
             hasLoadedThreads = true
@@ -157,6 +166,12 @@ class HomeVC: UIViewController, CLLocationManagerDelegate, UITableViewDelegate, 
         threadKeys = threadKeys.sort({$0 > $1})
         refreshControl.endRefreshing()
         tableView.reloadData()
+        stopLoadingAnimation(self.activityIndicator, loadingLabel: self.loadingLabel)
+        if threadKeys.count == 0 {
+            displayBackgroundMessage("Be the first to post in this area!", label: noThreadsLabel, viewToAdd: tableView, height: 90, textSize: 17)
+        } else {
+            removeBackgroundMessage(noThreadsLabel)
+        }
     }
     
     func postNewThread(){

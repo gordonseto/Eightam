@@ -24,12 +24,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
         
+        Batch.startWithAPIKey(BATCH_API_KEY)
+        BatchPush.registerForRemoteNotifications()
+        
         FIRApp.configure()
         FIRAuth.auth()?.signInAnonymouslyWithCompletion(){ (user, error) in
             print(user?.uid)
-            
-            Batch.startWithAPIKey(BATCH_API_KEY)
-            BatchPush.registerForRemoteNotifications()
             
             let editor = BatchUser.editor()
             editor.setIdentifier(user?.uid)
@@ -75,6 +75,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
+        print("hi")
         completionHandler(.NewData)
     }
     

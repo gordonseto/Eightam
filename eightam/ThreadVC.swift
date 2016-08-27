@@ -268,16 +268,16 @@ class ThreadVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UITab
         guard let _ = voteStatus else { return }
         guard let _ = thread.originalPost.key else { return }
         if voteStatus == VoteStatus.UpVote {
-            voteStatus = VoteStatus.NoVote
             displayNoVote()
             thread.originalPost.upVotes[uid] = nil
-            vote(uid, type: type, post: thread.originalPost, voteType: "NoVote")
+            vote(uid, type: type, post: thread.originalPost, voteType: "NoVote", oldVoteType: voteStatus)
+            voteStatus = VoteStatus.NoVote
         } else {
-            voteStatus = VoteStatus.UpVote
             displayUpVote()
             thread.originalPost.upVotes[uid] = true
             thread.originalPost.downVotes[uid] = nil
-            vote(uid, type: type, post: thread.originalPost, voteType: "UpVote")
+            vote(uid, type: type, post: thread.originalPost, voteType: "UpVote", oldVoteType:  voteStatus)
+            voteStatus = VoteStatus.UpVote
         }
         pointsLabel.text = "\(thread.originalPost.points)"
         delegate?.threadChanged(self.thread)
@@ -288,16 +288,16 @@ class ThreadVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UITab
         guard let _ = voteStatus else { return }
         guard let _ = thread.originalPost.key else { return }
         if voteStatus == VoteStatus.DownVote {
-            voteStatus = VoteStatus.NoVote
             displayNoVote()
             thread.originalPost.downVotes[uid] = nil
-            vote(uid, type: type, post: thread.originalPost, voteType: "NoVote")
+            vote(uid, type: type, post: thread.originalPost, voteType: "NoVote", oldVoteType: voteStatus)
+            voteStatus = VoteStatus.NoVote
         } else {
-            voteStatus = VoteStatus.DownVote
             displayDownVote()
             thread.originalPost.downVotes[uid] = true
             thread.originalPost.upVotes[uid] = nil
-            vote(uid, type: type, post: thread.originalPost, voteType: "DownVote")
+            vote(uid, type: type, post: thread.originalPost, voteType: "DownVote", oldVoteType: voteStatus)
+            voteStatus = VoteStatus.DownVote
         }
         pointsLabel.text = "\(thread.originalPost.points)"
         delegate?.threadChanged(self.thread)

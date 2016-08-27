@@ -115,16 +115,16 @@ class PostCell: UITableViewCell  {
         guard let _ = voteStatus else { return }
         guard let _ = post.key else { return }
         if voteStatus == VoteStatus.UpVote {
-            voteStatus = VoteStatus.NoVote
             displayNoVote()
             post.upVotes[uid] = nil
-            vote(uid, type: type, post: post, voteType: "NoVote")
+            vote(uid, type: type, post: post, voteType: "NoVote", oldVoteType:  voteStatus)
+            voteStatus = VoteStatus.NoVote
         } else {
-            voteStatus = VoteStatus.UpVote
             displayUpVote()
             post.upVotes[uid] = true
             post.downVotes[uid] = nil
-            vote(uid, type: type, post: post, voteType: "UpVote")
+            vote(uid, type: type, post: post, voteType: "UpVote", oldVoteType: voteStatus)
+            voteStatus = VoteStatus.UpVote
         }
         pointsLabel.text = "\(post.points)"
     }
@@ -134,16 +134,16 @@ class PostCell: UITableViewCell  {
         guard let _ = voteStatus else { return }
         guard let _ = post.key else { return }
         if voteStatus == VoteStatus.DownVote {
-            voteStatus = VoteStatus.NoVote
             displayNoVote()
             post.downVotes[uid] = nil
-            vote(uid, type: type, post: post, voteType: "NoVote")
+            vote(uid, type: type, post: post, voteType: "NoVote", oldVoteType: voteStatus)
+                        voteStatus = VoteStatus.NoVote
         } else {
-            voteStatus = VoteStatus.DownVote
             displayDownVote()
             post.downVotes[uid] = true
             post.upVotes[uid] = nil
-            vote(uid, type: type, post: post, voteType: "DownVote")
+            vote(uid, type: type, post: post, voteType: "DownVote", oldVoteType: voteStatus)
+            voteStatus = VoteStatus.DownVote
         }
         pointsLabel.text = "\(post.points)"
     }

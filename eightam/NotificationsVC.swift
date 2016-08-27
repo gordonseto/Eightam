@@ -62,7 +62,7 @@ class NotificationsVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     
     func getNotifications(){
         firebase =  FIRDatabase.database().reference()
-        firebase.child("notifications").child(uid).queryOrderedByKey().observeSingleEventOfType(.Value, withBlock: {snapshot in
+        firebase.child("notifications").child(uid).queryOrderedByKey().queryLimitedToLast(20).observeSingleEventOfType(.Value, withBlock: {snapshot in
             print(snapshot)
             self.notifications = []
             for child in snapshot.children {

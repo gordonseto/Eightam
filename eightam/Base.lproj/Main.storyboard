@@ -267,7 +267,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ymc-WG-nOy">
-                                                    <rect key="frame" x="8" y="8" width="526" height="65"/>
+                                                    <rect key="frame" x="16" y="8" width="526" height="65"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                                                     <color key="textColor" red="0.23078926280000001" green="0.23078926280000001" blue="0.23078926280000001" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -284,13 +284,13 @@
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="ymc-WG-nOy" firstAttribute="leading" secondItem="5pY-F4-HmB" secondAttribute="leadingMargin" id="5k8-Dw-9Dt"/>
+                                                <constraint firstItem="ymc-WG-nOy" firstAttribute="leading" secondItem="5pY-F4-HmB" secondAttribute="leadingMargin" constant="8" id="5k8-Dw-9Dt"/>
                                                 <constraint firstItem="5jv-8P-fl8" firstAttribute="centerY" secondItem="5pY-F4-HmB" secondAttribute="centerY" id="67e-Ct-MgJ"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="ymc-WG-nOy" secondAttribute="trailing" constant="15" id="FO1-M9-89O"/>
                                                 <constraint firstItem="5jv-8P-fl8" firstAttribute="trailing" secondItem="5pY-F4-HmB" secondAttribute="trailingMargin" id="al3-Hm-aF3"/>
                                                 <constraint firstItem="ymc-WG-nOy" firstAttribute="top" secondItem="5pY-F4-HmB" secondAttribute="topMargin" id="etJ-OU-J11"/>
                                                 <constraint firstItem="ymc-WG-nOy" firstAttribute="bottom" secondItem="5pY-F4-HmB" secondAttribute="bottomMargin" id="ig3-nr-Zx2"/>
-                                                <constraint firstItem="5jv-8P-fl8" firstAttribute="leading" secondItem="ymc-WG-nOy" secondAttribute="trailing" constant="16" id="twI-bp-Xbx"/>
+                                                <constraint firstItem="5jv-8P-fl8" firstAttribute="leading" secondItem="ymc-WG-nOy" secondAttribute="trailing" constant="8" id="twI-bp-Xbx"/>
                                             </constraints>
                                             <variation key="default">
                                                 <mask key="constraints">

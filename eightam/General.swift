@@ -36,7 +36,7 @@ func bounceView(view: UIView, amount: CGFloat){
     })
 }
 
-func vote(uid: String, type: String, post: Post, voteType: String){
+func vote(uid: String, type: String, post: Post, voteType: String, oldVoteType: VoteStatus){
     let firebase = FIRDatabase.database().reference()
 
     if post.numVoters % 5 == 0 && voteType != "NoVote" && post.numVoters > post.notificationMilestone && uid != post.authorUid {
@@ -52,6 +52,43 @@ func vote(uid: String, type: String, post: Post, voteType: String){
     } else {
         firebase.child(type).child(post.key).child("upVotes").child(uid).setValue(nil)
         firebase.child(type).child(post.key).child("downVotes").child(uid).setValue(true)
+    }
+    
+    if type == "threads" {
+        firebase.child("geolocations").child(post.threadKey).runTransactionBlock({ (currentData: FIRMutableData) -> FIRTransactionResult in
+            if var thread = currentData.value as? [String: AnyObject] {
+                var points = thread["points"] as? Int ?? 0
+                print(points)
+                if voteType == "UpVote" {
+                    if oldVoteType == VoteStatus.NoVote {
+                        points += 1
+                    } else {
+                        points += 2
+                    }
+                } else if voteType == "DownVote" {
+                    if oldVoteType == VoteStatus.NoVote {
+                        points -= 1
+                    } else {
+                        points -= 2
+                    }
+                } else {
+                    if oldVoteType == VoteStatus.UpVote {
+                        points -= 1
+                    } else {
+                        points += 1
+                    }
+                }
+                print(points)
+                thread["points"] = points
+                currentData.value = thread
+                return FIRTransactionResult.successWithValue(currentData)
+            }
+            return FIRTransactionResult.successWithValue(currentData)
+            }, andCompletionBlock: { (error, committed, snapshot) in
+                if error != nil {
+                    print("error in transaction")
+                }
+        })
     }
 }
 
@@ -98,5 +135,22 @@ func removeBackgroundMessage(label: UILabel!){
     if let label = label {
         label.removeFromSuperview()
     }
+}
+
+func startLoadingAnimation(activityIndicator: UIActivityIndicatorView, loadingLabel: UILabel, viewToAdd: UIView){
+    activityIndicator.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
+    activityIndicator.center = CGPointMake(UIScreen.mainScreen().bounds.size.width/2 - 32, UIScreen.mainScreen().bounds.size.height/2 - 90)
+    activityIndicator.startAnimating()
+    viewToAdd.addSubview(activityIndicator)
+    
+    loadingLabel.center = CGPointMake(UIScreen.mainScreen().bounds.size.width/2 + 32, UIScreen.mainScreen().bounds.size.height/2 - 90)
+    loadingLabel.text = "Loading..."
+    loadingLabel.textColor = UIColor.grayColor()
+    viewToAdd.addSubview(loadingLabel)
+}
+
+func stopLoadingAnimation(activityIndicator: UIActivityIndicatorView, loadingLabel: UILabel){
+    activityIndicator.removeFromSuperview()
+    loadingLabel.removeFromSuperview()
 }
 
