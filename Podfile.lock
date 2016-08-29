@@ -38,6 +38,7 @@ PODS:
   - IQKeyboardManagerSwift (4.0.3)
   - MBAutoGrowingTextView (0.1.0)
   - SloppySwiper (0.5)
+  - XLPagerTabStrip (5.0.0)
 
 DEPENDENCIES:
   - Batch
@@ -50,6 +51,7 @@ DEPENDENCIES:
   - IQKeyboardManagerSwift
   - MBAutoGrowingTextView (~> 0.1.0)
   - SloppySwiper
+  - XLPagerTabStrip (~> 5.0)
 
 EXTERNAL SOURCES:
   GeoFire:
@@ -77,7 +79,8 @@ SPEC CHECKSUMS:
   IQKeyboardManagerSwift: b6883b720b0e76473692fdc80828442566e1075f
   MBAutoGrowingTextView: 3955d4513be3d184fe2cb7739999c1f994dcd4d5
   SloppySwiper: 7fdffc91062af8fb80574dee80082cb9e0cee507
+  XLPagerTabStrip: 87b8b705f9a7178e76a063ffaa2d70045944a965
 
-PODFILE CHECKSUM: 2a78f8e143d40dab80c84c0b29d9dc2dc2765c1a
+PODFILE CHECKSUM: 5460b4e0b98206701bf93258dfef39f0c5cff5b7
 
 COCOAPODS: 1.0.1

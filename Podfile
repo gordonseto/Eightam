@@ -16,6 +16,7 @@ target 'eightam' do
   pod 'MBAutoGrowingTextView', '~> 0.1.0'
   pod 'GoogleMaps'
   pod 'Batch'
+  pod 'XLPagerTabStrip', '~> 5.0'
 
   target 'eightamTests' do
     inherit! :search_paths
