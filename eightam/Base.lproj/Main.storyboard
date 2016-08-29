@@ -22,6 +22,7 @@
             <string>HelveticaNeue</string>
             <string>HelveticaNeue</string>
             <string>HelveticaNeue</string>
+            <string>HelveticaNeue</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -442,30 +443,67 @@
                     <view key="view" contentMode="scaleToFill" id="jl2-iD-6Pf">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="1" green="0.81568627449999997" blue="0.28627450980000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="101" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="zjt-Po-1sd">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MyPostCell" rowHeight="101" id="Ud8-1D-NCV" customClass="MyPostCell" customModule="eightam" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="600" height="101"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Ud8-1D-NCV" id="uMx-8G-ncD">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="100"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4SC-hN-cKb">
+                                                    <rect key="frame" x="15" y="8" width="518" height="84"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                                                    <color key="textColor" red="0.23078926280000001" green="0.23078926280000001" blue="0.23078926280000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3d" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HSh-Rb-hMo">
+                                                    <rect key="frame" x="550" y="39" width="42" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="42" id="fqb-5x-rjj"/>
+                                                        <constraint firstAttribute="height" constant="21" id="ryB-Rh-AG1"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="4SC-hN-cKb" firstAttribute="bottom" secondItem="uMx-8G-ncD" secondAttribute="bottomMargin" id="931-NR-AGn"/>
+                                                <constraint firstItem="4SC-hN-cKb" firstAttribute="leading" secondItem="uMx-8G-ncD" secondAttribute="leadingMargin" constant="8" id="F9e-Pt-9R6"/>
+                                                <constraint firstItem="HSh-Rb-hMo" firstAttribute="centerY" secondItem="uMx-8G-ncD" secondAttribute="centerY" id="K5T-32-MZl"/>
+                                                <constraint firstItem="HSh-Rb-hMo" firstAttribute="leading" secondItem="4SC-hN-cKb" secondAttribute="trailing" constant="8" id="Prf-6x-mZJ"/>
+                                                <constraint firstItem="4SC-hN-cKb" firstAttribute="top" secondItem="uMx-8G-ncD" secondAttribute="topMargin" id="Ucn-oU-p0v"/>
+                                                <constraint firstItem="HSh-Rb-hMo" firstAttribute="trailing" secondItem="uMx-8G-ncD" secondAttribute="trailingMargin" id="XRR-4e-3kR"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="postTextLabel" destination="4SC-hN-cKb" id="HiW-oj-j6w"/>
+                                            <outlet property="timeLabel" destination="HSh-Rb-hMo" id="MMY-IT-jAp"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="ibQ-zH-tF9" firstAttribute="top" secondItem="zjt-Po-1sd" secondAttribute="bottom" id="2B4-8M-WSU"/>
+                            <constraint firstItem="zjt-Po-1sd" firstAttribute="leading" secondItem="jl2-iD-6Pf" secondAttribute="leading" id="Gj6-6q-8hb"/>
+                            <constraint firstAttribute="trailing" secondItem="zjt-Po-1sd" secondAttribute="trailing" id="IRI-WV-cgZ"/>
+                            <constraint firstItem="zjt-Po-1sd" firstAttribute="top" secondItem="jl2-iD-6Pf" secondAttribute="top" id="Ocd-wi-fsu"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="tableView" destination="zjt-Po-1sd" id="0oe-UM-MOp"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tHo-3s-uQm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1564" y="2298"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="45R-eQ-DjL">
-            <objects>
-                <viewController id="3WQ-JR-zr4" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="prp-MC-rSP"/>
-                        <viewControllerLayoutGuide type="bottom" id="VMj-jv-B3N"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="l2C-E4-vDc">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.20784313730000001" green="0.2274509804" blue="0.44705882349999998" alpha="1" colorSpace="calibratedRGB"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="xte-cn-2hh" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1564" y="3043"/>
+            <point key="canvasLocation" x="1538" y="2609"/>
         </scene>
         <!--MapVC-->
         <scene sceneID="SlY-Qy-0Fy">

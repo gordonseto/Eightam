@@ -111,7 +111,7 @@ class Post {
         
         _key = firebase.child("threads").child(threadId).child("replies").childByAutoId().key
         firebase.child("replies").child(_key).setValue(post)
-        firebase.child("users").child(authorUid).child("replies").child(_key).setValue(time)
+        firebase.child("replyInfos").child(authorUid).child(_key).setValue(time)
         firebase.child("threads").child(threadId).child("replies").child(_key).setValue(true)
         
         completion(self)

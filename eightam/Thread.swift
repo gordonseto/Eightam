@@ -79,7 +79,7 @@ class Thread {
         
         _key = firebase.child("threads").childByAutoId().key
         firebase.child("threads").child(_key).setValue(thread)
-        firebase.child("users").child(authorUid).child("threads").child(_key).setValue(time)
+        firebase.child("threadInfos").child(authorUid).child(_key).setValue(time)
         
         geofire.setLocation(geolocation, forKey: _key, withCompletionBlock: { (error) in
             if error != nil {

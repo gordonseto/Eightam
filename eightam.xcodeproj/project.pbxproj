@@ -13,6 +13,7 @@
 		8E064AB31D720E7A000FB47E /* NotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E064AB21D720E7A000FB47E /* NotificationCell.swift */; };
 		8E09EEF31D74B342002B4E4D /* ProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E09EEF21D74B342002B4E4D /* ProfileVC.swift */; };
 		8E09EEF51D74B5A7002B4E4D /* EmbeddedProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E09EEF41D74B5A7002B4E4D /* EmbeddedProfileVC.swift */; };
+		8E09EEF81D74CBD0002B4E4D /* MyPostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E09EEF71D74CBD0002B4E4D /* MyPostCell.swift */; };
 		8E7762051D6F54E3004DA65D /* ExploreVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7762041D6F54E3004DA65D /* ExploreVC.swift */; };
 		8E7762071D6F5644004DA65D /* NavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7762061D6F5644004DA65D /* NavigationView.swift */; };
 		8E7762091D6F59F4004DA65D /* MapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7762081D6F59F4004DA65D /* MapVC.swift */; };
@@ -58,6 +59,7 @@
 		8E064AB21D720E7A000FB47E /* NotificationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationCell.swift; sourceTree = "<group>"; };
 		8E09EEF21D74B342002B4E4D /* ProfileVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileVC.swift; sourceTree = "<group>"; };
 		8E09EEF41D74B5A7002B4E4D /* EmbeddedProfileVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmbeddedProfileVC.swift; sourceTree = "<group>"; };
+		8E09EEF71D74CBD0002B4E4D /* MyPostCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPostCell.swift; sourceTree = "<group>"; };
 		8E7762041D6F54E3004DA65D /* ExploreVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExploreVC.swift; sourceTree = "<group>"; };
 		8E7762061D6F5644004DA65D /* NavigationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationView.swift; sourceTree = "<group>"; };
 		8E7762081D6F59F4004DA65D /* MapVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapVC.swift; sourceTree = "<group>"; };
@@ -139,6 +141,7 @@
 				8EC806D31D6E091C00FC88DB /* ReplyView.swift */,
 				8E7762061D6F5644004DA65D /* NavigationView.swift */,
 				8E064AB21D720E7A000FB47E /* NotificationCell.swift */,
+				8E09EEF71D74CBD0002B4E4D /* MyPostCell.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -445,6 +448,7 @@
 				8E064AB31D720E7A000FB47E /* NotificationCell.swift in Sources */,
 				8E7762051D6F54E3004DA65D /* ExploreVC.swift in Sources */,
 				8E77620E1D6FCABD004DA65D /* BatchClientPush.swift in Sources */,
+				8E09EEF81D74CBD0002B4E4D /* MyPostCell.swift in Sources */,
 				8EC806CB1D6CD0E300FC88DB /* PostCell.swift in Sources */,
 				8E8CC2231D6CB79F00F4675C /* User.swift in Sources */,
 				8E7762101D6FCB42004DA65D /* NotificationsManager.swift in Sources */,
