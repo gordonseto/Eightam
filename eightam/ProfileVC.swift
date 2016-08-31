@@ -8,10 +8,21 @@
 
 import UIKit
 import XLPagerTabStrip
+import SloppySwiper
 
 class ProfileVC: ButtonBarPagerTabStripViewController {
 
+    var swiper: SloppySwiper!
+    
     override func viewDidLoad() {
+        
+        self.navigationController?.navigationBarHidden = true
+        
+        if let navigationcontroller = self.navigationController {
+            swiper = SloppySwiper(navigationController: navigationcontroller)
+            navigationcontroller.delegate = swiper
+        }
+        
         // change selected bar color
         settings.style.buttonBarBackgroundColor = BLUE_COLOR
         settings.style.buttonBarItemBackgroundColor = BLUE_COLOR

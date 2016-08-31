@@ -10,10 +10,13 @@ import UIKit
 import XLPagerTabStrip
 import FirebaseAuth
 import FirebaseDatabase
+import SloppySwiper
 
 class EmbeddedProfileVC: UIViewController, IndicatorInfoProvider, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var tableView: UITableView!
+    
+    var swiper: SloppySwiper!
     
     var type: String!
     
@@ -28,6 +31,11 @@ class EmbeddedProfileVC: UIViewController, IndicatorInfoProvider, UITableViewDel
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        if let navigationcontroller = self.navigationController {
+            swiper = SloppySwiper(navigationController: navigationcontroller)
+            navigationcontroller.delegate = swiper
+        }
+        
         tableView.delegate = self
         tableView.dataSource = self
         
@@ -35,6 +43,11 @@ class EmbeddedProfileVC: UIViewController, IndicatorInfoProvider, UITableViewDel
             self.uid = uid
             downloadContent()
         }
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        self.tabBarController?.tabBar.hidden = false
     }
     
     func downloadContent(){
@@ -59,6 +72,8 @@ class EmbeddedProfileVC: UIViewController, IndicatorInfoProvider, UITableViewDel
     
     func doneRetrievingKeys(){
         print(self.keys)
+        keys = keys.reverse()
+        tableView.reloadData()
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -89,7 +104,13 @@ class EmbeddedProfileVC: UIViewController, IndicatorInfoProvider, UITableViewDel
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
+        if type == "My Threads" {
+            let thread = threads[indexPath.row]
+            performSegueWithIdentifier("threadVCFromEmbeddedProfile", sender: thread.originalPost)
+        } else {
+            let reply = replies[indexPath.row]
+            performSegueWithIdentifier("threadVCFromEmbeddedProfile", sender: reply)
+        }
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -102,5 +123,16 @@ class EmbeddedProfileVC: UIViewController, IndicatorInfoProvider, UITableViewDel
 
     func indicatorInfoForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
         return IndicatorInfo(title: type)
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "threadVCFromEmbeddedProfile" {
+            if let destinationVC = segue.destinationViewController as? ThreadVC {
+                if let post = sender as? Post {
+                    let thread = Thread(key: post.threadKey)
+                    destinationVC.thread = thread
+                }
+            }
+        }
     }
 }

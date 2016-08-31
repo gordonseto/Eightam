@@ -124,6 +124,7 @@ class ThreadVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UITab
     }
     
     func getReplies(){
+        guard let thread = thread else { return }
         thread.downloadThread(){ thread in
             
             self.initializeOPView()
