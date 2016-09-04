@@ -21,7 +21,7 @@ class MyPostCell: UITableViewCell {
     func configureCell(post: Post){
         guard let text = post.text else { return }
         guard let time = post.time else { return }
-        postTextLabel.text = text
+        postTextLabel.text = "\"\(text)\""
         timeLabel.text = "\(getPostTime(time).0)\(getPostTime(time).1)"
     }
     

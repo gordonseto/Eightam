@@ -17,6 +17,7 @@ class EmbeddedProfileVC: UIViewController, IndicatorInfoProvider, UITableViewDel
     @IBOutlet weak var tableView: UITableView!
     
     var swiper: SloppySwiper!
+    var refreshControl: UIRefreshControl!
     
     var type: String!
     
@@ -35,6 +36,15 @@ class EmbeddedProfileVC: UIViewController, IndicatorInfoProvider, UITableViewDel
             swiper = SloppySwiper(navigationController: navigationcontroller)
             navigationcontroller.delegate = swiper
         }
+        
+        refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: Selector("refreshView:"), forControlEvents: UIControlEvents.ValueChanged)
+        refreshControl.tintColor = UIColor.lightGrayColor()
+        self.tableView.addSubview(refreshControl)
+        self.tableView.scrollEnabled = true
+        self.tableView.alwaysBounceVertical = true
+        self.tableView.delaysContentTouches = false
+        tableView.allowsSelection = true
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -74,6 +84,7 @@ class EmbeddedProfileVC: UIViewController, IndicatorInfoProvider, UITableViewDel
         print(self.keys)
         keys = keys.reverse()
         tableView.reloadData()
+        refreshControl.endRefreshing()
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -123,6 +134,12 @@ class EmbeddedProfileVC: UIViewController, IndicatorInfoProvider, UITableViewDel
 
     func indicatorInfoForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
         return IndicatorInfo(title: type)
+    }
+    
+    func refreshView(sender: AnyObject){
+        if let _ = uid {
+            downloadContent()
+        }
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

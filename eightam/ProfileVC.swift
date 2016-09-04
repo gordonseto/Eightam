@@ -26,8 +26,8 @@ class ProfileVC: ButtonBarPagerTabStripViewController {
         // change selected bar color
         settings.style.buttonBarBackgroundColor = BLUE_COLOR
         settings.style.buttonBarItemBackgroundColor = BLUE_COLOR
-        settings.style.selectedBarBackgroundColor = UIColor(red: 33/255.0, green: 174/255.0, blue: 67/255.0, alpha: 1.0)
-        settings.style.buttonBarItemFont = UIFont(name: "HelveticaNeue", size:14) ?? UIFont.systemFontOfSize(14)
+        settings.style.selectedBarBackgroundColor = UIColor.whiteColor()
+        settings.style.buttonBarItemFont = UIFont(name: "HelveticaNeue-Bold", size:14) ?? UIFont.systemFontOfSize(14)
         settings.style.selectedBarHeight = 3.0
         settings.style.buttonBarMinimumLineSpacing = 0
         settings.style.buttonBarItemTitleColor = BLUE_COLOR
@@ -38,7 +38,7 @@ class ProfileVC: ButtonBarPagerTabStripViewController {
         
         changeCurrentIndexProgressive = { (oldCell: ButtonBarViewCell?, newCell: ButtonBarViewCell?, progressPercentage: CGFloat, changeCurrentIndex: Bool, animated: Bool) -> Void in
             guard changeCurrentIndex == true else { return }
-            oldCell?.label.textColor = UIColor(red: 138/255.0, green: 138/255.0, blue: 144/255.0, alpha: 1.0)
+            oldCell?.label.textColor = UIColor.lightGrayColor()
             newCell?.label.textColor = .whiteColor()
         }
         super.viewDidLoad()
